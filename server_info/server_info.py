@@ -42,39 +42,29 @@ class ServerInfo:
             except requests.exceptions.RequestException as e:
                 print(f"An error occurred: {e}")
     
-    def analyze_error_messages(self):
-        """ funcion que analiza por si tiene las cabeceras desactivadas y no dan el tipo de servidor """
-        apache_errors = [
-            "404 Not Found",
-            "Not Found\n\nThe requested URL was not found on this server.",
-            "Object not found!\n\nThe requested URL was not found on this server.",
-            "404 Not Found\n\nThe requested URL was not found on this server."
-        ]
-
-        nginx_errors = [
-            "404 Not Found",
-            "404 Not Found\n\nnginx/1.14.0 (Ubuntu)",
-            "No se puede encontrar la página\n\nnginx",
-            "Error 404\n\nNot Found\n\nnginx"
-        ]
-
-        iis_errors = [
-            "HTTP Error 404.0 - Not Found",
-            "The resource you are looking for has been removed, had its name changed, or is temporarily unavailable.",
-            "404 - File or directory not found."
-        ]
-
-        tomcat_errors = [
-            "HTTP Status 404 – Not Found\n\nType Status Report\n\nMessage /{requested-url} not found\n\nDescription The origin server did not find a current representation for the target resource or is not willing to disclose that one exists.",
-            "HTTP Status 404 - Not Found\n\nThe requested resource is not available.",
-            "Error 404\n\n/{requested-url} Not Found."
-        ]
-
+    def analyze_error_messages_redirection(self):
         error_arrays = {
-            "Apache": apache_errors,
-            "Nginx": nginx_errors,
-            "IIS": iis_errors,
-            "Tomcat": tomcat_errors
+            "Apache": [
+                "Not Found",
+                "HTTP Error 404"
+            ],
+            "Nginx": [
+                "404 Not Found",
+                "404 Not Found\n\nnginx/1.14.0 (Ubuntu)",
+                "No se puede encontrar la página\n\nnginx",
+                "Error 404\n\nNot Found\n\nnginx"
+            ],
+            "IIS": [
+                "HTTP Error 404.0 - Not Found",
+                "The resource you are looking for has been removed, had its name changed, or is temporarily unavailable.",
+                "404 - File or directory not found."
+            ],
+            "Lighttpd": [
+                "404 Not Found",
+                "404 Not Found\n",
+                "404 Not Found</h1>",
+                "404 Not Found</html>"
+            ]
         }
 
         print("\nError messages:")
@@ -84,41 +74,46 @@ class ServerInfo:
                 nonexistent_url = url + '/nonexistentpage'
                 response = requests.get(nonexistent_url, proxies=self.proxies)
                 print(response.text)
-                # Si el servidor devuelve un error 404, extrae el contenido del elemento <title> y <address>
+                # Si el servidor devuelve un error 404, extrae el contenido del elemento <h1> y <address>
                 if response.status_code == 404:
                     soup = BeautifulSoup(response.text, 'html.parser')
-                    title = soup.title.text.strip()
-
-                    address = ""
-                    if soup.address:
-                        address = soup.address.text.strip()
-                        print(f"Address: {address}")
-                    else:
-                        print("No address found in the HTML.")
+                    title = soup.h1.text.strip()
+                    print(f"Title: {title}")
+                    address = soup.address.text.strip() if soup.address else ""
+                    print(f"Address: {address}")
 
                     # Busca si existe un elemento <hr>
                     hr_element = soup.find('hr')
                     if hr_element:
-                        center_content = hr_element.find_next('center').text.strip()
-                        print(f"Center content: {center_content}")
+                        center_element = hr_element.find_next('center')
+                        if center_element:
+                            center_content = center_element.text.strip()
+                            print(f"Center content: {center_content}")
 
-                        # Busca si el texto contiene la cadena 'nginx'
-                        if 'nginx' in center_content:
-                            print(f"Nginx server detected at {url}")
+                            # Verifica si el texto contiene la cadena 'nginx'
+                            if 'nginx' in center_content:
+                                print(f"Nginx server detected at {url}")
+                                self.check_server_type(title, address, "Nginx", error_arrays)
+                        else:
+                            # Si no existe un center element, puede ser un Apache o Lighttpd server
+                            print("No center element found in the HTML.")
+                            self.check_server_type(title, address, "Apache", error_arrays)
+                              
+                    else:
+                        print("No hr element found in the HTML.")
+                        self.check_server_type(title, address, "Lighttpd", error_arrays)  
+            except Exception as e:
+                print(f"Error accessing URL: {url}. {e}")
 
-                    # Compara el título y la dirección con los mensajes de error definidos en los arrays
-                    for server, error_list in error_arrays.items():
-                        for error_message in error_list:
-                            if error_message in title or (address and error_message in address):
-                                print(f"El servidor en {url} parece ser del tipo {server}")
-                                break
-
-            except requests.exceptions.RequestException as e:
-                print(f"An error occurred: {e}")
+    def check_server_type(self, title, address, server_type, error_arrays):
+        for error_message in error_arrays.get(server_type, []):
+            if error_message in title or (address and error_message in address):
+                print(f"The server at  seems to be of type {server_type}")
+                break
 
 
 if __name__ == "__main__":
     urls = ['http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/']
     server_info = ServerInfo(urls)
     #server_info.analyze_server_header()
-    server_info.analyze_error_messages()
+    server_info.analyze_error_messages_redirection()
