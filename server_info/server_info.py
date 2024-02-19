@@ -1,4 +1,3 @@
-import os
 import requests
 import time
 from bs4 import BeautifulSoup
@@ -43,6 +42,11 @@ class ServerInfo:
                 print(f"An error occurred: {e}")
     
     def analyze_error_messages_redirection(self):
+        """ el objetivo de este método es detectar el tipo de servidor web que se está utilizando en la URL 
+        en base a mensajes de error 404 predeterminados de cada tipo de servidor mediante el analisis del
+        contenido HTML devuelto por el servidor, basandome en la presencia de ciertas cadenas de texto y 
+        de estructuras HTML específicas."""
+
         error_arrays = {
             "Apache": [
                 "Not Found",
@@ -77,6 +81,7 @@ class ServerInfo:
                 # Si el servidor devuelve un error 404, extrae el contenido del elemento <h1> y <address>
                 if response.status_code == 404:
                     soup = BeautifulSoup(response.text, 'html.parser')
+                    # Comprobamos si existe un elemento <h1>
                     title = soup.h1.text.strip()
                     print(f"Title: {title}")
                     address = soup.address.text.strip() if soup.address else ""
