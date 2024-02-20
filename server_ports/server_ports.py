@@ -35,7 +35,7 @@ class PortScanner:
                 print(f"Error scanning port {port}: {e}")
 
 if __name__ == "__main__":
-    url = input("Enter URL (including http://): ")
+    url = input("Enter URL: ")
     ports_to_scan = [21, 22, 80, 443, 9050]  # Example list of ports to scan
     i = 0
     while i < 5:

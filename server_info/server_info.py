@@ -77,7 +77,7 @@ class ServerInfo:
                 # Añade una ruta inexistente a la URL
                 nonexistent_url = url + '/nonexistentpage'
                 response = requests.get(nonexistent_url, proxies=self.proxies)
-                print(response.text)
+                #print(response.text)
                 # Si el servidor devuelve un error 404, extrae el contenido del elemento <h1> y <address>
                 if response.status_code == 404:
                     soup = BeautifulSoup(response.text, 'html.parser')
@@ -113,7 +113,7 @@ class ServerInfo:
     def check_server_type(self, title, address, server_type, error_arrays):
         for error_message in error_arrays.get(server_type, []):
             if error_message in title or (address and error_message in address):
-                print(f"The server at  seems to be of type {server_type}")
+                print(f"The server at seems to be of type {server_type}")
                 break
 
 
