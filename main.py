@@ -8,4 +8,5 @@ Pruebas a realizar:
 5. Identificar si el html contiene direcciones de redes sociales
 6. Identificar si el html contiene direcciones de google analytics
 7. Identificar si se pueden descargar imagenes, videos, pdfs, etc.
+
 """
