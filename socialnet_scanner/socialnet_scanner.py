@@ -22,26 +22,33 @@ class RedesSocialesScanner:
             if response.status_code == 200:
                 # Utilizar expresiones regulares para buscar enlaces a redes sociales
                 patrones_redes_sociales = {
-                    'twitter': r'https?://(?:www\.)?twitter\.com/\w+',
-                    'facebook': r'https?://(?:www\.)?facebook\.com/\w+',
-                    'instagram': r'https?://(?:www\.)?instagram\.com/\w+',
-                    'reddit': r'https?://(?:www\.)?reddit\.com/r/\w+',
-                    'youtube': r'https?://(?:www\.)?youtube\.com/\w+',
-                    'whatsapp': r'https?://(?:www\.)?wa\.me/\w+',
-                    'wechat': r'https?://(?:www\.)?weixin\.qq\.com/\w+',
-                    'tiktok': r'https?://(?:www\.)?tiktok\.com/@\w+',
-                    'linkedin': r'https?://(?:www\.)?linkedin\.com/in/\w+',
-                    'telegram': r'https?://(?:www\.)?t\.me/\w+',
-                    'snapchat': r'https?://(?:www\.)?snapchat\.com/add/\w+',
-                    'pinterest': r'https?://(?:www\.)?pinterest\.com/\w+',
-                    'quora': r'https?://(?:www\.)?quora\.com/profile/\w+',
-                    'twitch': r'https?://(?:www\.)?twitch\.tv/\w+',
-                    'discord': r'https?://(?:www\.)?discord\.gg/\w+',
+                    'twitter': r'(https?://(?:www\.)?twitter\.com/[\w-]+)|\btwitter\b',
+                    'facebook': r'(https?://(?:www\.)?facebook\.com/[\w-]+)|\bfacebook\b',
+                    'instagram': r'(https?://(?:www\.)?instagram\.com/[\w-]+)|\binstagram\b',
+                    'reddit': r'(https?://(?:www\.)?reddit\.com/r/[\w-]+)|\breddit\b',
+                    'youtube': r'(https?://(?:www\.)?youtube\.com/[\w-]+)|\byoutube\b',
+                    'whatsapp': r'(https?://(?:www\.)?wa\.me/[\w-]+)|\bwhatsapp\b',
+                    'wechat': r'(https?://(?:www\.)?weixin\.qq\.com/[\w-]+)|\bwechat\b',
+                    'tiktok': r'(https?://(?:www\.)?tiktok\.com/@[\w-]+)|\btiktok\b',
+                    'linkedin': r'(https?://(?:www\.)?linkedin\.com/in/[\w-]+)|\blinkedin\b',
+                    'telegram': r'(https?://(?:www\.)?t\.me/[\w-]+)|\btelegram\b',
+                    'snapchat': r'(https?://(?:www\.)?snapchat\.com/add/[\w-]+)|\bsnapchat\b',
+                    'pinterest': r'(https?://(?:www\.)?pinterest\.com/[\w-]+)|\bpinterest\b',
+                    'quora': r'(https?://(?:www\.)?quora\.com/profile/[\w-]+)|\bquora\b',
+                    'twitch': r'(https?://(?:www\.)?twitch\.tv/[\w-]+)|\btwitch\b',
+                    'discord': r'(https?://(?:www\.)?discord\.gg/[\w-]+)|\bdiscord\b',
                 }
+
+                # Almacenar el texto de la respuesta en una lista de líneas
+                lineas = response.text.split('\n')
 
                 redes_sociales_encontradas = {}
                 for nombre_red_social, patron in patrones_redes_sociales.items():
-                    redes_sociales_encontradas[nombre_red_social] = re.findall(patron, response.text)
+                    for i, linea in enumerate(lineas):
+                        if re.search(patron, linea):
+                            if nombre_red_social not in redes_sociales_encontradas:
+                                redes_sociales_encontradas[nombre_red_social] = []
+                            redes_sociales_encontradas[nombre_red_social].append((i+1, linea.strip()))
 
                 return redes_sociales_encontradas
             else:
@@ -61,8 +68,8 @@ if __name__ == "__main__":
         for red_social, enlaces in redes_sociales_encontradas.items():
             if enlaces:
                 print(f"{red_social.capitalize()}:")
-                for enlace in enlaces:
-                    print(enlace)
+                for num_linea, linea in enlaces:
+                    print(f"Línea {num_linea}: {linea}")
             else:
                 pass
                 #print(f"No se encontraron enlaces a {red_social.capitalize()}.")
