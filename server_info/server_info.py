@@ -42,9 +42,9 @@ class ServerInfo:
                 print(f"An error occurred: {e}")
     
     def analyze_error_messages_redirection(self):
-        """ el objetivo de este método es detectar el tipo de servidor web que se está utilizando en la URL 
-        en base a mensajes de error 404 predeterminados de cada tipo de servidor mediante el analisis del
-        contenido HTML devuelto por el servidor, basandome en la presencia de ciertas cadenas de texto y 
+        """ El objetivo de este método es detectar el tipo de servidor web que se está utilizando en la URL 
+        en base a mensajes de error 404 predeterminados de cada tipo de servidor mediante el análisis del
+        contenido HTML devuelto por el servidor, basándose en la presencia de ciertas cadenas de texto y 
         de estructuras HTML específicas."""
 
         error_arrays = {
@@ -77,16 +77,24 @@ class ServerInfo:
                 # Añade una ruta inexistente a la URL
                 nonexistent_url = url + '/nonexistentpage'
                 response = requests.get(nonexistent_url, proxies=self.proxies)
-                #print(response.text)
                 # Si el servidor devuelve un error 404, extrae el contenido del elemento <h1> y <address>
                 if response.status_code == 404:
                     soup = BeautifulSoup(response.text, 'html.parser')
-                    # Comprobamos si existe un elemento <h1>
-                    title = soup.h1.text.strip()
-                    print(f"Title: {title}")
-                    address = soup.address.text.strip() if soup.address else ""
-                    print(f"Address: {address}")
-
+                    
+                    # Comprueba si existe un elemento <h1>
+                    if soup.h1 is not None:
+                        title = soup.h1.text.strip()
+                        print(f"Title: {title}")
+                    else:
+                        print("No <h1> tag found in the HTML.")
+                    
+                    # Comprueba si existe un elemento <address>
+                    if soup.address is not None:
+                        address = soup.address.text.strip()
+                        print(f"Address: {address}")
+                    else:
+                        address = ""
+                    
                     # Busca si existe un elemento <hr>
                     hr_element = soup.find('hr')
                     if hr_element:
@@ -102,13 +110,13 @@ class ServerInfo:
                         else:
                             # Si no existe un center element, puede ser un Apache o Lighttpd server
                             print("No center element found in the HTML.")
-                            self.check_server_type(title, address, "Apache", error_arrays)
-                              
+                            self.check_server_type(title, address, "Apache", error_arrays)                      
                     else:
-                        print("No hr element found in the HTML.")
-                        self.check_server_type(title, address, "Lighttpd", error_arrays)  
+                        print("No <hr> element found in the HTML.")
+                        self.check_server_type(title, address, "Lighttpd", error_arrays)
             except Exception as e:
                 print(f"Error accessing URL: {url}. {e}")
+
 
     def check_server_type(self, title, address, server_type, error_arrays):
         for error_message in error_arrays.get(server_type, []):
