@@ -2,7 +2,7 @@ import requests
 import time
 from bs4 import BeautifulSoup
 
-class ServerInfo:
+class InformacionServidor:
     def __init__(self, urls):
         self.urls = urls
         self.proxies = {
@@ -10,44 +10,36 @@ class ServerInfo:
             'https': 'socks5h://127.0.0.1:9050'
         }
     
-    def analyze_server_header(self):
+    def analizar_encabezado_servidor(self):
         for url in self.urls:
             try:
-                start_time = time.time()
+                tiempo_inicio = time.time()
                 response = requests.get(url, proxies=self.proxies)
-                end_time = time.time()
+                tiempo_fin = time.time()
                 print(response.text)
-                # Server type and version
-                server = response.headers.get('Server', 'Unknown')
-                print(f"\nServer info: {server}")
+                
+                servidor = response.headers.get('Server', 'Desconocido')
+                print(f"\nInformación del servidor: {servidor}")
 
-                # Response time
-                response_time = end_time - start_time
-                print(f"Response time: {response_time} seconds")
+                tiempo_respuesta = tiempo_fin - tiempo_inicio
+                print(f"Tiempo de respuesta: {tiempo_respuesta} segundos")
 
-                # Security headers
-                security_headers = ['Strict-Transport-Security', 'Content-Security-Policy', 'X-Content-Type-Options', 'X-Frame-Options', 'X-XSS-Protection']
-                print("Security headers:")
-                for header in security_headers:
+                headers_seguridad = ['Strict-Transport-Security', 'Content-Security-Policy', 'X-Content-Type-Options', 'X-Frame-Options', 'X-XSS-Protection']
+                print("Encabezados de seguridad:")
+                for header in headers_seguridad:
                     print(f"{header}: {response.headers.get(header, 'No establecido, posible vulnerabilidad.')}")
 
-                # robots.txt
                 robots_txt_url = url + '/robots.txt'
                 robots_txt_response = requests.get(robots_txt_url, proxies=self.proxies)
                 if robots_txt_response.status_code == 200:
                     print(f"robots.txt: {robots_txt_response.text}")
                 else:
-                    print("No robots.txt encontrado.")
+                    print("No se encontró robots.txt.")
             except requests.exceptions.RequestException as e:
-                print(f"An error occurred: {e}")
+                print(f"Se produjo un error: {e}")
     
-    def analyze_error_messages_redirection(self):
-        """ El objetivo de este método es detectar el tipo de servidor web que se está utilizando en la URL 
-        en base a mensajes de error 404 predeterminados de cada tipo de servidor mediante el análisis del
-        contenido HTML devuelto por el servidor, basándose en la presencia de ciertas cadenas de texto y 
-        de estructuras HTML específicas."""
-
-        error_arrays = {
+    def analizar_mensajes_error_redireccion(self):
+        mensajes_error = {
             "Apache": [
                 "Not Found",
                 "HTTP Error 404"
@@ -71,62 +63,58 @@ class ServerInfo:
             ]
         }
 
-        print("\nError messages:")
         for url in self.urls:
             try:
-                # Añade una ruta inexistente a la URL
-                nonexistent_url = url + '/nonexistentpage'
-                response = requests.get(nonexistent_url, proxies=self.proxies)
-                # Si el servidor devuelve un error 404, extrae el contenido del elemento <h1> y <address>
+                url_no_existente = url + '/paginanoexistente'
+                response = requests.get(url_no_existente, proxies=self.proxies)
                 if response.status_code == 404:
                     soup = BeautifulSoup(response.text, 'html.parser')
                     
-                    # Comprueba si existe un elemento <h1>
                     if soup.h1 is not None:
-                        title = soup.h1.text.strip()
-                        print(f"Title: {title}")
+                        titulo = soup.h1.text.strip()
+                        print(f"Título: {titulo}")
                     else:
-                        print("No <h1> tag found in the HTML.")
+                        print("No se encontró etiqueta <h1> en el HTML.")
                     
-                    # Comprueba si existe un elemento <address>
                     if soup.address is not None:
-                        address = soup.address.text.strip()
-                        print(f"Address: {address}")
+                        direccion = soup.address.text.strip()
+                        print(f"Dirección: {direccion}")
                     else:
-                        address = ""
+                        direccion = ""
                     
-                    # Busca si existe un elemento <hr>
                     hr_element = soup.find('hr')
                     if hr_element:
                         center_element = hr_element.find_next('center')
                         if center_element:
-                            center_content = center_element.text.strip()
-                            print(f"Center content: {center_content}")
+                            contenido_central = center_element.text.strip()
+                            print(f"Contenido central: {contenido_central}")
 
-                            # Verifica si el texto contiene la cadena 'nginx'
-                            if 'nginx' in center_content:
-                                print(f"Nginx server detected at {url}")
-                                self.check_server_type(title, address, "Nginx", error_arrays)
+                            if 'nginx' in contenido_central:
+                                print(f"Servidor Nginx detectado en {url}")
+                                self.verificar_tipo_servidor(titulo, direccion, "Nginx", mensajes_error)
                         else:
-                            # Si no existe un center element, puede ser un Apache o Lighttpd server
-                            print("No center element found in the HTML.")
-                            self.check_server_type(title, address, "Apache", error_arrays)                      
+                            print("No se encontró un elemento center en el HTML.")
+                            self.verificar_tipo_servidor(titulo, direccion, "Apache", mensajes_error)                      
                     else:
-                        print("No <hr> element found in the HTML.")
-                        self.check_server_type(title, address, "Lighttpd", error_arrays)
+                        print("No se encontró el elemento <hr> en el HTML.")
+                        self.verificar_tipo_servidor(titulo, direccion, "Lighttpd", mensajes_error)
+                        self.verificar_tipo_servidor(titulo, direccion, "Apache", mensajes_error)  
+                else:
+                    if "nginx" in response.headers.get('Server', ''):
+                        print(f"Servidor Nginx detectado en {url}")
             except Exception as e:
-                print(f"Error accessing URL: {url}. {e}")
+                print(f"Error al acceder a la URL: {url}. {e}")
 
 
-    def check_server_type(self, title, address, server_type, error_arrays):
-        for error_message in error_arrays.get(server_type, []):
-            if error_message in title or (address and error_message in address):
-                print(f"The server at seems to be of type {server_type}")
+    def verificar_tipo_servidor(self, titulo, direccion, tipo_servidor, mensajes_error):
+        for mensaje_error in mensajes_error.get(tipo_servidor, []):
+            if mensaje_error in titulo or (direccion and mensaje_error in direccion):
+                print(f"El servidor parece ser del tipo {tipo_servidor}")
                 break
 
 
 if __name__ == "__main__":
-    urls = ['http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/']
-    server_info = ServerInfo(urls)
-    #server_info.analyze_server_header()
-    server_info.analyze_error_messages_redirection()
+    urls = ['http://wasabiukrxmkdgve5kynjztuovbg43uxcbcxn6y2okcrsg7gb6jdmbad.onion/']
+    informacion_servidor = InformacionServidor(urls)
+    # informacion_servidor.analizar_encabezado_servidor()
+    informacion_servidor.analizar_mensajes_error_redireccion()
