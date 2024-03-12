@@ -9,8 +9,8 @@ import mmh3
 from urllib.parse import urljoin
 from bs4 import BeautifulSoup
 import base64
-
-SHODAN_API_KEY = 'QfGPuZYj6CwENQ9xlenqQC8bbsjy2yDs'
+import re
+import json
 
 class OnionFaviconDownloader:
     def __init__(self, url):
@@ -41,44 +41,33 @@ class OnionFaviconDownloader:
                 favicon_response = self.make_tor_request(favicon_url)
                 if favicon_response and favicon_response.status_code == 200:
                     favicon_content = favicon_response.content
-                    # Calcular el hash MMH3 de la imagen del favicon
-                    mmh3_hash = mmh3.hash(favicon_content)
-                    print(f"Hash del favicon.ico (MMH3): {mmh3_hash}")
+                    # Pasos 1 a 3: Convertir a base64 y añadir saltos de línea cada 76 caracteres
+                    b64 = base64.b64encode(favicon_content)
+                    utf8_b64 = b64.decode('utf-8')
+                    with_newlines = re.sub("(.{76}|$)", "\\1\n", utf8_b64, 0, re.DOTALL)
+                    # Calcular el hash MMH3
+                    mmh3_hash = mmh3.hash(with_newlines.encode())
 
                     # Calcular el hash SHA-256
                     sha256_hash = hashlib.sha256(favicon_content).hexdigest()
-                    print(f"Hash del favicon.ico (SHA-256): {sha256_hash}")
 
                     # Calcular el hash MD5
                     md5_hash = hashlib.md5(favicon_content).hexdigest()
-                    print(f"Hash del favicon.ico (MD5): {md5_hash}")
 
-                    # Búsqueda en Shodan
-                    shodan_results = self.search_shodan(mmh3_hash)
-                    if shodan_results is not None:
-                        print(shodan_results)
-                    else:
-                        print("No se encontraron resultados en Shodan")
+                    # Retornar los hashes en formato JSON
+                    hashes_json = {
+                        "MMH3": mmh3_hash,
+                        "SHA-256": sha256_hash,
+                        "MD5": md5_hash
+                    }
 
-                    return favicon_content
+                    return hashes_json
         print(f"No se pudo descargar el favicon de {self.url}")
         return None
-
-    def search_shodan(self, favicon_hash):
-        try:
-            shodan_url = f'https://api.shodan.io/shodan/host/search?key={SHODAN_API_KEY}&query=http.favicon.hash:{favicon_hash}'
-            response = requests.get(shodan_url)
-            if response.status_code == 200:
-                data = response.json()
-                return data['matches']
-            else:
-                print(f"Error al realizar la solicitud a Shodan. Código de estado: {response.status_code}")
-                return None
-        except Exception as e:
-            print(f"Error al procesar la respuesta de Shodan: {e}")
-            return None
 
 if __name__ == "__main__":
     onion_url = input("Ingrese la URL del sitio .onion del que desea descargar el favicon: ")
     downloader = OnionFaviconDownloader(onion_url)
-    downloader.download_favicon()
+    hashes = downloader.download_favicon()
+    if hashes:
+        print(json.dumps(hashes, indent=4))

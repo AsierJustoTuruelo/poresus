@@ -48,7 +48,8 @@ class InformacionServidor:
                 "404 Not Found",
                 "404 Not Found\n\nnginx/1.14.0 (Ubuntu)",
                 "No se puede encontrar la página\n\nnginx",
-                "Error 404\n\nNot Found\n\nnginx"
+                "Error 404\n\nNot Found\n\nnginx",
+                "Not Found"
             ],
             "IIS": [
                 "HTTP Error 404.0 - Not Found",
@@ -98,7 +99,9 @@ class InformacionServidor:
                     else:
                         print("No se encontró el elemento <hr> en el HTML.")
                         self.verificar_tipo_servidor(titulo, direccion, "Lighttpd", mensajes_error)
-                        self.verificar_tipo_servidor(titulo, direccion, "Apache", mensajes_error)  
+                        self.verificar_tipo_servidor(titulo, direccion, "Apache", mensajes_error)
+                        self.verificar_tipo_servidor(titulo, direccion, "Nginx", mensajes_error)
+  
                 else:
                     if "nginx" in response.headers.get('Server', ''):
                         print(f"Servidor Nginx detectado en {url}")
@@ -109,12 +112,12 @@ class InformacionServidor:
     def verificar_tipo_servidor(self, titulo, direccion, tipo_servidor, mensajes_error):
         for mensaje_error in mensajes_error.get(tipo_servidor, []):
             if mensaje_error in titulo or (direccion and mensaje_error in direccion):
-                print(f"El servidor parece ser del tipo {tipo_servidor}")
+                print(f"El servidor puede ser del tipo {tipo_servidor}")
                 break
 
 
 if __name__ == "__main__":
-    urls = ['http://wasabiukrxmkdgve5kynjztuovbg43uxcbcxn6y2okcrsg7gb6jdmbad.onion/']
+    urls = ['http://juhanurmihxlp77nkq76byazcldy2hlmovfu2epvl5ankdibsot4csyd.onion/']
     informacion_servidor = InformacionServidor(urls)
     # informacion_servidor.analizar_encabezado_servidor()
     informacion_servidor.analizar_mensajes_error_redireccion()
