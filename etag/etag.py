@@ -53,5 +53,5 @@ class ETagScanner:
 
 if __name__ == "__main__":
     # Prueba la función con la URL de tu elección
-    scanner = ETagScanner('http://torlinksge6enmcyyuxjpjkoouw4oorgdgeo7ftnq3zodj7g2zxi3kyd.onion/')
+    scanner = ETagScanner('http://6nhmgdpnyoljh5uzr5kwlatx2u3diou4ldeommfxjz3wkhalzgjqxzqd.onion/')
     scanner.scan_etag()
