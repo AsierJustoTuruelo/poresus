@@ -1,5 +1,6 @@
 import socks
 import socket
+import json
 
 class PortScanner:
     def __init__(self, url):
@@ -22,7 +23,7 @@ class PortScanner:
         # Quitar el sufijo '/' si está presente en la URL
         if self.url.endswith('/'):
             self.url = self.url[:-1]
-        
+
         for port in ports:
             try:
                 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
@@ -30,17 +31,16 @@ class PortScanner:
                     result = s.connect_ex((self.url, port))
                     if result == 0:
                         self.open_ports.append(port)
-                        print(f"Port {port} is open")
             except Exception as e:
-                print(f"Error scanning port {port}: {e}")
+                pass
+                #print(f"Error scanning port {port}: {e}")
+
+    def get_open_ports_as_json(self):
+        return json.dumps({"open_ports": self.open_ports}, indent=4)
 
 if __name__ == "__main__":
     url = input("Enter URL: ")
     ports_to_scan = [21, 22, 80, 443, 9050]  # Example list of ports to scan
-    i = 0
-    while i < 5:
-        scanner = PortScanner(url)
-        scanner.scan_ports(ports_to_scan, timeout=2)  # Cambia el tiempo de espera a 2 segundos
-        print("Open ports:", scanner.open_ports)
-        i += 1
-   
+    scanner = PortScanner(url)
+    scanner.scan_ports(ports_to_scan, timeout=2)  # Cambia el tiempo de espera a 2 segundos
+    print(scanner.get_open_ports_as_json())

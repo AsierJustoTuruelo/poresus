@@ -1,7 +1,9 @@
 import re
+import json
 import socks
 import socket
 import requests
+from bs4 import BeautifulSoup
 
 class ServerStatusChecker:
     def __init__(self, url):
@@ -22,10 +24,22 @@ class ServerStatusChecker:
             print(f"Error al hacer la solicitud a través de Tor: {e}")
             return None
 
+    def extract_ip_from_html(self, html):
+        ips = re.findall(r'\b(?:\d{1,3}\.){3}\d{1,3}\b', html)
+        if ips:
+            return list(set(ips))
+        return None
+
+    def extract_server_from_html(self, html):
+        soup = BeautifulSoup(html, 'html.parser')
+        server_tags = soup.find_all('address')
+        servers = [tag.text.strip() for tag in server_tags]
+        return servers
+
     def check_server_status(self):
         try:
             # Realizar la solicitud a la URL dada
-            response = self.make_tor_request(self.url +  "/server-status")
+            response = self.make_tor_request(self.url + "/server-status")
             if response is None:
                 print("No se pudo obtener la respuesta de la página.")
                 return
@@ -33,17 +47,16 @@ class ServerStatusChecker:
             # Verificar si la URL /server-status está disponible
             if response.status_code == 200:
                 print("La URL /server-status está disponible.")
-                print(response.text)    
-                ips = re.findall(r'\b(?:\d{1,3}\.){3}\d{1,3}\b', response.text)
-                if ips:
-                    unique_ips = set(ips)
-                    print("Direcciones IP encontradas en /server-status:")
-                    for ip in unique_ips:
-                        print(f"{ip}")
-                else:
-                    print("No se encontraron direcciones IP en la respuesta.")
+                ip_addresses = self.extract_ip_from_html(response.text)
+                servers = self.extract_server_from_html(response.text)
+                
+                result = {
+                    "IP_addresses": ip_addresses,
+                    "Servers": servers
+                }
+
+                print(json.dumps(result, indent=4))
             else:
-                print(response.text)
                 print("La URL /server-status no está disponible.")
             
         except Exception as e:
@@ -51,5 +64,5 @@ class ServerStatusChecker:
 
 if __name__ == "__main__":
     # Prueba la función con la URL de tu elección
-    checker = ServerStatusChecker('http://archiveiya74codqgiixo33q62qlrqtkgmcitqx5u2oeqnmn5bpcbiyd.onion')
+    checker = ServerStatusChecker('http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/')
     checker.check_server_status()
