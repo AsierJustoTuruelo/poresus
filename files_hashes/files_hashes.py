@@ -5,10 +5,11 @@ import socks
 import socket
 from urllib.parse import urljoin
 from bs4 import BeautifulSoup
+import json
 
 class OnionFileAnalyzer:
-    def __init__(self, onion_url):
-        self.onion_url = onion_url
+    def __init__(self, onion_urls):
+        self.onion_urls = onion_urls
         self.proxies = {
             'http': 'socks5h://127.0.0.1:9050',
             'https': 'socks5h://127.0.0.1:9050'
@@ -25,14 +26,14 @@ class OnionFileAnalyzer:
             print(f"Error al hacer la solicitud a través de Tor: {e}")
             return None
 
-    def analyze_files_on_page(self):
-        response = self.make_tor_request(self.onion_url)
+    def analyze_files_on_page(self, onion_url):
+        response = self.make_tor_request(onion_url)
         if response:
             try:
                 soup = BeautifulSoup(response.content, 'html.parser')
                 files = []
                 for link in soup.find_all('a', href=True):
-                    file_url = urljoin(self.onion_url, link['href'])
+                    file_url = urljoin(onion_url, link['href'])
                     file_response = self.make_tor_request(file_url)
                     if file_response and file_response.status_code == 200:
                         file_content = file_response.content
@@ -44,7 +45,7 @@ class OnionFileAnalyzer:
                 print(f"Error al analizar la página .onion: {e}")
                 return None
         else:
-            print(f"No se pudo acceder a la página .onion: {self.onion_url}")
+            print(f"No se pudo acceder a la página .onion: {onion_url}")
             return None
 
     def calculate_hashes(self, file_content):
@@ -60,18 +61,20 @@ class OnionFileAnalyzer:
             print(f"Error al calcular los hashes del archivo: {e}")
             return None
 
+    def analyze_files(self):
+        all_files = {}
+        for onion_url in self.onion_urls:
+            files = self.analyze_files_on_page(onion_url)
+            if files:
+                all_files[onion_url] = files
+        return all_files
+
 if __name__ == "__main__":
-    onion_url = input("Ingrese la URL de la página .onion que desea escanear: ")
-    analyzer = OnionFileAnalyzer(onion_url)
-    files = analyzer.analyze_files_on_page()
-    if files:
-        print("Archivos encontrados en la página .onion:")
-        for file_data in files:
-            print(f"Nombre: {file_data['name']}")
-            print(f"URL: {file_data['url']}")
-            print("Huellas digitales:")
-            for algo, hash_value in file_data['hashes'].items():
-                print(f"{algo}: {hash_value}")
-            print()
-    else:
-        print("No se encontraron archivos en la página .onion o se produjo un error durante el análisis.")
+    # Lista de URLs de prueba
+    onion_urls = [
+        'http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/metadata/metadata.html',
+        # Agrega más URLs aquí si es necesario
+    ]
+    analyzer = OnionFileAnalyzer(onion_urls)
+    files_json = analyzer.analyze_files()
+    print(json.dumps(files_json, indent=4))

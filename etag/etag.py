@@ -1,16 +1,16 @@
 import socks
 import socket
 import requests
-from urllib.parse import urljoin
-from bs4 import BeautifulSoup
+import json
 
 class ETagScanner:
-    def __init__(self, url):
-        self.url = url
+    def __init__(self, urls):
+        self.urls = urls
         self.proxies = {
             'http': 'socks5h://127.0.0.1:9050',
             'https': 'socks5h://127.0.0.1:9050'
         }
+        self.results = []  # Lista para almacenar los resultados de ETag
 
     def make_tor_request(self, url):
         try:
@@ -25,33 +25,44 @@ class ETagScanner:
 
     def extract_etag(self, response):
         # Extraer la etiqueta ETag de la respuesta
-        print(response.headers)
         headers = response.headers
         if 'ETag' in headers:
             return headers['ETag']
         else:
             return None
 
-    def scan_etag(self):
+    def scan_etag(self, url):
         try:
             # Realizar la solicitud a la URL dada
-            response = self.make_tor_request(self.url)
+            response = self.make_tor_request(url)
             if response is None:
-                print("No se pudo obtener la respuesta de la página.")
+                print(f"No se pudo obtener la respuesta de la página: {url}")
                 return
 
             # Extraer la etiqueta ETag de la respuesta
             etag = self.extract_etag(response)
 
             if etag:
-                print(f"La etiqueta ETag de la página es: {etag}")
+                self.results.append(etag)
             else:
-                print("No se encontró la etiqueta ETag en la página.")
+                print(f"No se encontró la etiqueta ETag en la página: {url}")
             
         except Exception as e:
-            print(f"Error al escanear la página: {e}")
+            print(f"Error al escanear la página {url}: {e}")
+
+    def scan_etags(self):
+        for url in self.urls:
+            self.scan_etag(url)
+
+        # Devolver los resultados de ETag como un JSON
+        return json.dumps({"ETags": self.results})
 
 if __name__ == "__main__":
-    # Prueba la función con la URL de tu elección
-    scanner = ETagScanner('http://6nhmgdpnyoljh5uzr5kwlatx2u3diou4ldeommfxjz3wkhalzgjqxzqd.onion/')
-    scanner.scan_etag()
+    # Lista de URLs de prueba
+    urls = [
+        'http://6nhmgdpnyoljh5uzr5kwlatx2u3diou4ldeommfxjz3wkhalzgjqxzqd.onion/',
+        # Agrega más URLs aquí si es necesario
+    ]
+    scanner = ETagScanner(urls)
+    results_json = scanner.scan_etags()
+    print(results_json)

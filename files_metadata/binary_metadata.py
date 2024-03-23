@@ -4,10 +4,11 @@ import socket
 import requests
 from urllib.parse import urljoin
 from bs4 import BeautifulSoup
+import json
 
 class BinaryFileScanner:
-    def __init__(self, url):
-        self.url = url
+    def __init__(self, urls):
+        self.urls = urls
         self.proxies = {
             'http': 'socks5h://127.0.0.1:9050',
             'https': 'socks5h://127.0.0.1:9050'
@@ -25,33 +26,49 @@ class BinaryFileScanner:
             return None
 
     def scan_binary_files(self):
-        # Obtener el contenido de la página web
-        respuesta = self.make_tor_request(self.url)
-        soup = BeautifulSoup(respuesta.text, 'html.parser')
-
-        # Buscar todos los enlaces a archivos binarios
-        enlaces_binarios = [a['href'] for a in soup.find_all('a', href=True) if a['href'].endswith('.bin')]
-
-        for enlace in enlaces_binarios:
-            # Convertir enlace relativo a absoluto si es necesario
-            enlace_absoluto = urljoin(self.url, enlace)
-
-            # Obtener el contenido del archivo binario
-            respuesta = self.make_tor_request(enlace_absoluto)
-            if respuesta is None:
-                print(f"No se pudo descargar el archivo binario de {enlace_absoluto}")
+        result_data = {}
+        for url in self.urls:
+            # Obtener el contenido de la página web
+            response = self.make_tor_request(url)
+            if response is None:
+                print(f"No se pudo acceder a la página {url}")
                 continue
 
-            archivo_binario = io.BytesIO(respuesta.content)
+            soup = BeautifulSoup(response.text, 'html.parser')
 
-            # Leer el archivo binario y convertirlo en una lista de cadenas binarias
-            data = archivo_binario.read()
-            binary_data = [format(byte, '08b') for byte in data]
+            # Buscar todos los enlaces a archivos binarios
+            binary_links = [a['href'] for a in soup.find_all('a', href=True) if a['href'].endswith('.bin')]
 
-            print(f'Datos binarios para {enlace_absoluto}:')
-            print(binary_data)
+            binary_data_per_url = {}
+            for binary_link in binary_links:
+                # Convertir enlace relativo a absoluto si es necesario
+                absolute_link = urljoin(url, binary_link)
+
+                # Obtener el contenido del archivo binario
+                response = self.make_tor_request(absolute_link)
+                if response is None:
+                    print(f"No se pudo descargar el archivo binario de {absolute_link}")
+                    continue
+
+                binary_file = io.BytesIO(response.content)
+
+                # Leer el archivo binario y convertirlo en una lista de cadenas binarias
+                data = binary_file.read()
+                binary_data = [format(byte, '08b') for byte in data]
+
+                binary_data_per_url[binary_link] = binary_data
+
+            result_data.update(binary_data_per_url)
+
+        # Convertir los resultados a JSON y devolverlos
+        return json.dumps(result_data)
 
 if __name__ == "__main__":
-    # Prueba la función con la URL de tu elección
-    scanner = BinaryFileScanner('http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html')
-    scanner.scan_binary_files()
+    # Lista de URLs de prueba
+    urls = [
+        'http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html'
+        # Puedes agregar más URLs aquí si es necesario
+    ]
+    scanner = BinaryFileScanner(urls)
+    results_json = scanner.scan_binary_files()
+    print(results_json)
