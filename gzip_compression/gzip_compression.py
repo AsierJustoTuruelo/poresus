@@ -5,10 +5,11 @@ import requests
 from datetime import datetime
 from urllib.parse import urljoin
 from bs4 import BeautifulSoup
+import json
 
 class GzipHeaderScanner:
-    def __init__(self, url):
-        self.url = url
+    def __init__(self, urls):
+        self.urls = urls
         self.proxies = {
             'http': 'socks5h://127.0.0.1:9050',
             'https': 'socks5h://127.0.0.1:9050'
@@ -47,37 +48,45 @@ class GzipHeaderScanner:
             return "América"
 
     def scan_gzip_header(self):
+        results = []
         try:
-            # Realizar la solicitud a la URL dada
-            response = self.make_tor_request(self.url)
-            if response is None:
-                print("No se pudo obtener la respuesta de la página.")
-                return
+            for url in self.urls:
+                # Realizar la solicitud a la URL dada
+                response = self.make_tor_request(url)
+                if response is None:
+                    print(f"No se pudo obtener la respuesta de la página: {url}")
+                    continue
 
-            # Analizar los encabezados HTTP
-            headers = response.headers
+                # Analizar los encabezados HTTP
+                headers = response.headers
 
-            # Verificar si la compresión GZIP está presente en los encabezados
-            if 'Content-Encoding' in headers and headers['Content-Encoding'] == 'gzip':
-                print("La compresión GZIP está habilitada en la página.")
-            else:
-                print("La compresión GZIP no está habilitada en la página.")
+                # Verificar si la compresión GZIP está presente en los encabezados
+                gzip_enabled = 'Content-Encoding' in headers and headers['Content-Encoding'] == 'gzip'
 
-            # Extraer datos sensibles de los encabezados HTTP
-            extracted_data = self.extract_sensitive_data(headers)
+                # Extraer datos sensibles de los encabezados HTTP
+                extracted_data = self.extract_sensitive_data(headers)
 
-            # Estimar la ubicación basada en la hora actual
-            estimated_location = self.estimate_location()
+                # Estimar la ubicación basada en la hora actual
+                estimated_location = self.estimate_location()
 
-            # Mostrar los datos sensibles extraídos y la ubicación estimada
-            print("Datos sensibles extraídos de los encabezados HTTP:")
-            print(extracted_data)
-            print(f"Ubicación estimada basada en la hora actual: {estimated_location}")
+                # Agregar resultados a la lista de resultados
+                results.append({
+                    "gzip_enabled": gzip_enabled,
+                    "sensitive_data": extracted_data,
+                    "estimated_location": estimated_location
+                })
+
+            # Devolver los resultados en formato JSON
+            return json.dumps(results)
             
         except Exception as e:
             print(f"Error al escanear la página: {e}")
 
 if __name__ == "__main__":
-    # Prueba la función con la URL de tu elección
-    scanner = GzipHeaderScanner('http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html')
-    scanner.scan_gzip_header()
+    # Prueba la función con la lista de URLs de tu elección
+    urls = [
+        'http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html'
+    ]
+    scanner = GzipHeaderScanner(urls)
+    results_json = scanner.scan_gzip_header()
+    print(results_json)

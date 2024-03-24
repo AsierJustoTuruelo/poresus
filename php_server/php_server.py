@@ -23,6 +23,9 @@ class PHPServerInfoScanner:
         php_files = re.findall(pattern, html_content)
         return php_files
 
+    def extract_filename(self, url):
+        return url.split('/')[-1]
+
     def test_phpinfo_exposure(self):
         results = {}
         try:
@@ -35,14 +38,12 @@ class PHPServerInfoScanner:
                     # Reemplazar el último segmento de la URL con el archivo PHP encontrado
                     url_parts = self.url.rsplit('/', 1)
                     php_url = url_parts[0] + '/' + php_file
-                    print(f"Probando {php_url}")
                     response = self.make_tor_request(php_url)
                     php_content = response.text
-                    print(php_content)
                     if 'IP' in php_content or 'PHP' in php_content or '.com' in php_content or 'Server' in php_content or 'Debian' in php_content or 'onion' in php_content:
-                        results[php_url] = "Exposes sensitive information"
+                        results[self.extract_filename(php_url)] = "Exposes sensitive information"
                     else:
-                        results[php_url] = "Does not expose sensitive information"
+                        results[self.extract_filename(php_url)] = "Does not expose sensitive information"
 
         except Exception as e:
             results['error'] = str(e)

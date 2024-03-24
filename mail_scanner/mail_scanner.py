@@ -2,32 +2,36 @@ import requests
 import re
 import socks
 import socket
+import json
 
 class HtmlEmailExtractor:
-    def __init__(self, url):
-        self.url = url
+    def __init__(self, urls):
+        self.urls = urls
         self.proxies = {
             'http': 'socks5h://127.0.0.1:9050',
             'https': 'socks5h://127.0.0.1:9050'
         }
 
     def fetch_html_and_extract_emails(self):
-        try:
-            # Configuración del proxy para las solicitudes
-            socks.setdefaultproxy(socks.SOCKS5, "127.0.0.1", 9050)
-            socket.socket = socks.socksocket
+        results = {}
+        for url in self.urls:
+            try:
+                # Configuración del proxy para las solicitudes
+                socks.setdefaultproxy(socks.SOCKS5, "127.0.0.1", 9050)
+                socket.socket = socks.socksocket
 
-            response = requests.get(self.url, proxies=self.proxies)
-            if response.status_code == 200:
-                html_content = response.text
-                emails_found = self._extract_emails(html_content)
-                return emails_found
-            else:
-                print(f"Error al hacer la solicitud. Código de estado: {response.status_code}")
-                return []
-        except requests.RequestException as e:
-            print(f"Error al hacer la solicitud: {e}")
-            return []
+                response = requests.get(url, proxies=self.proxies)
+                if response.status_code == 200:
+                    html_content = response.text
+                    emails_found = self._extract_emails(html_content)
+                    results = {"emails": emails_found}
+                else:
+                    print(f"Error al hacer la solicitud para {url}. Código de estado: {response.status_code}")
+                    results[url] = {"error": f"Código de estado: {response.status_code}"}
+            except requests.RequestException as e:
+                print(f"Error al hacer la solicitud para {url}: {e}")
+                results[url] = {"error": str(e)}
+        return results
 
     def _extract_emails(self, html_content):
         # Expresión regular para buscar direcciones de correo electrónico y enlaces mailto:
@@ -51,7 +55,9 @@ class HtmlEmailExtractor:
         return emails_found
 
 if __name__ == "__main__":
-    url = input("Enter URL: ")
-    extractor = HtmlEmailExtractor(url)
+    urls = [
+        "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/mailweb/mailweb.html"
+    ]
+    extractor = HtmlEmailExtractor(urls)
     emails = extractor.fetch_html_and_extract_emails()
-    print("Emails found:", emails)
+    print(json.dumps(emails, indent=2))

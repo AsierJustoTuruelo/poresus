@@ -5,30 +5,31 @@ import socket
 import json
 
 class HtmlPhoneExtractor:
-    def __init__(self, url):
-        self.url = url
+    def __init__(self, urls):
+        self.urls = urls
         self.proxies = {
             'http': 'socks5h://127.0.0.1:9050',
             'https': 'socks5h://127.0.0.1:9050'
         }
 
     def fetch_html_and_extract_phones(self):
-        try:
-            # Configuración del proxy para las solicitudes
-            socks.setdefaultproxy(socks.SOCKS5, "127.0.0.1", 9050)
-            socket.socket = socks.socksocket
+        results = []
+        for url in self.urls:
+            try:
+                # Configuración del proxy para las solicitudes
+                socks.setdefaultproxy(socks.SOCKS5, "127.0.0.1", 9050)
+                socket.socket = socks.socksocket
 
-            response = requests.get(self.url, proxies=self.proxies)
-            if response.status_code == 200:
-                html_content = response.text
-                phones_found = self._extract_phones(html_content)
-                return phones_found
-            else:
-                print(f"Error al hacer la solicitud. Código de estado: {response.status_code}")
-                return []
-        except requests.RequestException as e:
-            print(f"Error al hacer la solicitud: {e}")
-            return []
+                response = requests.get(url, proxies=self.proxies)
+                if response.status_code == 200:
+                    html_content = response.text
+                    phones_found = self._extract_phones(html_content)
+                    results.extend(phones_found)
+                else:
+                    print(f"Error al hacer la solicitud para {url}. Código de estado: {response.status_code}")
+            except requests.RequestException as e:
+                print(f"Error al hacer la solicitud para {url}: {e}")
+        return json.dumps({"Phone_numbers": results}, indent=2)
 
     def _extract_phones(self, html_content):
         # Expresión regular para buscar números de teléfono en cualquier formato internacional
@@ -37,14 +38,12 @@ class HtmlPhoneExtractor:
         # Buscar números de teléfono
         phones_found = re.findall(phone_pattern, html_content)
         
-        # Convertir los números de teléfono encontrados a JSON
-        phones_json = json.dumps({"Phone_numbers": phones_found})
-        
-        return phones_json
+        return phones_found
 
 if __name__ == "__main__":
-    url = input("Ingrese la URL: ")
-    extractor = HtmlPhoneExtractor(url)
+    urls = [
+        "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/phone_numbers/phone_numbers.html"
+    ]
+    extractor = HtmlPhoneExtractor(urls)
     phones_json = extractor.fetch_html_and_extract_phones()
-    print("Números de teléfono encontrados:")
     print(phones_json)

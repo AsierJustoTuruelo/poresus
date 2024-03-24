@@ -20,24 +20,37 @@ class InformacionServidor:
                 if response.status_code == 200:
                     soup = BeautifulSoup(response.text, 'html.parser')
                     soup2 = BeautifulSoup(response2.text, 'html.parser')
+                    servidores_detectados = []
+
                     servidor_html = self.detectar_servidor_html(soup)
+                    if servidor_html:
+                        servidores_detectados.append(servidor_html)
+
                     servidor_html2 = self.detectar_servidor_html(soup2)
+                    if servidor_html2:
+                        servidores_detectados.append(servidor_html2)
+
                     servidor_header = self.detectar_servidor_header(response)
+                    if servidor_header:
+                        servidores_detectados.append(servidor_header)
+
                     servidor_error = self.detectar_servidor_error(response2)
-                    servidor_mas_comun = self.detectar_servidor_mas_comun([servidor_html, servidor_html2, servidor_header, servidor_error])
+                    if servidor_error:
+                        servidores_detectados.append(servidor_error)
+
+                    servidor_mas_comun = self.detectar_servidor_mas_comun(servidores_detectados)
                     resultado = {
-                        "url": url,
                         "servidor": servidor_mas_comun
                     }
-                    resultados.append(resultado)
+                    resultados = resultado
                 else:
-                    resultados.append({"url": url, "error": f"Error al acceder a {url}: {response.status_code}"})
+                    resultados = {"url": url, "error": f"Error al acceder a {url}: {response.status_code}"}
             except Exception as e:
-                resultados.append({"url": url, "error": f"Error al acceder a {url}: {e}"})
+                resultados = {"url": url, "error": f"Error al acceder a {url}: {e}"}
         return resultados
 
     def detectar_servidor_html(self, soup):
-        text = soup.get_text()
+        text = soup.get_text().lower()  # Convertir el texto a minúsculas para hacer coincidencias de forma insensible a mayúsculas
         servidores = {
             "Nginx": "nginx",
             "Apache": "apache",
@@ -47,8 +60,9 @@ class InformacionServidor:
         }
         contador_servidores = Counter()
         for servidor, palabra_clave in servidores.items():
-            if palabra_clave in text:
+            if text.find(palabra_clave) != -1:
                 contador_servidores[servidor] += 1
+                print(f"Servidor1 {servidor} detectado")
         return contador_servidores.most_common(1)[0][0] if contador_servidores else None
 
     def detectar_servidor_header(self, response):
@@ -61,7 +75,8 @@ class InformacionServidor:
             "Caddy": "Caddy"
         }
         for servidor, identificador in servidores_conocidos.items():
-            if identificador in server_header:
+            if identificador.lower() in server_header.lower():
+                print(f"Servidor2 {servidor} detectado")
                 return servidor
         return None
 
@@ -100,12 +115,15 @@ class InformacionServidor:
         for servidor, errores in errores_conocidos.items():
             for error in errores:
                 if error in text:
+                    print(f"Servidor3 {servidor} detectado")
                     contador_servidores[servidor] += 1
         return contador_servidores.most_common(1)[0][0] if contador_servidores else None
 
     def detectar_servidor_mas_comun(self, servidores):
         contador_servidores = Counter(servidores)
-        return contador_servidores.most_common(1)[0][0] if contador_servidores else None
+        return contador_servidores.most_common(1)[0][0] if contador_servidores else ""
+
+
 
 if __name__ == "__main__":
     urls = ['http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/php_info/php_info.html']
