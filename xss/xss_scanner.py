@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin
+import json
 
 class XSSScanner:
     def __init__(self, urls):
@@ -10,6 +11,7 @@ class XSSScanner:
             'https': 'socks5h://127.0.0.1:9050'
         }
         self.payload = '<script>alert("XSS")</script>'
+        self.results = {}
 
     def get_forms(self, url):
         try:
@@ -19,6 +21,7 @@ class XSSScanner:
             return forms
         except Exception as e:
             print(f"Error al obtener los formularios de {url}: {e}")
+            self.results[url] = {"error": str(e)}
             return []
 
     def submit_forms(self, forms, url):
@@ -43,20 +46,30 @@ class XSSScanner:
                 action = form.get('action')
                 full_url = urljoin(url, action)  # Construir la URL completa
                 response = requests.post(full_url, data=form_data, proxies=self.proxies)
-                print(response.text)
                 if self.payload in response.text:
+                    self.results[url] = {
+                        "vulnerable_form": action,
+                        "vulnerable": True
+                    }
                     print(f'El sitio {url} es vulnerable a XSS en el formulario con action: {action}')
                 else:
                     print(f'El sitio {url} no es vulnerable a XSS en el formulario con action: {action}')
             except Exception as e:
                 print(f"Error al enviar el formulario en {url}: {e}")
+                if url in self.results:
+                    self.results[url]["error"] = str(e)
+                else:
+                    self.results[url] = {"error": str(e)}
 
     def scan_xss(self):
         for url in self.urls:
             forms = self.get_forms(url)
             self.submit_forms(forms, url)
 
+        return self.results
+
 if __name__ == "__main__":
     urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_xss/prueba_xss.html"]
     scanner = XSSScanner(urls)
-    scanner.scan_xss()
+    results = scanner.scan_xss()
+    print(json.dumps(results, indent=4))

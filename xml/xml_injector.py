@@ -17,8 +17,21 @@ class XXEScanner:
             response.raise_for_status()
             html_content = response.text
             soup = BeautifulSoup(html_content, 'html.parser')
-            form_action = soup.find('form')['action']
-            form_method = soup.find('form')['method'].lower()
+
+            # Verificar si existe un formulario en la página
+            form = soup.find('form')
+            if form is None:
+                print(f"No se encontró ningún formulario en {url}")
+                return
+
+            # Obtener el atributo 'action' del formulario, si está presente
+            form_action = form.get('action')
+            if form_action is None:
+                print(f"No se encontró el atributo 'action' en el formulario de {url}")
+                return
+
+            # Obtener el atributo 'method' del formulario, si está presente
+            form_method = form.get('method', '').lower()
 
             # Payload XML con una entidad externa
             payload = """<?xml version="1.0"?>
