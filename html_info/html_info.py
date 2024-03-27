@@ -3,7 +3,7 @@ import requests
 import json
 import os
 
-class ServerInfo:
+class HtmlInfo:
     def __init__(self, urls):
         self.urls = urls
         self.proxies = {
@@ -52,6 +52,6 @@ if __name__ == "__main__":
         'http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/google_ap/google_ap.html'
     ]
     
-    server_info = ServerInfo(onion_urls)
+    server_info = HtmlInfo(onion_urls)
     result = server_info.analyze_page_content()
     print(result)

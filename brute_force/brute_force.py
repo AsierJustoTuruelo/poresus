@@ -141,10 +141,7 @@ class AdvancedBruteForceScanner:
             login_inputs = soup.find_all('input', {'type': ['text', 'password']})
             form = soup.find("form")
             input_names = {'action': form['action'], 'method': form['method']}
-            print(login_inputs)
-            print(input_names)
             self.input_name_users = [input_tag.attrs.get("name") for input_tag in login_inputs]
-            print(self.input_name_users)
             return input_names
         except requests.exceptions.RequestException as e:
             print(f"Error: Unable to retrieve content from {url}: {e}")
