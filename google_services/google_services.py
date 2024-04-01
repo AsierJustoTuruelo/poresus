@@ -14,7 +14,7 @@ class GoogleIDsExtractor:
             'https': 'socks5h://127.0.0.1:9050'
         }
 
-    def fetch_html_and_extract_google_ids(self):
+    def scan_google_services(self):
         results = []
         try:
             # Configuración del proxy para las solicitudes
@@ -51,5 +51,5 @@ if __name__ == "__main__":
         'http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/google_ap/google_ap.html'
     ]
     extractor = GoogleIDsExtractor(urls)
-    results_json = extractor.fetch_html_and_extract_google_ids()
+    results_json = extractor.scan_google_services()
     print(results_json)

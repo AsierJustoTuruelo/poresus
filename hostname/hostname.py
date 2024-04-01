@@ -22,7 +22,7 @@ class HostnameHackingScanner:
             print(f"Error al hacer la solicitud a través de Tor: {e}")
             return None
 
-    def test_hostname_hacking(self):
+    def scan_hostnames(self):
         try:
             results = []
             for onion_domain in self.onion_domains:
@@ -37,12 +37,12 @@ class HostnameHackingScanner:
                 if response_hacked.text != response_normal.text:
                     result = {
                         'resultado': f'El servicio en {onion_domain} es vulnerable a Hostname Hacking',
-                        'hostname_vuln': True
+                        'is_hostname_vulnerable': True
                     }
                 else:
                     result = {
                         'resultado': f'El servicio en {onion_domain} no es vulnerable a Hostname Hacking',
-                        'hostname_vuln': False
+                        'is_hostname_vulnerable': False
                     }
                 results.append(result)
 
@@ -61,5 +61,5 @@ if __name__ == "__main__":
 
     # Prueba la función con la lista de URLs
     scanner = HostnameHackingScanner(onion_domains)
-    result = scanner.test_hostname_hacking()
+    result = scanner.scan_hostnames()
     print(result)

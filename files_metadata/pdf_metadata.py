@@ -27,7 +27,7 @@ class OnionPdfScanner:
             print(f"Error al hacer la solicitud a través de Tor: {e}")
             return None
 
-    def obtener_metadatos(self):
+    def scan_pdf_files(self):
         for url in self.urls:
             # Obtener el contenido de la página web
             response = self.make_tor_request(url)
@@ -63,7 +63,7 @@ class OnionPdfScanner:
 
                 self.results["pdf_metadata"][pdf_link] = serializable_metadata
 
-        # Convertir los resultados a JSON y devolverlos
+        # Convertir loss resultados a JSON y devolverlos
         return json.dumps(self.results)
 
 if __name__ == "__main__":
@@ -73,5 +73,5 @@ if __name__ == "__main__":
         # Puedes agregar más URLs aquí si es necesario
     ]
     scanner = OnionPdfScanner(urls)
-    results_json = scanner.obtener_metadatos()
+    results_json = scanner.scan_pdf_files()
     print(results_json)

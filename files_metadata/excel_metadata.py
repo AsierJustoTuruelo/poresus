@@ -27,7 +27,7 @@ class OnionExcelScanner:
             print(f"Error al hacer la solicitud a través de Tor: {e}")
             return None
 
-    def obtener_datos(self):
+    def scan_excel_files(self):
         for url in self.urls:
             # Obtener el contenido de la página web
             respuesta = self.make_tor_request(url)
@@ -64,5 +64,5 @@ if __name__ == "__main__":
         # Agrega más URLs aquí si es necesario
     ]
     scanner = OnionExcelScanner(urls)
-    results_json = scanner.obtener_datos()
+    results_json = scanner.scan_excel_files()
     print(results_json)

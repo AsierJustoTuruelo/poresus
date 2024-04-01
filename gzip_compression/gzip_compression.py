@@ -47,7 +47,7 @@ class GzipHeaderScanner:
         else:
             return "América"
 
-    def scan_gzip_header(self):
+    def scan_gzip_headers(self):
         results = []
         try:
             for url in self.urls:
@@ -88,5 +88,5 @@ if __name__ == "__main__":
         'http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html'
     ]
     scanner = GzipHeaderScanner(urls)
-    results_json = scanner.scan_gzip_header()
+    results_json = scanner.scan_gzip_headers()
     print(results_json)

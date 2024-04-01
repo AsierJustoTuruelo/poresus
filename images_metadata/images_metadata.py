@@ -28,7 +28,7 @@ class OnionImageScanner:
             print(f"Error al hacer la solicitud a través de Tor: {e}")
             return None
 
-    def scan_and_download_images(self):
+    def scan_images(self):
         results = {}
         for onion_url in self.urls:
             response = self.make_tor_request(onion_url)
@@ -67,7 +67,8 @@ class OnionImageScanner:
 if __name__ == "__main__":
     onion_urls = [
         'http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html'
+        
     ]
     scanner = OnionImageScanner(onion_urls)
-    results = scanner.scan_and_download_images()
+    results = scanner.scan_images()
     print(json.dumps(results, indent=2))

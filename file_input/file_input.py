@@ -6,9 +6,9 @@ import json
 import os
 
 class FileUploadValidator:
-    def __init__(self, onion_urls, tor_proxy="socks5h://127.0.0.1:9050"):
+    def __init__(self, onion_urls):
         self.onion_urls = onion_urls
-        self.tor_proxy = tor_proxy
+        self.tor_proxy = "socks5h://127.0.0.1:9050"
         self.session = requests.Session()
         self.session.proxies = {
             'http': self.tor_proxy,

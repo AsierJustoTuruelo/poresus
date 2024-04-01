@@ -27,7 +27,7 @@ class OnionGifScanner:
             print(f"Error al hacer la solicitud a través de Tor: {e}")
             return None
 
-    def obtener_metadatos(self):
+    def scan_gif_files(self):
         for url in self.urls:
             # Obtener el contenido de la página web
             respuesta = self.make_tor_request(url)
@@ -73,5 +73,5 @@ if __name__ == "__main__":
         # Puedes agregar más URLs aquí si es necesario
     ]
     scanner = OnionGifScanner(urls)
-    results_json = scanner.obtener_metadatos()
+    results_json = scanner.scan_gif_files()
     print(results_json)

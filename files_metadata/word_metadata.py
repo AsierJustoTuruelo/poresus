@@ -27,7 +27,7 @@ class OnionWordScanner:
             print(f"Error al hacer la solicitud a través de Tor: {e}")
             return None
 
-    def obtener_metadatos(self):
+    def scan_word_files(self):
         results = {"word_metadata": []}
 
         for url in self.urls:
@@ -81,5 +81,5 @@ if __name__ == "__main__":
         'http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html'
     ]
     scanner = OnionWordScanner(urls)
-    results_json = scanner.obtener_metadatos()
+    results_json = scanner.scan_word_files()
     print(results_json)
