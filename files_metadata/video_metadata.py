@@ -52,7 +52,6 @@ class OnionMediaScanner:
             for enlace in enlaces_media:
                 # Convertir enlace relativo a absoluto si es necesario
                 enlace_absoluto = urljoin(url, enlace)
-
                 # Obtener el contenido del archivo de medios
                 respuesta = self.make_tor_request(enlace_absoluto)
                 if respuesta is None:

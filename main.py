@@ -61,7 +61,7 @@ def show_logo():
     ██████╔╝██║░░██║██████╔╝█████╗░░╚█████╗░░██║░░░██║╚█████╗░
     ██╔═══╝░██║░░██║██╔══██╗██╔══╝░░░╚═══██╗░██║░░░██║░╚═══██╗
     ██║░░░░░╚█████╔╝██║░░██║███████╗██████╔╝╚ ██████╔╝██████╔╝
-    ╚═╝░░░░░░╚════╝░╚═╝░░╚═╝╚══════╝╚═════╝░░ ╚═════╝░╚═════╝░
+    ╚═╝░░░░░░╚════╝░╚═╝░░╚═╝╚══════╝╚═════╝░░ ╚═════╝░╚═════╝░ by AJ
     """
     print(logo)
 
@@ -114,7 +114,7 @@ def main():
     results = {}
     if args.bitcoin:
         # Ejecutar Bitcoin address extractor
-        bitcoin_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/bitcoin_address/bitcoin_adress.html"]
+        bitcoin_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/bitcoin_address/bitcoin_adress.html", "http://kz62gxxlegswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/bitcoin_address/"]
         bitcoin_extractor = BitcoinAddressExtractor(bitcoin_urls)
         bitcoin_addresses = bitcoin_extractor.fetch_html_and_extract_addresses()
         results["Bitcoin Results"] = {
@@ -123,7 +123,7 @@ def main():
     
     if args.bruteforce:
         # Ejecutar Brute Force scanner
-        brute_force_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_bruteforce/prueba_bruteforce.html"]
+        brute_force_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_bruteforce/prueba_bruteforce.html", "http://kz62gxxl6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_bruteforce/prueba_bruteforce.html"]
         brute_force_scanner = AdvancedBruteForceScanner(brute_force_urls)
         brute_force_results_json = json.loads(brute_force_scanner.brute_force(usernames_file, passwords_file))
         results["Brute Force Results"] = {
@@ -132,7 +132,7 @@ def main():
     
     if args.etag:
         # Ejecutar ETag scanner
-        etag_urls = ["http://6nhmgdpnyoljh5uzr5kwlatx2u3diou4ldeommfxjz3wkhalzgjqxzqd.onion/"]
+        etag_urls = ["http://6nhmgdpnyoljh5uzr5kwlatx2u3diou4ldeommfxjz3wkhalzgjqxzqd.onion/", "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/"]
         etag_scanner = ETagScanner(etag_urls)
         etag_results_json = json.loads(etag_scanner.scan_etags())
         results["ETag Results"] = {
@@ -141,7 +141,7 @@ def main():
     
     if args.favicon:
         # Ejecutar Favicon downloader
-        favicon_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/favicon-ico/favicon-ico.html"]
+        favicon_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/favicon-ico/favicon-ico.html","http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/" ,"http://6nhmgdpnyoljh5uzr5kwlatx2u3diou4ldeommfxjz3wkhalzgjqxzqd.onion/"]
         favicon_downloader = OnionFaviconDownloader(favicon_urls)
         favicon_hashes = favicon_downloader.download_favicon()
         if favicon_hashes:
@@ -151,14 +151,14 @@ def main():
     
     if args.fileinput:
         # Ejecutar File Input validator
-        file_input_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_file/index.html"]
+        file_input_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_file/index.html", "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/"]
         file_input_validator = FileUploadValidator(file_input_urls)
         file_input_validator.run_tests()
         results["File Input Results"] = file_input_validator.results
     
     if args.filehashes:
         # Ejecutar File Hashes scanner
-        file_hashes_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_file/index.html"]
+        file_hashes_urls = ["http://z62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/", "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html"]
         file_hashes_scanner = OnionFileAnalyzer(file_hashes_urls)
         file_hashes_results = file_hashes_scanner.analyze_files()
         results["File Hashes Results"] = {
@@ -248,7 +248,7 @@ def main():
     
     if args.gzipheader:
         # Ejecutar Gzip Header scanner
-        gzip_header_urls = ['http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html']
+        gzip_header_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html", "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/"]
         gzip_header_scanner = GzipHeaderScanner(gzip_header_urls)
         gzip_header_results = gzip_header_scanner.scan_gzip_headers()
         results["Gzip Header Results"] = {
@@ -257,7 +257,7 @@ def main():
     
     if args.hostname:
         # Ejecutar Hostname Hacking scanner
-        hostname_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_hostname/prueba_hostname.html"]
+        hostname_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_hostname/prueba_hostname.html", "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/"]
         hostname_scanner = HostnameHackingScanner(hostname_urls)
         hostname_results = hostname_scanner.scan_hostnames()
         results["Hostname Results"] = {

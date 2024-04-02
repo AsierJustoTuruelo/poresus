@@ -2,6 +2,7 @@ import socks
 import socket
 import requests
 import json
+from tqdm import tqdm  # Importa tqdm
 
 class ETagScanner:
     def __init__(self, urls):
@@ -10,7 +11,7 @@ class ETagScanner:
             'http': 'socks5h://127.0.0.1:9050',
             'https': 'socks5h://127.0.0.1:9050'
         }
-        self.results = []  # Lista para almacenar los resultados de ETag
+        self.results = {}  # Diccionario para almacenar los resultados de ETag
 
     def make_tor_request(self, url):
         try:
@@ -43,19 +44,20 @@ class ETagScanner:
             etag = self.extract_etag(response)
 
             if etag:
-                self.results.append(etag)
+                self.results[url] = etag
             else:
                 print(f"No se encontró la etiqueta ETag en la página: {url}")
+                self.results[url] = "No encontrado ETag"
             
         except Exception as e:
             print(f"Error al escanear la página {url}: {e}")
 
     def scan_etags(self):
-        for url in self.urls:
+        for url in tqdm(self.urls, desc="Scanning ETags"):  # Barra de progreso para cada URL
             self.scan_etag(url)
 
         # Devolver los resultados de ETag como un JSON
-        return json.dumps({"ETags": self.results})
+        return json.dumps(self.results)
 
 if __name__ == "__main__":
     # Lista de URLs de prueba

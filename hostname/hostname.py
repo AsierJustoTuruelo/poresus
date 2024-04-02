@@ -1,7 +1,7 @@
 import requests
 import socks
 import socket
-import json
+from tqdm import tqdm  # Importa tqdm
 
 class HostnameHackingScanner:
     def __init__(self, onion_domains):
@@ -24,8 +24,9 @@ class HostnameHackingScanner:
 
     def scan_hostnames(self):
         try:
-            results = []
-            for onion_domain in self.onion_domains:
+            results = {}
+            # Utiliza tqdm para mostrar la barra de progreso
+            for onion_domain in tqdm(self.onion_domains, desc="Scanning Hostnames"):
                 # Realizar la solicitud al dominio .onion original
                 response_normal = self.make_tor_request(onion_domain)
 
@@ -35,19 +36,18 @@ class HostnameHackingScanner:
 
                 # Compara las respuestas para detectar diferencias
                 if response_hacked.text != response_normal.text:
-                    result = {
+                    results[onion_domain] = {
                         'resultado': f'El servicio en {onion_domain} es vulnerable a Hostname Hacking',
                         'is_hostname_vulnerable': True
                     }
                 else:
-                    result = {
+                    results[onion_domain] = {
                         'resultado': f'El servicio en {onion_domain} no es vulnerable a Hostname Hacking',
                         'is_hostname_vulnerable': False
                     }
-                results.append(result)
 
-            # Devuelve el resultado como JSON
-            return json.dumps(results)
+            # Devuelve el resultado como un diccionario
+            return results
 
         except Exception as e:
             print(f"Error al escanear la página: {e}")

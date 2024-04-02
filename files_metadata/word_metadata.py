@@ -46,7 +46,7 @@ class OnionWordScanner:
             for enlace in enlaces_word:
                 # Convertir enlace relativo a absoluto si es necesario
                 enlace_absoluto = urljoin(url, enlace)
-
+                print(f"Descargando archivo Word: {enlace_absoluto}")
                 # Obtener el contenido del archivo Word
                 respuesta = self.make_tor_request(enlace_absoluto)
                 if respuesta is None:

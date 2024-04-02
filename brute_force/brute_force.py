@@ -4,6 +4,7 @@ from urllib.parse import urljoin
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import threading
 import json
+from tqdm import tqdm  # Importa tqdm
 
 usernames_file = "./dics/usernames.txt"
 passwords_file = "./dics/rockyou.txt"
@@ -104,7 +105,7 @@ class AdvancedBruteForceScanner:
             pass
 
     def brute_force(self, usernames_file, passwords_file):
-        for url in self.urls:
+        for url in tqdm(self.urls, desc="Scanning URLs for Brute Force"):  # Barra de progreso para cada URL
             input_names = self.find_login_inputs(url)
             if not input_names:
                 continue  # Si no se pueden encontrar formularios de inicio de sesión, pasar a la siguiente URL
@@ -131,6 +132,8 @@ class AdvancedBruteForceScanner:
                 thread.join()
 
         # Convertir los resultados a JSON y devolverlos
+        if not self.results:
+            return json.dumps({"No encontrado fuerza bruta"})
         return json.dumps(self.results)
 
     def find_login_inputs(self, url):

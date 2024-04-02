@@ -6,6 +6,7 @@ from datetime import datetime
 from urllib.parse import urljoin
 from bs4 import BeautifulSoup
 import json
+from tqdm import tqdm  # Importa tqdm
 
 class GzipHeaderScanner:
     def __init__(self, urls):
@@ -48,9 +49,9 @@ class GzipHeaderScanner:
             return "América"
 
     def scan_gzip_headers(self):
-        results = []
+        results = {"Gzip Header Results": {}}
         try:
-            for url in self.urls:
+            for url in tqdm(self.urls, desc="Scanning URLs for GZIP header"):  # Barra de progreso para cada URL
                 # Realizar la solicitud a la URL dada
                 response = self.make_tor_request(url)
                 if response is None:
@@ -69,18 +70,19 @@ class GzipHeaderScanner:
                 # Estimar la ubicación basada en la hora actual
                 estimated_location = self.estimate_location()
 
-                # Agregar resultados a la lista de resultados
-                results.append({
+                # Agregar resultados al diccionario de resultados
+                results["Gzip Header Results"][url] = {
                     "gzip_enabled": gzip_enabled,
                     "sensitive_data": extracted_data,
                     "estimated_location": estimated_location
-                })
+                }
 
-            # Devolver los resultados en formato JSON
-            return json.dumps(results)
+            # Devolver los resultados
+            return results
             
         except Exception as e:
             print(f"Error al escanear la página: {e}")
+
 
 if __name__ == "__main__":
     # Prueba la función con la lista de URLs de tu elección
