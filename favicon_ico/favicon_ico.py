@@ -11,7 +11,7 @@ from bs4 import BeautifulSoup
 import base64
 import re
 import json
-from tqdm import tqdm  # Importa tqdm
+from tqdm import tqdm
 
 class OnionFaviconDownloader:
     def __init__(self, urls):
@@ -20,7 +20,7 @@ class OnionFaviconDownloader:
             'http': 'socks5h://127.0.0.1:9050',
             'https': 'socks5h://127.0.0.1:9050'
         }
-        self.results = {}  # Diccionario para almacenar los resultados de hashes
+        self.results = {}  # Dictionary to store hash results
 
     def make_tor_request(self, url):
         try:
@@ -30,11 +30,11 @@ class OnionFaviconDownloader:
             response = requests.get(url, proxies=self.proxies)
             return response
         except Exception as e:
-            print(f"Error al hacer la solicitud a través de Tor: {e}")
+            self.results[url] = f"Error making request through Tor: {e}"
             return None
 
     def download_favicon(self):
-        for url in tqdm(self.urls, desc="Downloading Favicons"):  # Barra de progreso para cada URL
+        for url in tqdm(self.urls, desc="Checking url for Favicons"):  
             response = self.make_tor_request(url)
             if response:
                 try:
@@ -45,37 +45,38 @@ class OnionFaviconDownloader:
                         favicon_response = self.make_tor_request(favicon_url)
                         if favicon_response and favicon_response.status_code == 200:
                             favicon_content = favicon_response.content
-                            # Pasos 1 a 3: Convertir a base64 y añadir saltos de línea cada 76 caracteres
+                            # Steps 1 to 3: Convert to base64 and add newlines every 76 characters
                             b64 = base64.b64encode(favicon_content)
                             utf8_b64 = b64.decode('utf-8')
                             with_newlines = re.sub("(.{76}|$)", "\\1\n", utf8_b64, 0, re.DOTALL)
-                            # Calcular el hash MMH3
+                            # Calculate MMH3 hash
                             mmh3_hash = mmh3.hash(with_newlines.encode())
 
-                            # Calcular el hash SHA-256
+                            # Calculate SHA-256 hash
                             sha256_hash = hashlib.sha256(favicon_content).hexdigest()
 
-                            # Calcular el hash MD5
+                            # Calculate MD5 hash
                             md5_hash = hashlib.md5(favicon_content).hexdigest()
 
-                            # Almacenar los hashes en el diccionario de resultados
+                            # Store hashes in the results dictionary
                             self.results[url] = {
                                 "MMH3": mmh3_hash,
                                 "SHA-256": sha256_hash,
                                 "MD5": md5_hash
                             }
                         else:
-                            self.results[url] = "No se pudo descargar el favicon"
+                            self.results[url] = "Failed to download favicon"
                     else:
-                            self.results[url] = "No se pudo descargar el favicon"
+                            self.results[url] = "Failed to download favicon"
                 except Exception as e:
-                    print(f"Error al procesar la URL {url}: {e}")
+                    self.results[url] = f"Error processing URL {url}: {e}"
+                    
         if not self.results:
-            print("No se pudo descargar el favicon de ninguna de las URLs proporcionadas.")
+            print("Failed to download favicon from any of the provided URLs.")
         return self.results
 
 if __name__ == "__main__":
-    urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/favicon-ico/favicon-ico.html"]
+    urls = ["http://53d5skw4ypzku4bfq2tk2mr3xh5yqrzss25sooiubmjz67lb3gdivcad.onion/","https://www.reddittorjg6rue252oqsxryoxengawnmo46qy4kyii5wtqnwfj4ooad.onion/?rdt=41078", "a"]
     downloader = OnionFaviconDownloader(urls)
     hashes = downloader.download_favicon()
     if hashes:

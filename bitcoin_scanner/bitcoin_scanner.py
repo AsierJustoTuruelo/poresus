@@ -30,10 +30,9 @@ class BitcoinAddressExtractor:
                     else:
                         print(f"Error making request to {url}. Status code: {response.status_code}")
                 except requests.RequestException as e:
-                    print(f"Error making request to {url}: {e}")
                     addresses_found[url] = "Not accessible"
         except Exception as e:
-            print(f"Unknown error: {e}")
+            addresses_found[url] = "Unknown error"
 
         if not addresses_found:
             addresses_found = {"Not found"}
@@ -54,12 +53,16 @@ class BitcoinAddressExtractor:
         # Use a set to avoid duplicate addresses
         addresses_found_set = set(addresses_found_legacy + addresses_found_segwit + addresses_found_bech32)
 
+        if not addresses_found_set:
+            addresses_found_set.add("No bitcoins found at this URL")
+
         return list(addresses_found_set)
 
 if __name__ == "__main__":
     urls = [
         "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/bitcoin_address/bitcoin_adress.html",
-        "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/"
+        "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/",
+        "aaa"
     ]
     extractor = BitcoinAddressExtractor(urls)
     addresses = extractor.fetch_html_and_extract_addresses()

@@ -91,7 +91,7 @@ class OnionFileAnalyzer:
 
 if __name__ == "__main__":
     onion_urls = [
-        'http://kz62gxxle6gwe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html',
+        'http://kz62gxxle6gwe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html',"http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html"
         # Add more URLs here if necessary
     ]
     analyzer = OnionFileAnalyzer(onion_urls)

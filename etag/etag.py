@@ -2,7 +2,7 @@ import socks
 import socket
 import requests
 import json
-from tqdm import tqdm  # Importa tqdm
+from tqdm import tqdm
 
 class ETagScanner:
     def __init__(self, urls):
@@ -21,7 +21,7 @@ class ETagScanner:
             response = requests.get(url, proxies=self.proxies)
             return response
         except Exception as e:
-            print(f"Error al hacer la solicitud a través de Tor: {e}")
+            self.results[url] = f"Error al hacer la solicitud a través de Tor: {e}"
             return None
 
     def extract_etag(self, response):
@@ -37,7 +37,7 @@ class ETagScanner:
             # Realizar la solicitud a la URL dada
             response = self.make_tor_request(url)
             if response is None:
-                print(f"No se pudo obtener la respuesta de la página: {url}")
+                self.results[url] = "No se pudo obtener la respuesta"
                 return
 
             # Extraer la etiqueta ETag de la respuesta
@@ -46,11 +46,10 @@ class ETagScanner:
             if etag:
                 self.results[url] = etag
             else:
-                print(f"No se encontró la etiqueta ETag en la página: {url}")
                 self.results[url] = "No encontrado ETag"
             
         except Exception as e:
-            print(f"Error al escanear la página {url}: {e}")
+            self.results[url] = f"Error al escanear la página {url}"
 
     def scan_etags(self):
         for url in tqdm(self.urls, desc="Scanning ETags"):  # Barra de progreso para cada URL
@@ -62,7 +61,7 @@ class ETagScanner:
 if __name__ == "__main__":
     # Lista de URLs de prueba
     urls = [
-        'http://6nhmgdpnyoljh5uzr5kwlatx2u3diou4ldeommfxjz3wkhalzgjqxzqd.onion/',
+        'http://6nhmgdpnyoljh5uzr5kwlatx2u3diou4ldeommfxjz3wkhalzgjqxzqd.onion/',"a", "http://6nhmgdpnyoljh5uzr5kwlatx2u3diou4ldeommfxjz3wkhalzgjqxzqd.onion/tests/"
         # Agrega más URLs aquí si es necesario
     ]
     scanner = ETagScanner(urls)

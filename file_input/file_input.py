@@ -4,7 +4,7 @@ from urllib.parse import urljoin
 import threading
 import json
 import os
-from tqdm import tqdm  # Importa tqdm
+from tqdm import tqdm
 
 class FileUploadValidator:
     def __init__(self, onion_urls):
@@ -30,7 +30,6 @@ class FileUploadValidator:
                     input_name = input_type.get('name', 'file')
                     allowed_file_types = input_type.get('accept', '').split(',')
 
-                    # Buscar el campo select para el tipo de archivo permitido
                     select_field = form.find('select', {'name': 'fileType'})
                     if select_field:
                         selected_option = select_field.find('option', {'selected': True})
@@ -42,8 +41,7 @@ class FileUploadValidator:
                     yield (form, input_name, allowed_file_types)
                 
         except requests.exceptions.RequestException as e:
-            print(f"Error al acceder a {onion_url}: {e}")
-            # Añadir "No results" al diccionario de resultados
+            print(f"Error accessing {onion_url}: {e}")
             self.results[onion_url] = {
                 "result_file_input": "No results"
             }
@@ -52,10 +50,9 @@ class FileUploadValidator:
         try:
             action = form.get('action')
             if not action:
-                print(f"No se encontró ninguna acción en el formulario de {onion_url}")
+                print(f"No action found in form for {onion_url}")
                 return
             
-            # Lista de archivos maliciosos para probar
             malicious_files = [
                 ("malicious.php.png", "<?php echo 'VULNERABLE'; ?>"),
                 ("malicious.php.txt", "<?php echo 'VULNERABLE'; ?>"),
@@ -73,45 +70,35 @@ class FileUploadValidator:
                 ("malicious.php.pptx", "<?php echo 'VULNERABLE'; ?>")
             ]
 
-            # Probar la carga de archivos maliciosos
             for file_name, content in tqdm(malicious_files, desc="Testing malicious files"):
-                # Crear el archivo malicioso
                 with open(file_name, "w") as malicious_file:
                     malicious_file.write(content)
 
-                # Cargar el archivo malicioso
                 files = {input_name: open(file_name, 'rb')}
                 res = self.session.post(urljoin(onion_url, action), files=files,
                                         proxies=self.session.proxies, allow_redirects=True)
 
-                # Eliminar el archivo malicioso después de la prueba
                 os.remove(file_name)
-                # Verificar si el código malicioso se ejecutó en el servidor
+
                 if 'VULNERABLE' in res.text:
                     if onion_url not in self.results:
                         self.results[onion_url] = {}
                     if input_name not in self.results[onion_url]:
                         self.results[onion_url][input_name] = []
 
-                    # Obtener la extensión del archivo subido
                     uploaded_extension = os.path.splitext(file_name)[1]
 
-                    # Agregar la extensión del archivo subido a la lista de tipos MIME permitidos
                     allowed_file_types.append(uploaded_extension)
 
-                    # Almacenar el resultado en el diccionario de resultados
-                    self.results[onion_url][input_name].append(f"VULNERABLE: {file_name}")
+                    self.results[onion_url][input_name].append(f"Accepts files with: {os.path.splitext(file_name)[1]} extension")
                 else:
                     if onion_url not in self.results:
                         self.results[onion_url] = {}
                     if input_name not in self.results[onion_url]:
                         self.results[onion_url][input_name] = []
 
-                    # Almacenar el resultado en el diccionario de resultados
                     self.results[onion_url][input_name].append(f"NO VULNERABLE: {file_name}")
         except requests.exceptions.RequestException as e:
-            print(f"Error durante la prueba para el formulario en {onion_url}: {e}")
-            # Añadir "no tuvo éxito" al diccionario de resultados
             if onion_url not in self.results:
                 self.results[onion_url] = {}
             self.results[onion_url] = {
@@ -128,17 +115,24 @@ class FileUploadValidator:
                         "result_file_input": "No forms found"
                     }
                 else:
-                    for form, input_name, allowed_file_types in file_upload_forms:  
-                        self.test_file_upload(onion_url, form, input_name, allowed_file_types)
+                    threads = []
+                    for form, input_name, allowed_file_types in file_upload_forms:
+                        thread = threading.Thread(target=self.test_file_upload,
+                                                  args=(onion_url, form, input_name, allowed_file_types))
+                        threads.append(thread)
+                        thread.start()
+                    for thread in threads:
+                        thread.join()
 
             except Exception as e:
-                print(f"Error al procesar la URL {onion_url}: {e}")
-
-
+                self.results[onion_url] = {
+                    "result_file_input": f"Error processing URL {onion_url}"
+                }
+                print(f"Error processing URL {onion_url}: {e}")
 
 if __name__ == "__main__":
     onion_urls = [
-        "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests"
+        "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests", "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_file/", "a"
     ]
     validator = FileUploadValidator(onion_urls)
     validator.run_tests()

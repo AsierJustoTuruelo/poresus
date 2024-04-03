@@ -24,7 +24,6 @@ class GzipHeaderScanner:
             response = requests.get(url, proxies=self.proxies)
             return response
         except Exception as e:
-            print(f"Error al hacer la solicitud a través de Tor: {e}")
             return None
 
     def extract_sensitive_data(self, headers):
@@ -49,13 +48,14 @@ class GzipHeaderScanner:
             return "América"
 
     def scan_gzip_headers(self):
-        results = {"Gzip Header Results": {}}
+        results = {}
         try:
             for url in tqdm(self.urls, desc="Scanning URLs for GZIP header"):  # Barra de progreso para cada URL
                 # Realizar la solicitud a la URL dada
                 response = self.make_tor_request(url)
+                print(response.headers)
                 if response is None:
-                    print(f"No se pudo obtener la respuesta de la página: {url}")
+                    results[url] = {f"No se pudo obtener la respuesta de la página"}
                     continue
 
                 # Analizar los encabezados HTTP
@@ -71,7 +71,7 @@ class GzipHeaderScanner:
                 estimated_location = self.estimate_location()
 
                 # Agregar resultados al diccionario de resultados
-                results["Gzip Header Results"][url] = {
+                results[url] = {
                     "gzip_enabled": gzip_enabled,
                     "sensitive_data": extracted_data,
                     "estimated_location": estimated_location
@@ -87,7 +87,7 @@ class GzipHeaderScanner:
 if __name__ == "__main__":
     # Prueba la función con la lista de URLs de tu elección
     urls = [
-        'http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html'
+        "http://juhanurmihxlp77nkq76byazcldy2hlmovfu2epvl5ankdibsot4csyd.onion/"
     ]
     scanner = GzipHeaderScanner(urls)
     results_json = scanner.scan_gzip_headers()

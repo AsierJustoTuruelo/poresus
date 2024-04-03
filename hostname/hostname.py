@@ -1,7 +1,7 @@
 import requests
 import socks
 import socket
-from tqdm import tqdm  # Importa tqdm
+from tqdm import tqdm  # Import tqdm
 
 class HostnameHackingScanner:
     def __init__(self, onion_domains):
@@ -19,47 +19,57 @@ class HostnameHackingScanner:
             response = requests.get(url, proxies=self.proxies)
             return response
         except Exception as e:
-            print(f"Error al hacer la solicitud a través de Tor: {e}")
             return None
 
     def scan_hostnames(self):
+        results = {}
         try:
-            results = {}
-            # Utiliza tqdm para mostrar la barra de progreso
             for onion_domain in tqdm(self.onion_domains, desc="Scanning Hostnames"):
-                # Realizar la solicitud al dominio .onion original
-                response_normal = self.make_tor_request(onion_domain)
+                try:
+                    # Make request to the original .onion domain
+                    response_normal = self.make_tor_request(onion_domain)
 
-                # Modificar el encabezado 'Host' para la técnica de Hostname Hacking
-                headers = {'Host': 'localhost'}
-                response_hacked = requests.get(onion_domain, headers=headers, proxies=self.proxies)
+                    # Modify the 'Host' header for Hostname Hacking technique
+                    headers = {'Host': 'localhost'}
+                    response_hacked = requests.get(onion_domain, headers=headers, proxies=self.proxies)
 
-                # Compara las respuestas para detectar diferencias
-                if response_hacked.text != response_normal.text:
+                    # Compare responses to detect differences
+                    if response_normal is None:
+                        results[onion_domain] = {
+                            'result': f'The service at {onion_domain} is not accessible',
+                            'is_hostname_vulnerable': False
+                        }
+                    elif response_hacked.text != response_normal.text:
+                        results[onion_domain] = {
+                            'result': f'The service at {onion_domain} is vulnerable to Hostname Hacking',
+                            'is_hostname_vulnerable': True
+                        }
+                    else:
+                        results[onion_domain] = {
+                            'result': f'The service at {onion_domain} is not vulnerable to Hostname Hacking',
+                            'is_hostname_vulnerable': False
+                        }
+                except Exception as e:
                     results[onion_domain] = {
-                        'resultado': f'El servicio en {onion_domain} es vulnerable a Hostname Hacking',
-                        'is_hostname_vulnerable': True
-                    }
-                else:
-                    results[onion_domain] = {
-                        'resultado': f'El servicio en {onion_domain} no es vulnerable a Hostname Hacking',
+                        'result': f'Error occurred: {e}',
                         'is_hostname_vulnerable': False
                     }
+                    results[onion_domain] = {f"Error scanning {onion_domain}"}
 
-            # Devuelve el resultado como un diccionario
+            # Return the result as a dictionary
             return results
 
         except Exception as e:
-            print(f"Error al escanear la página: {e}")
+            results[onion_domain] = "Error occurred while scanning the page"
             return None
 
 if __name__ == "__main__":
-    # Lista de URLs .onion de ejemplo
+    # Sample list of .onion URLs
     onion_domains = [
-        'http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/'
+        'http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html',"a","http://juhanurmihxlp77nkq76byazcldy2hlmovfu2epvl5ankdibsot4csyd.onion/"
     ]
 
-    # Prueba la función con la lista de URLs
+    # Test the function with the list of URLs
     scanner = HostnameHackingScanner(onion_domains)
     result = scanner.scan_hostnames()
     print(result)
