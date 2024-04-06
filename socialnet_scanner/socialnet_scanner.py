@@ -3,6 +3,7 @@ import json
 import socks
 import socket
 import requests
+from tqdm import tqdm
 
 class RedesSocialesScanner:
     def __init__(self, urls):
@@ -20,7 +21,6 @@ class RedesSocialesScanner:
             response = requests.get(url, proxies=self.proxies)
             return response
         except Exception as e:
-            print(f"Error al hacer la solicitud a través de Tor: {e}")
             return None
 
     def extract_social_media(self, text):
@@ -50,36 +50,33 @@ class RedesSocialesScanner:
                     redes_sociales_encontradas[nombre_red_social] = []
                 redes_sociales_encontradas[nombre_red_social].append(match.group(0))
 
-        return redes_sociales_encontradas
+        return redes_sociales_encontradas if redes_sociales_encontradas else {"No socialnet found": None}
 
     def scan_social_media(self, url):
         try:
             response = self.make_tor_request(url)
             if response is None:
-                print(f"No se pudo obtener la respuesta de la página: {url}")
-                return None
+                return {"error": f"No se pudo obtener la respuesta de la página: {url}"}
 
             if response.status_code == 200:
                 social_media_found = self.extract_social_media(response.text)
                 return social_media_found
             else:
-                print(f"No se pudo acceder a la página: {url}")
-                return None
+                return {"error": f"No se pudo acceder a la página: {url}"}
         except Exception as e:
-            print(f"Error al escanear redes sociales en {url}: {e}")
-            return None
+            return {"error": f"Error al escanear redes sociales en {url}: {e}"}
 
     def scan_social_media_for_all_urls(self):
         results = {}
-        for url in self.urls:
+        for url in tqdm(self.urls, desc="Scanning Social Media"):
             social_media_found = self.scan_social_media(url)
             if social_media_found:
-                results = social_media_found
+                results[url] = social_media_found
         return results
 
 if __name__ == "__main__":
     onion_urls = [
-        'http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/redes_sociales/redes_sociales.html'
+        'http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/redes_sociales/redes_sociales.html', "a", "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/"
     ]
 
     scanner = RedesSocialesScanner(onion_urls)

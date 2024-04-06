@@ -4,6 +4,7 @@ import socks
 import socket
 import requests
 from bs4 import BeautifulSoup
+from tqdm import tqdm
 
 class ServerStatusChecker:
     def __init__(self, urls):
@@ -42,7 +43,7 @@ class ServerStatusChecker:
             response = self.make_tor_request(url + "/server-status")
             if response is None:
                 print("No se pudo obtener la respuesta de la página.")
-                return
+                return {"error": "No se pudo obtener la respuesta de la página."}
 
             # Verificar si la URL /server-status está disponible
             disponible = response.status_code == 200
@@ -64,20 +65,20 @@ class ServerStatusChecker:
             
         except Exception as e:
             print(f"Error al verificar la URL {url}/server-status: {e}")
-            return None
+            return {"error": f"Error al verificar la URL {url}/server-status: {e}"}
 
     def check_servers_status(self):
         results = {}
-        for url in self.urls:
+        for url in tqdm(self.urls, desc="Checking Servers"):
             result = self.check_server_status(url)
             if result:
-                results = result
+                results[url] = result
         return results
 
 if __name__ == "__main__":
     # Prueba la función con una lista de URLs de tu elección
     onion_urls = [
-        'http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/'
+        'http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/', 'a'
     ]
     
     checker = ServerStatusChecker(onion_urls)

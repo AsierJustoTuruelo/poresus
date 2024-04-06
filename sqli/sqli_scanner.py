@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 from urllib.parse import urljoin
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import json
+from tqdm import tqdm
 
 class AdvancedSqlInjectionScanner:
     def __init__(self, proxy_address="127.0.0.1", proxy_port=9050):
@@ -34,8 +35,7 @@ class AdvancedSqlInjectionScanner:
                 })
             return forms_info
         except requests.exceptions.RequestException as e:
-            print(f"Error al acceder a {url}: {e}")
-            return {'error': str(e)}
+            return {'error': f"Not accessible: {e}"}
 
     def vulnerable(self, response):
         # Lista de posibles mensajes de error o éxito relacionados con SQL
@@ -111,7 +111,6 @@ class AdvancedSqlInjectionScanner:
         ]
 
         vulnerable_forms = []
-        errors = []
 
         def send_request(username_payload, password_payload, sql_payload):
             payload = {username_payload: sql_payload, password_payload: '1234'}
@@ -129,7 +128,7 @@ class AdvancedSqlInjectionScanner:
                         return
 
             except Exception as e:
-                errors.append(str(e))
+                pass
 
         with ThreadPoolExecutor(max_workers=10) as executor:
             futures = []
@@ -141,11 +140,11 @@ class AdvancedSqlInjectionScanner:
             for future in as_completed(futures):
                 future.result()
 
-        return {'vulnerable_forms': vulnerable_forms, 'errors': errors}
-
+        return {'vulnerable_forms': vulnerable_forms}
+    
     def sql_injection_scan(self, urls):
         results = {}
-        for url in urls:
+        for url in tqdm(urls, desc="Scanning SQL Injection"):
             try:
                 self.session.proxies = {
                     'http': 'socks5h://localhost:9050',
@@ -153,23 +152,30 @@ class AdvancedSqlInjectionScanner:
                 }
 
                 forms_info = self.get_forms(url)
-                print(f"[+] Detectados {len(forms_info)} formularios en {url}.")
+                if 'error' in forms_info:
+                    results[url] = forms_info
+                    continue
+
+                #print(f"[+] Detectados {len(forms_info)} formularios en {url}.")
+
+                if not forms_info:
+                    results[url] = {'Error': 'No forms found'}
+                    continue
 
                 for form_info in forms_info:
                     action = form_info.get("action")
                     if action and (".php" in url or ".php" in action):
                         result = self.inject_sql(url, action, {'User-Agent': 'pentest'})
-                        results = {'url': url, 'forms_info': forms_info, 'sql_injection_result': result}
+                        results[url] = {'forms_info': forms_info, 'sql_injection_result': result}
 
             except Exception as e:
-                print(f"Error durante el escaneo de inyección SQL para {url}: {e}")
-                results = {'url': url, 'error': str(e)}
-
+                results[url] = {'error': str(e)}
+                
         return results
 
 if __name__ == "__main__":
     urls = [
-        "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.html"
+        "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.html","a","http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/"
     ]
 
     sql_scanner = AdvancedSqlInjectionScanner()

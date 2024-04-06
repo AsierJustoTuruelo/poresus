@@ -3,6 +3,7 @@ import re
 import socks
 import socket
 import json
+from tqdm import tqdm
 
 class HtmlPhoneExtractor:
     def __init__(self, urls):
@@ -13,36 +14,46 @@ class HtmlPhoneExtractor:
         }
 
     def fetch_html_and_extract_phones(self):
-        results = []
-        for url in self.urls:
+        results = {}
+        for url in tqdm(self.urls, desc="Extracting Phone Numbers"):
             try:
-                # Configuración del proxy para las solicitudes
+                # Proxy configuration for requests
                 socks.setdefaultproxy(socks.SOCKS5, "127.0.0.1", 9050)
                 socket.socket = socks.socksocket
 
-                response = requests.get(url, proxies=self.proxies)
+                response = requests.get(url, proxies=self.proxies, timeout=10)  # Add timeout to handle unreachable URLs
                 if response.status_code == 200:
                     html_content = response.text
                     phones_found = self._extract_phones(html_content)
-                    results.extend(phones_found)
+                    if phones_found:
+                        results[url] = phones_found
+                    else:
+                        results[url] = "No phones found"
                 else:
-                    print(f"Error al hacer la solicitud para {url}. Código de estado: {response.status_code}")
+                    results[url] = {"error": f"Status Code: {response.status_code}"}
             except requests.RequestException as e:
-                print(f"Error al hacer la solicitud para {url}: {e}")
+                results[url] = {"error": str(e)}
         return json.dumps({"Phone_numbers": results}, indent=2)
 
     def _extract_phones(self, html_content):
-        # Expresión regular para buscar números de teléfono en cualquier formato internacional
+        # Regular expression to search for phone numbers in any international format
         phone_pattern = r'(?<!\d)(?<!\d-)(?<!\d\s)(?:\+\d{1,3}\s?)?(?:\(\d{1,4}\)\s*|\d{1,4}[-. ]?)?\d{1,4}[-. ]?\d{1,4}[-. ]?\d{1,4}(?!\d)'
         
-        # Buscar números de teléfono
+        # Regular expression to identify date-like patterns (for exclusion)
+        date_pattern = r'\b\d{1,4}[./-]\d{1,2}[./-]\d{2,4}\b'
+        
+        # Search for phone numbers
         phones_found = re.findall(phone_pattern, html_content)
         
-        return phones_found
+        # Filter out any patterns resembling dates
+        phones_found = [phone for phone in phones_found if not re.match(date_pattern, phone)]
+        
+        return phones_found if phones_found else None
 
 if __name__ == "__main__":
     urls = [
-        "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/phone_numbers/phone_numbers.html"
+        "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/phone_numbers/phone_numbers.html","a",
+        "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/"
     ]
     extractor = HtmlPhoneExtractor(urls)
     phones_json = extractor.fetch_html_and_extract_phones()

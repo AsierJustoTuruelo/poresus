@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import json
 from collections import Counter
+from tqdm import tqdm
 
 class InformacionServidor:
     def __init__(self, urls):
@@ -12,8 +13,8 @@ class InformacionServidor:
         }
     
     def analizar_servidor(self):
-        resultados = []
-        for url in self.urls:
+        resultados = {}
+        for url in tqdm(self.urls, desc="Analyzing URLs"):
             try:
                 response = requests.get(url, proxies=self.proxies)
                 response2 = requests.get(url+"/nonexistent", proxies=self.proxies)
@@ -32,21 +33,23 @@ class InformacionServidor:
 
                     servidor_header = self.detectar_servidor_header(response)
                     if servidor_header:
-                        servidores_detectados.append(servidor_header)
+                        resultados[url] = {
+                            "servidor": servidor_header
+                        }
+                        continue
 
                     servidor_error = self.detectar_servidor_error(response2)
                     if servidor_error:
                         servidores_detectados.append(servidor_error)
 
                     servidor_mas_comun = self.detectar_servidor_mas_comun(servidores_detectados)
-                    resultado = {
+                    resultados[url] = {
                         "servidor": servidor_mas_comun
                     }
-                    resultados = resultado
                 else:
-                    resultados = {"url": url, "error": f"Error al acceder a {url}: {response.status_code}"}
+                    resultados[url] = {"error": f"Error al acceder a {url}: {response.status_code}"}
             except Exception as e:
-                resultados = {"url": url, "error": f"Error al acceder a {url}: {e}"}
+                resultados[url] = {"error": f"Error al acceder a {url}: {e}"}
         return resultados
 
     def detectar_servidor_html(self, soup):
@@ -56,13 +59,14 @@ class InformacionServidor:
             "Apache": "apache",
             "IIS": "iis",
             "Lighttpd": "lighttpd",
-            "Caddy": "caddy"
+            "Caddy": "caddy",
+            "Tomcat": "apache tomcat",
+            "Express": "express"
         }
         contador_servidores = Counter()
         for servidor, palabra_clave in servidores.items():
             if text.find(palabra_clave) != -1:
                 contador_servidores[servidor] += 1
-                print(f"Servidor1 {servidor} detectado")
         return contador_servidores.most_common(1)[0][0] if contador_servidores else None
 
     def detectar_servidor_header(self, response):
@@ -72,11 +76,12 @@ class InformacionServidor:
             "Apache": "apache",
             "IIS": "Microsoft-IIS",
             "Lighttpd": "lighttpd",
-            "Caddy": "Caddy"
+            "Caddy": "Caddy",
+            "Tomcat": "Apache-Coyote",
+            "Express": "Express"
         }
         for servidor, identificador in servidores_conocidos.items():
             if identificador.lower() in server_header.lower():
-                print(f"Servidor2 {servidor} detectado")
                 return servidor
         return None
 
@@ -107,6 +112,15 @@ class InformacionServidor:
             ],
             "Caddy": [
                 "Caddy error"
+            ],
+            "Tomcat": [
+                "Apache Tomcat Error Report",
+                "HTTP Status 404",
+                "Apache Tomcat/8.5.69",
+                "Apache Tomcat/9.0.0"
+            ],
+            "Express": [
+                "Cannot GET /nonexistent"
             ]
         }
         soup = BeautifulSoup(response.text, 'html.parser')
@@ -115,7 +129,6 @@ class InformacionServidor:
         for servidor, errores in errores_conocidos.items():
             for error in errores:
                 if error in text:
-                    print(f"Servidor3 {servidor} detectado")
                     contador_servidores[servidor] += 1
         return contador_servidores.most_common(1)[0][0] if contador_servidores else None
 
@@ -123,10 +136,8 @@ class InformacionServidor:
         contador_servidores = Counter(servidores)
         return contador_servidores.most_common(1)[0][0] if contador_servidores else ""
 
-
-
 if __name__ == "__main__":
-    urls = ['http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/php_info/php_info.html']
+    urls = ['http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/php_info/php_info.html',"a"]
     informacion_servidor = InformacionServidor(urls)
     resultados = informacion_servidor.analizar_servidor()
     print(json.dumps(resultados, indent=4))
