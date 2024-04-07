@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin
 import json
+from tqdm import tqdm
 
 class XSSScanner:
     def __init__(self, urls):
@@ -12,6 +13,13 @@ class XSSScanner:
         }
         self.payload = '<script>alert("XSS")</script>'
         self.results = {}
+
+    def is_accessible(self, url):
+        try:
+            response = requests.head(url, proxies=self.proxies)
+            return response.status_code == 200
+        except requests.exceptions.RequestException:
+            return False
 
     def get_forms(self, url):
         try:
@@ -25,7 +33,10 @@ class XSSScanner:
             return []
 
     def submit_forms(self, forms, url):
-        print(f"Number of forms detected on {url}: {len(forms)}")
+        if not forms:
+            self.results[url] = {"error": "No se encontraron formularios"}
+            return
+
         for form in forms:
             try:
                 form_data = {}
@@ -51,9 +62,7 @@ class XSSScanner:
                         "vulnerable_form": action,
                         "vulnerable": True
                     }
-                    print(f'El sitio {url} es vulnerable a XSS en el formulario con action: {action}')
-                else:
-                    print(f'El sitio {url} no es vulnerable a XSS en el formulario con action: {action}')
+            
             except Exception as e:
                 print(f"Error al enviar el formulario en {url}: {e}")
                 if url in self.results:
@@ -62,14 +71,21 @@ class XSSScanner:
                     self.results[url] = {"error": str(e)}
 
     def scan_xss(self):
-        for url in self.urls:
+        for url in tqdm(self.urls, desc="Scanning URLs"):
+            if not self.is_accessible(url):
+                self.results[url] = {"error": "URL no accesible"}
+                continue
             forms = self.get_forms(url)
             self.submit_forms(forms, url)
 
         return self.results
 
 if __name__ == "__main__":
-    urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_xss/prueba_xss.html"]
+    urls = [
+        "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_xss/prueba_xss.html",
+        "a",
+        "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_xss/"
+    ]
     scanner = XSSScanner(urls)
     results = scanner.scan_xss()
     print(json.dumps(results, indent=4))
