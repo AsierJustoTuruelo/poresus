@@ -24,7 +24,7 @@ class HostnameHackingScanner:
     def scan_hostnames(self):
         results = {}
         try:
-            for onion_domain in tqdm(self.onion_domains, desc="Scanning Hostnames"):
+            for onion_domain in tqdm(self.onion_domains, desc="Scanning URLs for Hostname Vulnerability"):
                 try:
                     # Make request to the original .onion domain
                     response_normal = self.make_tor_request(onion_domain)

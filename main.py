@@ -29,7 +29,7 @@ from files_metadata.excel_metadata import OnionExcelScanner
 from files_metadata.gif_metadata import OnionGifScanner
 from files_metadata.pdf_metadata import OnionPdfScanner
 from files_metadata.ppt_metadata import OnionPptScanner
-#from files_metadata.txt_metadata import
+from files_metadata.txt_metadata import OnionTextScanner
 from files_metadata.video_metadata import OnionMediaScanner
 from files_metadata.word_metadata import OnionWordScanner
 from google_services.google_services import GoogleIDsExtractor
@@ -47,6 +47,7 @@ from socialnet_scanner.socialnet_scanner import RedesSocialesScanner
 from sqli.sqli_scanner import AdvancedSqlInjectionScanner
 from validacion_input.validacionInput import ValidacionInput
 from xss.xss_scanner import XSSScanner
+from database_type.database_type import DatabaseTypeScanner
 #from xml.xml_injector import XXEScanner
 
 import argparse
@@ -88,6 +89,7 @@ def main():
     parser.add_argument("-pwm", "--pptmetadata", action="store_true", help="Run PPT Metadata scanner")
     parser.add_argument("-wm", "--wordmetadata", action="store_true", help="Run Word Metadata scanner")
     parser.add_argument("-mm", "--mediametadata", action="store_true", help="Run Media Metadata scanner")
+    parser.add_argument("-tm", "--txtmetadata", action="store_true", help="Run Text Metadata scanner")
     parser.add_argument("-im", "--imagemetadata", action="store_true", help="Run Image Metadata scanner")
     parser.add_argument("-gs", "--googleids", action="store_true", help="Run Google IDs extractor")
     parser.add_argument("-gh", "--gzipheader", action="store_true", help="Run Gzip Header scanner")
@@ -104,6 +106,8 @@ def main():
     parser.add_argument("-vi", "--validacioninput", action="store_true", help="Run Validacion Input scanner")
     parser.add_argument("-xss", "--xss", action="store_true", help="Run XSS scanner")
     #parser.add_argument("-xxe", "--xxe", action="store_true", help="Run XXE scanner")
+    parser.add_argument("-db", "--database", action="store_true", help="Run Data Base scanner")
+    parser.add_argument("-all", "--all", action="store_true", help="Run all scanners")
 
     
 
@@ -226,6 +230,15 @@ def main():
         media_metadata_results = media_metadata_scanner.scan_media_files()
         results["Media Metadata Results"] = {
             "Media Metadata Results": media_metadata_results
+        }
+    
+    if args.txtmetadata:
+        # Ejecutar Text Metadata scanner
+        text_metadata_urls = ["http://6nhmgdpnyoljh5uzr5kwlatx2u3diou4ldeommfxjz3wkhalzgjqxzqd.onion/"]
+        text_metadata_scanner = OnionTextScanner(text_metadata_urls)
+        text_metadata_results = text_metadata_scanner.scan_text_files()
+        results["Text Metadata Results"] = {
+            "Text Metadata Results": text_metadata_results
         }
     
     if args.imagemetadata:
@@ -361,11 +374,225 @@ def main():
             "XSS Results": xss_results
         }
     
+    if args.database:
+        # Ejecutar Data Base scanner
+        database_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_dbtype/prueba_dbtype.html", "a", "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/"]
+        database_scanner = DatabaseTypeScanner(database_urls)
+        results["Database Results"] = database_scanner.scan_urls()
+    
+    if args.all:
+        # Ejecutar todos los escáneres
+        bitcoin_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/bitcoin_address/bitcoin_adress.html", "http://kz62gxxlegswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/bitcoin_address/"]
+        bitcoin_extractor = BitcoinAddressExtractor(bitcoin_urls)
+        bitcoin_addresses = bitcoin_extractor.fetch_html_and_extract_addresses()
+        results["Bitcoin Results"] = {
+            "Bitcoin Addresses": bitcoin_addresses if bitcoin_addresses else "No se encontraron direcciones Bitcoin."
+        }
+        
+        brute_force_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_bruteforce/prueba_bruteforce.html", "http://kz62gxxl6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_bruteforce/prueba_bruteforce.html"]
+        brute_force_scanner = AdvancedBruteForceScanner(brute_force_urls)
+        brute_force_results_json = json.loads(brute_force_scanner.brute_force(usernames_file, passwords_file))
+        results["Brute Force Results"] = {
+            "Brute Force Results": brute_force_results_json
+        }
+        
+        etag_urls = ["http://6nhmgdpnyoljh5uzr5kwlatx2u3diou4ldeommfxjz3wkhalzgjqxzqd.onion/", "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/"]
+        etag_scanner = ETagScanner(etag_urls)
+        etag_results_json = json.loads(etag_scanner.scan_etags())
+        results["ETag Results"] = {
+            "ETag Results": etag_results_json
+        }
+
+        favicon_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/favicon-ico/favicon-ico.html","http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/" ,"http://6nhmgdpnyoljh5uzr5kwlatx2u3diou4ldeommfxjz3wkhalzgjqxzqd.onion/"]
+        favicon_downloader = OnionFaviconDownloader(favicon_urls)
+        favicon_hashes = favicon_downloader.download_favicon()
+        if favicon_hashes:
+            results["Favicon Results"] = {
+                "Favicon Hashes": favicon_hashes
+            }
+
+        file_input_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_file/index.html", "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/"]
+        file_input_validator = FileUploadValidator(file_input_urls)
+        file_input_validator.run_tests()
+        results["File Input Results"] = file_input_validator.results
+
+        file_hashes_urls = ["http://z62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/", "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html"]
+        file_hashes_scanner = OnionFileAnalyzer(file_hashes_urls)
+        file_hashes_results = file_hashes_scanner.analyze_files()
+        results["File Hashes Results"] = {
+            "File Hashes Results": file_hashes_results
+        }
+
+        binary_metadata_urls = ['http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html']
+        binary_metadata_scanner = BinaryFileScanner(binary_metadata_urls)
+        binary_metadata_results = binary_metadata_scanner.scan_binary_files()
+        results["Binary Metadata Results"] = {
+            "Binary Metadata Results": binary_metadata_results
+        }
+
+        excel_metadata_urls = ["http://6nhmgdpnyoljh5uzr5kwlatx2u3diou4ldeommfxjz3wkhalzgjqxzqd.onion/"]
+        excel_metadata_scanner = OnionExcelScanner(excel_metadata_urls)
+        excel_metadata_results = excel_metadata_scanner.scan_excel_files()
+        results["Excel Metadata Results"] = {
+            "Excel Metadata Results": excel_metadata_results
+        }
+
+        gif_metadata_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html"]
+        gif_metadata_scanner = OnionGifScanner(gif_metadata_urls)
+        gif_metadata_results = gif_metadata_scanner.scan_gif_files()
+        results["GIF Metadata Results"] = {
+            "GIF Metadata Results": gif_metadata_results
+        }
+
+        pdf_metadata_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html"]
+        pdf_metadata_scanner = OnionPdfScanner(pdf_metadata_urls)
+        pdf_metadata_results = pdf_metadata_scanner.scan_pdf_files()
+        results["PDF Metadata Results"] = {
+            "PDF Metadata Results": pdf_metadata_results
+        }
+
+        ppt_metadata_urls = ["http://6nhmgdpnyoljh5uzr5kwlatx2u3diou4ldeommfxjz3wkhalzgjqxzqd.onion/"]
+        ppt_metadata_scanner = OnionPptScanner(ppt_metadata_urls)
+        ppt_metadata_results = ppt_metadata_scanner.scan_ppt_files()
+        results["PPT Metadata Results"] = {
+            "PPT Metadata Results": ppt_metadata_results
+        }
+
+        word_metadata_urls = ["http://6nhmgdpnyoljh5uzr5kwlatx2u3diou4ldeommfxjz3wkhalzgjqxzqd.onion/"]
+        word_metadata_scanner = OnionWordScanner(word_metadata_urls)
+        word_metadata_results = word_metadata_scanner.scan_word_files()
+        results["Word Metadata Results"] = {
+            "Word Metadata Results": word_metadata_results
+        }
+
+        media_metadata_urls = ["http://6nhmgdpnyoljh5uzr5kwlatx2u3diou4ldeommfxjz3wkhalzgjqxzqd.onion/"]
+        media_metadata_scanner = OnionMediaScanner(media_metadata_urls)
+        media_metadata_results = media_metadata_scanner.scan_media_files()
+        results["Media Metadata Results"] = {
+            "Media Metadata Results": media_metadata_results
+        }
+
+        image_metadata_urls = ['http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html']
+        image_metadata_scanner = OnionImageScanner(image_metadata_urls)
+        image_metadata_results = image_metadata_scanner.scan_images()
+        results["Image Metadata Results"] = {
+            "Image Metadata Results": image_metadata_results
+        }
+
+        google_ids_urls = ['http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/google_ap/google_ap.html']
+        google_ids_extractor = GoogleIDsExtractor(google_ids_urls)
+        google_ids = google_ids_extractor.scan_google_services()
+        results["Google IDs Results"] = {
+            "Google IDs": google_ids if google_ids else "No se encontraron IDs de Google."
+        }
+
+        gzip_header_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html", "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/"]
+        gzip_header_scanner = GzipHeaderScanner(gzip_header_urls)
+        gzip_header_results = gzip_header_scanner.scan_gzip_headers()
+        results["Gzip Header Results"] = {
+            "Gzip Header Results": gzip_header_results
+        }
+
+        hostname_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_hostname/prueba_hostname.html", "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/"]
+        hostname_scanner = HostnameHackingScanner(hostname_urls)
+        hostname_results = hostname_scanner.scan_hostnames()
+        results["Hostname Results"] = {
+            "Hostname Results": hostname_results
+        }
+
+        html_info_urls = ["http://6nhmgdpnyoljh5uzr5kwlatx2u3diou4ldeommfxjz3wkhalzgjqxzqd.onion/"]
+        html_info_scanner = HtmlInfo(html_info_urls)
+        html_info_results = html_info_scanner.analyze_html()
+        results["HTML Info Results"] = {
+            "HTML Info Results": html_info_results
+        }
+
+        mail_extractor_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/mailweb/mailweb.html"]
+        mail_extractor = HtmlEmailExtractor(mail_extractor_urls)
+        mail_addresses = mail_extractor.extract_emails()
+        results["Mail Results"] = {
+            "Mail Addresses": mail_addresses if mail_addresses else "No se encontraron direcciones de correo."
+        }
+
+        other_services_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/otherservices/otherservices.html"]
+        other_services_scanner = OnionServiceAnalyzer(other_services_urls)
+        other_services_results = other_services_scanner.analyze_services()
+        results["Other Services Results"] = {
+            "Other Services Results": other_services_results
+        }
+
+        phone_scanner_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/phone_numbers/phone_numbers.html"]
+        phone_scanner = HtmlPhoneExtractor(phone_scanner_urls)
+        phone_numbers = phone_scanner.extract_phone_numbers()
+        results["Phone Results"] = {
+            "Phone Numbers": phone_numbers
+        }
+
+        php_server_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/php_info/php_info.html"]
+        php_server_scanner = PHPServerInfoScanner(php_server_urls)
+        php_server_info = php_server_scanner.scan_php_server_info()
+        results["PHP Server Results"] = {
+            "PHP Server Info": php_server_info
+        }
+
+        server_info_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/php_info/php_info.html"]
+        server_info_scanner = InformacionServidor(server_info_urls)
+        server_info = server_info_scanner.get_server_info()
+        results["Server Info Results"] = {
+            "Server Info": server_info
+        }
+
+        server_status_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/"]
+        server_status_checker = ServerStatusChecker(server_status_urls)
+        server_status = server_status_checker.check_servers_status()
+        results["Server Status Results"] = {
+            "Server Status": server_status
+        }
+
+        socialnets_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/social/social.html"]
+        socialnets_scanner = RedesSocialesScanner(socialnets_urls)
+        socialnets_results = socialnets_scanner.extract_social_networks()
+        results["Social Networks Results"] = {
+            "Social Networks": socialnets_results if socialnets_results else "No se encontraron redes sociales."
+        }
+
+        sqli_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.html"]
+        sqli_scanner = AdvancedSqlInjectionScanner()
+        sqli_results = sqli_scanner.scan_sql_injection(sqli_urls)
+        results["SQL Injection Results"] = {
+            "SQL Injection Results": sqli_results
+        }
+
+        validacion_input_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_validacion_input/prueba_validacion_input.html"]
+        validacion_input_scanner = ValidacionInput(validacion_input_urls)
+        validacion_input_results = validacion_input_scanner.run_tests()
+        results["Validacion Input Results"] = validacion_input_results
+
+        xss_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_xss/prueba_xss.html"]
+        xss_scanner = XSSScanner(xss_urls)
+        xss_results = xss_scanner.scan_xss()
+        results["XSS Results"] = {
+            "XSS Results": xss_results
+        }
+
+        database_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_dbtype/prueba_dbtype.html", "a", "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/"]
+        database_scanner = DatabaseTypeScanner(database_urls)
+        results["Database Results"] = database_scanner.scan_urls()
+
+
+
+
+
+    
 
 
       
     # Imprimir los resultados en formato JSON
     print(json.dumps(results, indent=4))
+    with open('res.json', 'w') as file:
+        json.dump(results, file, indent=4)
+
+    print("Resultados escritos en res.json exitosamente.")
 
 if __name__ == "__main__":
     main()

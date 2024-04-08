@@ -41,7 +41,6 @@ class FileUploadValidator:
                     yield (form, input_name, allowed_file_types)
                 
         except requests.exceptions.RequestException as e:
-            print(f"Error accessing {onion_url}: {e}")
             self.results[onion_url] = {
                 "result_file_input": "No results"
             }
@@ -70,7 +69,7 @@ class FileUploadValidator:
                 ("malicious.php.pptx", "<?php echo 'VULNERABLE'; ?>")
             ]
 
-            for file_name, content in tqdm(malicious_files, desc="Testing malicious files"):
+            for file_name, content in tqdm(malicious_files, desc="Scanning URLs to insert malicious files", unit="file"):
                 with open(file_name, "w") as malicious_file:
                     malicious_file.write(content)
 

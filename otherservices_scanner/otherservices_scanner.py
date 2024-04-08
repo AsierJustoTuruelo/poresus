@@ -15,7 +15,7 @@ class OnionServiceAnalyzer:
 
     def analyze_services(self):
         results = {}
-        for url in tqdm(self.urls, desc="Analyzing Onion Services"):
+        for url in tqdm(self.urls, desc="Scanning URLs for Other Services"):
             try:
                 # Proxy configuration for requests
                 socks.setdefaultproxy(socks.SOCKS5, "127.0.0.1", 9050)

@@ -12,9 +12,9 @@ class InformacionServidor:
             'https': 'socks5h://127.0.0.1:9050'
         }
     
-    def analizar_servidor(self):
+    def get_server_info(self):
         resultados = {}
-        for url in tqdm(self.urls, desc="Analyzing URLs"):
+        for url in tqdm(self.urls, desc="Scanning URLs for Server Info"):
             try:
                 response = requests.get(url, proxies=self.proxies)
                 response2 = requests.get(url+"/nonexistent", proxies=self.proxies)
@@ -139,5 +139,5 @@ class InformacionServidor:
 if __name__ == "__main__":
     urls = ['http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/php_info/php_info.html',"a"]
     informacion_servidor = InformacionServidor(urls)
-    resultados = informacion_servidor.analizar_servidor()
+    resultados = informacion_servidor.get_server_info()
     print(json.dumps(resultados, indent=4))

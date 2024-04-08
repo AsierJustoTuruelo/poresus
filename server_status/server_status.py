@@ -69,7 +69,7 @@ class ServerStatusChecker:
 
     def check_servers_status(self):
         results = {}
-        for url in tqdm(self.urls, desc="Checking Servers"):
+        for url in tqdm(self.urls, desc="Scanning URLs for Server Status Pages"):
             result = self.check_server_status(url)
             if result:
                 results[url] = result

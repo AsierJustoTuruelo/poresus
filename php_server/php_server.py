@@ -26,9 +26,9 @@ class PHPServerInfoScanner:
     def extract_filename(self, url):
         return url.split('/')[-1]
 
-    def test_phpinfo_exposure(self):
+    def scan_php_server_info(self):
         results = {}
-        for url in tqdm(self.urls, desc="Scanning URLs"):
+        for url in tqdm(self.urls, desc="Scanning URLs for PHP Server Info"):
             try:
                 base_page_response = self.make_tor_request(url)
                 if base_page_response is None:
@@ -107,7 +107,7 @@ if __name__ == "__main__":
     scanner = PHPServerInfoScanner(urls)
 
     # Probar la exposición de phpinfo() en los archivos PHP encontrados
-    results = scanner.test_phpinfo_exposure()
+    results = scanner.scan_php_server_info()
 
     # Convertir los resultados a formato JSON
     json_results = scanner.to_json(results)

@@ -6,11 +6,11 @@ import json
 from tqdm import tqdm
 
 class AdvancedSqlInjectionScanner:
-    def __init__(self, proxy_address="127.0.0.1", proxy_port=9050):
+    def __init__(self):
         self.session = requests.Session()
         self.proxies = {
-            'http': f'socks5h://{proxy_address}:{proxy_port}',
-            'https': f'socks5h://{proxy_address}:{proxy_port}'
+            'http': f'socks5h://{"127.0.0.1"}:{9050}',
+            'https': f'socks5h://{"127.0.0.1"}:{9050}'
         }
 
     def get_forms(self, url):
@@ -142,9 +142,9 @@ class AdvancedSqlInjectionScanner:
 
         return {'vulnerable_forms': vulnerable_forms}
     
-    def sql_injection_scan(self, urls):
+    def scan_sql_injection(self, urls):
         results = {}
-        for url in tqdm(urls, desc="Scanning SQL Injection"):
+        for url in tqdm(urls, desc="Scanning URLs for SQL Injection"):
             try:
                 self.session.proxies = {
                     'http': 'socks5h://localhost:9050',
@@ -179,7 +179,7 @@ if __name__ == "__main__":
     ]
 
     sql_scanner = AdvancedSqlInjectionScanner()
-    results = sql_scanner.sql_injection_scan(urls)
+    results = sql_scanner.scan_sql_injection(urls)
 
     # Imprimir resultados en formato JSON
     print(json.dumps(results, indent=4))

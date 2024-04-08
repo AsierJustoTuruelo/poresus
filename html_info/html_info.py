@@ -12,9 +12,9 @@ class HtmlInfo:
             'https': 'socks5h://127.0.0.1:9050'
         }
 
-    def analyze_page_content(self):
+    def analyze_html(self):
         all_results = {}
-        for url in tqdm(self.urls, desc="Analyzing URLs"):  # Barra de progreso para cada URL
+        for url in tqdm(self.urls, desc="Scanning URLs for HTML information"):  
             try:
                 response = requests.get(url, proxies=self.proxies)
                 response.raise_for_status()
@@ -57,5 +57,5 @@ if __name__ == "__main__":
     ]
     
     server_info = HtmlInfo(onion_urls)
-    result = server_info.analyze_page_content()
+    result = server_info.analyze_html()
     print(result)

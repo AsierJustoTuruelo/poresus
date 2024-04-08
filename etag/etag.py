@@ -52,7 +52,7 @@ class ETagScanner:
             self.results[url] = f"Error al escanear la página {url}"
 
     def scan_etags(self):
-        for url in tqdm(self.urls, desc="Scanning ETags"):  # Barra de progreso para cada URL
+        for url in tqdm(self.urls, desc="Scanning URLs for ETags"):  # Barra de progreso para cada URL
             self.scan_etag(url)
 
         # Devolver los resultados de ETag como un JSON

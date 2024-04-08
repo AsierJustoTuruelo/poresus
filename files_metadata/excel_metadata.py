@@ -6,6 +6,7 @@ import socket
 import requests
 from urllib.parse import urljoin
 import json
+from tqdm import tqdm
 
 class OnionExcelScanner:
     def __init__(self, urls):
@@ -28,13 +29,20 @@ class OnionExcelScanner:
             return None
 
     def scan_excel_files(self):
-        for url in self.urls:
+        for url in tqdm(self.urls, desc="Scanning URLs for Excel files"):
             # Obtener el contenido de la página web
             respuesta = self.make_tor_request(url)
+            if respuesta is None:
+                self.results[url] = "Url not accessible"
+                continue
+
             soup = BeautifulSoup(respuesta.text, 'html.parser')
 
             # Buscar todos los enlaces a archivos Excel
             enlaces_excel = [a['href'] for a in soup.find_all('a', href=True) if a['href'].endswith('.xlsx')]
+
+            if not enlaces_excel:
+                self.results[url] = "No Excel files found on this URL"
 
             for enlace in enlaces_excel:
                 # Convertir enlace relativo a absoluto si es necesario
@@ -46,13 +54,16 @@ class OnionExcelScanner:
                     print(f"No se pudo descargar el archivo Excel de {enlace_absoluto}")
                     continue
 
-                archivo_excel = io.BytesIO(respuesta.content)
+                try:
+                    archivo_excel = io.BytesIO(respuesta.content)
 
-                # Leer el archivo Excel y extraer los datos
-                df = pd.read_excel(archivo_excel)
-                json_data = df.to_json(orient="records")
+                    # Leer el archivo Excel y extraer los datos
+                    df = pd.read_excel(archivo_excel)
+                    json_data = df.to_json(orient="records")
 
-                self.results["excel_metadata"][enlace] = json_data
+                    self.results["excel_metadata"][enlace] = json_data
+                except Exception as e:
+                    print(f"Error al procesar el archivo Excel {enlace}: {e}")
 
         # Convertir los resultados a JSON y devolverlos
         return json.dumps(self.results)
@@ -60,7 +71,7 @@ class OnionExcelScanner:
 if __name__ == "__main__":
     # Lista de URLs de prueba
     urls = [
-        'http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html',
+        'http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html', 'a', 'http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/'
         # Agrega más URLs aquí si es necesario
     ]
     scanner = OnionExcelScanner(urls)

@@ -22,7 +22,7 @@ class GoogleIDsExtractor:
             socks.setdefaultproxy(socks.SOCKS5, "127.0.0.1", 9050)
             socket.socket = socks.socksocket
 
-            for url in tqdm(self.urls, desc="Scanning URLs"):  # Add tqdm for progress bar
+            for url in tqdm(self.urls, desc="Scanning URLs for Google Services"): 
                 try:
                     response = requests.get(url, proxies=self.proxies)
                     if response.status_code == 200:

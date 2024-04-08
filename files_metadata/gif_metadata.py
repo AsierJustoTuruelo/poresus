@@ -6,6 +6,7 @@ import socket
 import requests
 from urllib.parse import urljoin
 import json
+from tqdm import tqdm
 
 class OnionGifScanner:
     def __init__(self, urls):
@@ -24,21 +25,23 @@ class OnionGifScanner:
             response = requests.get(url, proxies=self.proxies)
             return response
         except Exception as e:
-            print(f"Error al hacer la solicitud a través de Tor: {e}")
             return None
 
     def scan_gif_files(self):
-        for url in self.urls:
+        for url in tqdm(self.urls, desc="Scanning URLs for GIF files"):
             # Obtener el contenido de la página web
             respuesta = self.make_tor_request(url)
             if respuesta is None:
-                print(f"No se pudo acceder a la página {url}")
+                self.results[url] = "Url not accessible"
                 continue
 
             soup = BeautifulSoup(respuesta.text, 'html.parser')
 
             # Buscar todos los enlaces a archivos GIF
             enlaces_gif = [a['href'] for a in soup.find_all('a', href=True) if a['href'].endswith('.gif')]
+
+            if not enlaces_gif:
+                self.results[url] = "No GIF files found on this URL"
 
             for enlace in enlaces_gif:
                 # Convertir enlace relativo a absoluto si es necesario
@@ -47,21 +50,23 @@ class OnionGifScanner:
                 # Obtener el contenido del archivo GIF
                 respuesta = self.make_tor_request(enlace_absoluto)
                 if respuesta is None:
-                    print(f"No se pudo descargar el archivo GIF de {enlace_absoluto}")
                     continue
 
-                archivo_gif = io.BytesIO(respuesta.content)
+                try:
+                    archivo_gif = io.BytesIO(respuesta.content)
 
-                # Leer el archivo GIF y extraer los metadatos
-                imagen_gif = Image.open(archivo_gif)
-                metadatos = imagen_gif.info
+                    # Leer el archivo GIF y extraer los metadatos
+                    imagen_gif = Image.open(archivo_gif)
+                    metadatos = imagen_gif.info
 
-                # Convertir los metadatos a un formato serializable
-                serializable_metadatos = {}
-                for key, value in metadatos.items():
-                    serializable_metadatos[key] = str(value)
+                    # Convertir los metadatos a un formato serializable
+                    serializable_metadatos = {}
+                    for key, value in metadatos.items():
+                        serializable_metadatos[key] = str(value)
 
-                self.results["gif_metadata"][enlace] = serializable_metadatos
+                    self.results["gif_metadata"][enlace] = serializable_metadatos
+                except Exception as e:
+                    print(f"Error al procesar el archivo GIF {enlace}: {e}")
 
         # Convertir los resultados a JSON y devolverlos
         return json.dumps(self.results)
@@ -69,7 +74,7 @@ class OnionGifScanner:
 if __name__ == "__main__":
     # Lista de URLs de prueba
     urls = [
-        'http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html'
+        'http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html', 'a', 'http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/'
         # Puedes agregar más URLs aquí si es necesario
     ]
     scanner = OnionGifScanner(urls)

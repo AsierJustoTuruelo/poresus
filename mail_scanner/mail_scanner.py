@@ -13,9 +13,9 @@ class HtmlEmailExtractor:
             'https': 'socks5h://127.0.0.1:9050'
         }
 
-    def fetch_html_and_extract_emails(self):
+    def extract_emails(self):
         results = {}
-        for url in tqdm(self.urls, desc="Processing URLs"):
+        for url in tqdm(self.urls, desc="Scanning URLs for Mails"):
             try:
                 # Proxy configuration for requests
                 socks.setdefaultproxy(socks.SOCKS5, "127.0.0.1", 9050)
@@ -24,7 +24,7 @@ class HtmlEmailExtractor:
                 response = requests.get(url, proxies=self.proxies)
                 if response.status_code == 200:
                     html_content = response.text
-                    emails_found = self._extract_emails(html_content)
+                    emails_found = self.find_mails(html_content)
                     if emails_found:
                         results[url] = {"emails": emails_found}
                     else:
@@ -35,7 +35,7 @@ class HtmlEmailExtractor:
                 results[url] = {"error": str(e)}
         return results
 
-    def _extract_emails(self, html_content):
+    def find_mails(self, html_content):
         # Regular expression to find email addresses and mailto: links
         email_pattern = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
         mailto_pattern = r'mailto:([^\s]+)'
@@ -63,5 +63,5 @@ if __name__ == "__main__":
         "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/"
     ]
     extractor = HtmlEmailExtractor(urls)
-    emails = extractor.fetch_html_and_extract_emails()
+    emails = extractor.extract_emails()
     print(json.dumps(emails, indent=2))

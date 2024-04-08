@@ -6,9 +6,9 @@ import json
 from tqdm import tqdm
 
 class ValidacionInput:
-    def __init__(self, onion_urls, tor_proxy="socks5h://127.0.0.1:9050"):
+    def __init__(self, onion_urls):
         self.onion_urls = onion_urls
-        self.tor_proxy = tor_proxy
+        self.tor_proxy = "socks5h://127.0.0.1:9050"
         self.session = requests.Session()
         self.session.proxies = {
             'http': self.tor_proxy,
@@ -79,20 +79,26 @@ class ValidacionInput:
         except requests.exceptions.RequestException as e:
             self.results[onion_url] = {"error": str(e)}
 
+    def run_tests(self):
+        threads = []
+        for onion_url in self.onion_urls:
+            thread = threading.Thread(target=self.test_input, args=(onion_url,))
+            threads.append(thread)
+            thread.start()
+
+        for thread in tqdm(threads, desc="Scanning URLs for input validation"):
+            thread.join()
+
+        return self.results
+
+
 if __name__ == "__main__":
     onion_urls = [
         "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_validacion_entrada/prueba_validacion_entrada.html",
         "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/",
         "http://example.invalid"  # URL no válida para generar un error
     ]
-    pentester = ValidacionInput(onion_urls, tor_proxy="socks5h://127.0.0.1:9050")
-    threads = []
-    for onion_url in onion_urls:
-        thread = threading.Thread(target=pentester.test_input, args=(onion_url,))
-        threads.append(thread)
-        thread.start()
+    pentester = ValidacionInput(onion_urls)
+    results = pentester.run_tests()
 
-    for thread in tqdm(threads, desc="Progress"):
-        thread.join()
-
-    print(json.dumps(pentester.results))
+    print(json.dumps(results))

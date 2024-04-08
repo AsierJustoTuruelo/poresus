@@ -6,12 +6,13 @@ import json
 from tqdm import tqdm
 
 class DatabaseTypeScanner:
-    def __init__(self, proxy_address="127.0.0.1", proxy_port=9050):
+    def __init__(self, urls):
         self.session = requests.Session()
         self.proxies = {
-            'http': f'socks5h://{proxy_address}:{proxy_port}',
-            'https': f'socks5h://{proxy_address}:{proxy_port}'
+            'http': f'socks5h://{"127.0.0.1"}:{9050}',
+            'https': f'socks5h://{"127.0.0.1"}:{9050}'
         }
+        self.urls = urls
 
     def is_accessible(self, url):
         try:
@@ -61,6 +62,18 @@ class DatabaseTypeScanner:
         except requests.exceptions.RequestException as e:
             return f"Not accessible: {str(e)}"
 
+    def scan_urls(self):
+        results = {}
+
+        for url in tqdm(self.urls, desc="Scanning URLs for Database Type"):
+            if not self.is_accessible(url):
+                results[url] = "Not accessible"
+                continue
+            database_type = self.detect_database_type(url)
+            results[url] = database_type
+
+        return results
+
 
 # Example usage
 if __name__ == "__main__":
@@ -71,14 +84,7 @@ if __name__ == "__main__":
         # Add more URLs here
     ]
 
-    scanner = DatabaseTypeScanner(proxy_address="127.0.0.1", proxy_port=9050)
-    results = {}
-
-    for url in tqdm(urls, desc="Scanning"):
-        if not scanner.is_accessible(url):
-            results[url] = "Not accessible"
-            continue
-        database_type = scanner.detect_database_type(url)
-        results[url] = database_type
+    scanner = DatabaseTypeScanner(urls)
+    results = scanner.scan_urls()
 
     print(json.dumps(results, indent=4))

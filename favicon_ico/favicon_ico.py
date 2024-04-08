@@ -34,7 +34,7 @@ class OnionFaviconDownloader:
             return None
 
     def download_favicon(self):
-        for url in tqdm(self.urls, desc="Checking url for Favicons"):  
+        for url in tqdm(self.urls, desc="Scanning URLs for Favicons"):  
             response = self.make_tor_request(url)
             if response:
                 try:

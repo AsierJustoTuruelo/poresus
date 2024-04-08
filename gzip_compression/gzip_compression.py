@@ -53,7 +53,6 @@ class GzipHeaderScanner:
             for url in tqdm(self.urls, desc="Scanning URLs for GZIP header"):  # Barra de progreso para cada URL
                 # Realizar la solicitud a la URL dada
                 response = self.make_tor_request(url)
-                print(response.headers)
                 if response is None:
                     results[url] = {f"No se pudo obtener la respuesta de la página"}
                     continue

@@ -1,0 +1,355 @@
+{
+    "Bitcoin Results": {
+        "Bitcoin Addresses": {
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/bitcoin_address/bitcoin_adress.html": "Not accessible",
+            "http://kz62gxxlegswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/bitcoin_address/": "Not accessible"
+        }
+    },
+    "Brute Force Results": {
+        "Brute Force Results": {
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_bruteforce/prueba_bruteforce.html": [
+                {
+                    "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_bruteforce/prueba_bruteforce.html",
+                    "credentials": {
+                        "usernam": "test",
+                        "psw": "test"
+                    },
+                    "success": true,
+                    "response": "<h1>Inicio de sesi\u00f3n exitoso!</h1>"
+                }
+            ],
+            "http://kz62gxxl6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_bruteforce/prueba_bruteforce.html": [
+                {
+                    "url": "http://kz62gxxl6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_bruteforce/prueba_bruteforce.html",
+                    "error": "Error: Unable to retrieve content from http://kz62gxxl6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_bruteforce/prueba_bruteforce.html"
+                }
+            ]
+        }
+    },
+    "ETag Results": {
+        "ETag Results": {
+            "http://6nhmgdpnyoljh5uzr5kwlatx2u3diou4ldeommfxjz3wkhalzgjqxzqd.onion/": "\"1a00000000c950-4dea-5c4342b9502ad\"",
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/": "No encontrado ETag"
+        }
+    },
+    "Favicon Results": {
+        "Favicon Hashes": {
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/favicon-ico/favicon-ico.html": {
+                "MMH3": 40203703,
+                "SHA-256": "efdc8dc2d789f1cc943d5685d61283632a1134a46b27c9431d35997114bb7c41",
+                "MD5": "2872404e164824f76ffaf6d0b909215e"
+            },
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/": "Failed to download favicon",
+            "http://6nhmgdpnyoljh5uzr5kwlatx2u3diou4ldeommfxjz3wkhalzgjqxzqd.onion/": {
+                "MMH3": 689789599,
+                "SHA-256": "886a3f53baa7b7b220662615993b5eb02e6ad5445d4715efcee09be40fdf9907",
+                "MD5": "e78793716e78e4c5174158574b6f69a9"
+            }
+        }
+    },
+    "File Input Results": {
+        "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_file/index.html": {
+            "fileToUpload": [
+                "Accepts files with: .png extension",
+                "Accepts files with: .txt extension",
+                "Accepts files with: .php extension",
+                "Accepts files with: .jpg extension",
+                "Accepts files with: .jpeg extension",
+                "Accepts files with: .gif extension",
+                "Accepts files with: .bmp extension",
+                "Accepts files with: .zip extension",
+                "Accepts files with: .gz extension",
+                "Accepts files with: .rar extension",
+                "Accepts files with: .pdf extension",
+                "Accepts files with: .docx extension",
+                "Accepts files with: .xlsx extension",
+                "Accepts files with: .pptx extension"
+            ]
+        },
+        "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/": {
+            "result_file_input": "No forms found"
+        }
+    },
+    "File Hashes Results": {
+        "File Hashes Results": {
+            "http://z62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/": {
+                "Error": "Could not access .onion page: http://z62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/"
+            },
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html": [
+                {
+                    "name": "prueba.docx",
+                    "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/prueba.docx",
+                    "hashes": {
+                        "SHA-256": "7e19caf8fa59ea40d2c546f60d52f682a605741ce4313f71119a6d88a376afed",
+                        "MD5": "96cf6a6c966153b86f0b6dcc7eed7901"
+                    }
+                },
+                {
+                    "name": "prueba.pdf",
+                    "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/prueba.pdf",
+                    "hashes": {
+                        "SHA-256": "498094837ba969cafd19629b4a8b9956cc48557220cf2614eb2d25cad26b42ca",
+                        "MD5": "a265029a1f0bc60e1d1bbbeec95b8bb9"
+                    }
+                },
+                {
+                    "name": "prueba.xlsx",
+                    "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/prueba.xlsx",
+                    "hashes": {
+                        "SHA-256": "7b39ca142c2d711eb4d1fae30cd2e810a8c441763f90ca2500af5f96dbe71726",
+                        "MD5": "b2241ab388407879b0b4cca6ebb7b8d3"
+                    }
+                },
+                {
+                    "name": "prueba.pptx",
+                    "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/prueba.pptx",
+                    "hashes": {
+                        "SHA-256": "15f1723eb2ed8a3a1ac9af81809868d7a29e1b825dec49267db4dc63e64c0790",
+                        "MD5": "18a22270001ff1c17a3653f4babe55fc"
+                    }
+                },
+                {
+                    "name": "prueba.mp3",
+                    "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/prueba.mp3",
+                    "hashes": {
+                        "SHA-256": "61ff4cb8d42114143d528694afb79e8a9457e11cc4da40052d80fa704560dca7",
+                        "MD5": "b62c75c4b1a9616b71257a4a75f9b017"
+                    }
+                },
+                {
+                    "name": "prueba.mp4",
+                    "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/prueba.mp4",
+                    "hashes": "Not accessible"
+                },
+                {
+                    "name": "prueba.gif",
+                    "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/prueba.gif",
+                    "hashes": {
+                        "SHA-256": "a4fccc9b3c9becd434c4dd0824a06a30e20f5fc2b26e5e23c40fe4c172995584",
+                        "MD5": "3da6c5040386b69bd325a2cfcd8242c5"
+                    }
+                },
+                {
+                    "name": "prueba.bin",
+                    "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/prueba.bin",
+                    "hashes": {
+                        "SHA-256": "7a2b95e1b46740e0ee928253c70b4e31b6dad43f59174dadd394657e2edeb942",
+                        "MD5": "fb87cd05d9d8669e8d9a128c4e11d7cf"
+                    }
+                },
+                {
+                    "name": "prueba.txt",
+                    "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/prueba.txt",
+                    "hashes": {
+                        "SHA-256": "133ee989293f92736301280c6f14c89d521200c17dcdcecca30cd20705332d44",
+                        "MD5": "916f4c31aaa35d6b867dae9a7f54270d"
+                    }
+                }
+            ]
+        }
+    },
+    "Binary Metadata Results": {
+        "Binary Metadata Results": "{\"binary_data\": {\"prueba.bin\": [\"01000101\", \"01110011\", \"01110100\", \"01101111\", \"00100000\", \"01100101\", \"01110011\", \"00100000\", \"01110101\", \"01101110\", \"00100000\", \"01100001\", \"01110010\", \"01100011\", \"01101000\", \"01101001\", \"01110110\", \"01101111\", \"00100000\", \"01100010\", \"01101001\", \"01101110\", \"01100001\", \"01110010\", \"01101001\", \"01101111\", \"00100000\", \"01100100\", \"01100101\", \"00100000\", \"01110000\", \"01110010\", \"01110101\", \"01100101\", \"01100010\", \"01100001\", \"00001010\"]}}"
+    },
+    "Excel Metadata Results": {
+        "Excel Metadata Results": "{\"excel_metadata\": {}, \"http://6nhmgdpnyoljh5uzr5kwlatx2u3diou4ldeommfxjz3wkhalzgjqxzqd.onion/\": \"No Excel files found on this URL\"}"
+    },
+    "GIF Metadata Results": {
+        "GIF Metadata Results": "{\"gif_metadata\": {\"prueba.gif\": {\"version\": \"b'GIF89a'\", \"background\": \"0\", \"loop\": \"0\", \"comment\": \"b'Please visit my site https://hola.com/'\", \"extension\": \"(b'NETSCAPE2.0', 795)\"}}}"
+    },
+    "PDF Metadata Results": {
+        "PDF Metadata Results": "{\"pdf_metadata\": {\"http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html\": {\"file_name\": \"prueba.pdf\", \"/Author\": \"Asier Justo\", \"/Creator\": \"Microsoft\\u00ae Word for Microsoft 365\", \"/CreationDate\": \"D:20240227172119+01'00'\", \"/ModDate\": \"D:20240227172119+01'00'\", \"/Producer\": \"Microsoft\\u00ae Word for Microsoft 365\"}}}"
+    },
+    "PPT Metadata Results": {
+        "PPT Metadata Results": "{\"ppt_metadata\": {}, \"http://6nhmgdpnyoljh5uzr5kwlatx2u3diou4ldeommfxjz3wkhalzgjqxzqd.onion/\": \"No PowerPoint files found on this URL\"}"
+    },
+    "Word Metadata Results": {
+        "Word Metadata Results": "{\"word_metadata\": {}, \"http://6nhmgdpnyoljh5uzr5kwlatx2u3diou4ldeommfxjz3wkhalzgjqxzqd.onion/\": \"No Word files found on this URL\"}"
+    },
+    "Media Metadata Results": {
+        "Media Metadata Results": "{\"media_metadata\": {}, \"http://6nhmgdpnyoljh5uzr5kwlatx2u3diou4ldeommfxjz3wkhalzgjqxzqd.onion/\": \"No media files found on this URL\"}"
+    },
+    "Image Metadata Results": {
+        "Image Metadata Results": {
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html": [
+                {
+                    "image_url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/Screenshot_2024-02-24_12_17_34.png",
+                    "image_info": {
+                        "size": [
+                            2560,
+                            1465
+                        ],
+                        "mode": "RGB",
+                        "metadata": {
+                            "Title": "Imagen mia",
+                            "Author": "Tu Nombre",
+                            "Software": "ExifTool"
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    "Google IDs Results": {
+        "Google IDs": "{\"http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/google_ap/google_ap.html\": {\"analytics_ids\": [\"UA-12345678-1\", \"UA-87654321-2\"], \"publisher_ids\": [\"pub-1234567890123456\", \"pub-9876543210987654\"]}}"
+    },
+    "Gzip Header Results": {
+        "Gzip Header Results": {
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html": {
+                "gzip_enabled": true,
+                "sensitive_data": {
+                    "Date": "Mon, 08 Apr 2024 18:00:44 GMT"
+                },
+                "estimated_location": "Am\u00e9rica"
+            },
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/": {
+                "gzip_enabled": true,
+                "sensitive_data": {
+                    "Date": "Mon, 08 Apr 2024 18:00:45 GMT"
+                },
+                "estimated_location": "Am\u00e9rica"
+            }
+        }
+    },
+    "Hostname Results": {
+        "Hostname Results": {
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_hostname/prueba_hostname.html": {
+                "result": "The service at http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_hostname/prueba_hostname.html is vulnerable to Hostname Hacking",
+                "is_hostname_vulnerable": true
+            },
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/": {
+                "result": "The service at http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/ is vulnerable to Hostname Hacking",
+                "is_hostname_vulnerable": true
+            }
+        }
+    },
+    "HTML Info Results": {
+        "HTML Info Results": "{\n    \"http://6nhmgdpnyoljh5uzr5kwlatx2u3diou4ldeommfxjz3wkhalzgjqxzqd.onion/\": {\n        \"comments\": [\n            \" EVERYTHING ABOVE THIS LINE CAN BE CHANGED \",\n            \" EVERYTHING ABOVE THIS LINE CAN BE CHANGED \",\n            \" EVERYTHING ABOVE THIS LINE CAN BE CHANGED \",\n            \" EVERYTHING ABOVE THIS LINE CAN BE CHANGED \",\n            \" EVERYTHING ABOVE THIS LINE CAN BE CHANGED \",\n            \" EVERYTHING BELOW THIS LINE CAN BE CHANGED \",\n            \" EVERYTHING BELOW THIS LINE CAN BE CHANGED \",\n            \" EVERYTHING BELOW THIS LINE CAN BE CHANGED \",\n            \" EVERYTHING BELOW THIS LINE CAN BE CHANGED \"\n        ],\n        \"scripts\": [],\n        \"metas\": [\n            \"<meta content=\\\"text/html; charset=utf-8\\\" http-equiv=\\\"Content-type\\\"/>\"\n        ],\n        \"hidden_elements\": []\n    }\n}"
+    },
+    "Mail Results": {
+        "Mail Addresses": {
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/mail/mail.html": {
+                "error": "Status Code: 404"
+            }
+        }
+    },
+    "Other Services Results": {
+        "Other Services Results": {
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/services/services.html": {
+                "error": "Status Code: 404"
+            }
+        }
+    },
+    "Phone Results": {
+        "Phone Numbers": "{\n  \"Phone_numbers\": {\n    \"http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/phone/phone.html\": {\n      \"error\": \"Status Code: 404\"\n    }\n  }\n}"
+    },
+    "PHP Server Results": {
+        "PHP Server Info": {
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/php_info/php_info.html": {
+                "exposes_sensitive_information": true,
+                "sensitive_info": [
+                    "IP addresses",
+                    "PHP version",
+                    "Debian OS information",
+                    "Onion URLs"
+                ]
+            }
+        }
+    },
+    "Server Info Results": {
+        "Server Info": {
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/php_info/php_info.html": {
+                "servidor": "Apache"
+            }
+        }
+    },
+    "Server Status Results": {
+        "Server Status": {
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/": {
+                "Disponible": true,
+                "Direcciones IP Encontradas": [
+                    "127.0.0.1"
+                ],
+                "Servidores": [
+                    "Apache/2.4.58 (Debian) Server at kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion Port 80"
+                ]
+            }
+        }
+    },
+    "Social Networks Results": {
+        "Social Networks": {
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/social/social.html": {
+                "error": "No se pudo acceder a la p\u00e1gina: http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/social/social.html"
+            }
+        }
+    },
+    "SQL Injection Results": {
+        "SQL Injection Results": {
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.html": {
+                "forms_info": [
+                    {
+                        "action": "prueba_sqli.php",
+                        "inputs": [
+                            {
+                                "name": "usernam"
+                            },
+                            {
+                                "name": "psw"
+                            }
+                        ]
+                    }
+                ],
+                "sql_injection_result": {
+                    "vulnerable_forms": [
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usernam": "' OR 1=1 -- ",
+                                "psw": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usernam": "' OR 1=1 -- ",
+                                "password": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usernam": "' OR 1=1 -- ",
+                                "pass": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usernam": "' OR 1=1 -- ",
+                                "pwd": "1234"
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "Validacion Input Results": {
+        "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_validacion_input/prueba_validacion_input.html": {
+            "error": "URL no accesible"
+        }
+    },
+    "XSS Results": {
+        "XSS Results": {
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_xss/prueba_xss.html": {
+                "vulnerable_form": "submit.php",
+                "vulnerable": true
+            }
+        }
+    },
+    "Database Results": {
+        "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_dbtype/prueba_dbtype.html": "MySQL",
+        "a": "Not accessible",
+        "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/": "No form found"
+    }
+}

@@ -49,7 +49,7 @@ class OnionFileAnalyzer:
                         if any(file_link.endswith(extension) for extension in common_file_extensions):
                             futures.append(executor.submit(self.process_file, file_link))
                     
-                    for future in tqdm(futures, desc="Calculating files hashes", unit="file"):
+                    for future in tqdm(futures, desc="Scanning URLs for extract File Hashes", unit="file"):
                         result = future.result()
                         if result:
                             files.append(result)

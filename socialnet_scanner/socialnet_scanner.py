@@ -66,9 +66,9 @@ class RedesSocialesScanner:
         except Exception as e:
             return {"error": f"Error al escanear redes sociales en {url}: {e}"}
 
-    def scan_social_media_for_all_urls(self):
+    def extract_social_networks(self):
         results = {}
-        for url in tqdm(self.urls, desc="Scanning Social Media"):
+        for url in tqdm(self.urls, desc="Scanning URLs for Social Networks"):
             social_media_found = self.scan_social_media(url)
             if social_media_found:
                 results[url] = social_media_found
@@ -80,6 +80,6 @@ if __name__ == "__main__":
     ]
 
     scanner = RedesSocialesScanner(onion_urls)
-    results = scanner.scan_social_media_for_all_urls()
+    results = scanner.extract_social_networks()
     if results:
         print(json.dumps(results, indent=4))

@@ -7,6 +7,7 @@ import socks
 import socket
 import requests
 import json
+from tqdm import tqdm
 
 class OnionPptScanner:
     def __init__(self, urls):
@@ -25,33 +26,34 @@ class OnionPptScanner:
             response = requests.get(url, proxies=self.proxies)
             return response
         except Exception as e:
-            print(f"Error al hacer la solicitud a través de Tor: {e}")
             return None
 
     def scan_ppt_files(self):
-        for url in self.urls:
+        for url in tqdm(self.urls, desc="Scanning URLs for PowerPoint files"):
             # Obtener el contenido de la página web
-            respuesta = self.make_tor_request(url)
-            if respuesta is None:
-                print(f"No se pudo acceder a la página {url}")
+            response = self.make_tor_request(url)
+            if response is None:
+                self.results[url] = "Url not accessible"
                 continue
 
-            soup = BeautifulSoup(respuesta.text, 'html.parser')
+            soup = BeautifulSoup(response.text, 'html.parser')
 
             # Buscar todos los enlaces a archivos PowerPoint
             enlaces_ppt = [a['href'] for a in soup.find_all('a', href=True) if a['href'].endswith('.pptx')]
+
+            if not enlaces_ppt:
+                self.results[url] = "No PowerPoint files found on this URL"
 
             for enlace in enlaces_ppt:
                 # Convertir enlace relativo a absoluto si es necesario
                 enlace_absoluto = urljoin(url, enlace)
 
                 # Obtener el contenido del archivo PowerPoint
-                respuesta = self.make_tor_request(enlace_absoluto)
-                if respuesta is None:
-                    print(f"No se pudo descargar el archivo PowerPoint de {enlace_absoluto}")
+                response = self.make_tor_request(enlace_absoluto)
+                if response is None:
                     continue
 
-                archivo_ppt = io.BytesIO(respuesta.content)
+                archivo_ppt = io.BytesIO(response.content)
 
                 # Leer el archivo PowerPoint y extraer los metadatos
                 presentacion = Presentation(archivo_ppt)
@@ -62,10 +64,14 @@ class OnionPptScanner:
                     "Título": metadatos.title,
                     "Autor": metadatos.author,
                     "Fecha de creación": str(metadatos.created),
-                    "Última fecha de modificación": str(metadatos.modified)
+                    "Última fecha de modificación": str(metadatos.modified),
+                    "Nombre de archivo": enlace  # Agregar el nombre del archivo entre los metadatos
                 }
 
-                self.results["ppt_metadata"][enlace] = serializable_metadatos
+                # Usar la URL como clave en el diccionario de resultados y agregar los metadatos al diccionario ppt_metadata
+                if "ppt_metadata" not in self.results:
+                    self.results["ppt_metadata"] = {}
+                self.results["ppt_metadata"][url] = serializable_metadatos
 
         # Convertir los resultados a JSON y devolverlos
         return json.dumps(self.results)
@@ -73,7 +79,7 @@ class OnionPptScanner:
 if __name__ == "__main__":
     # Lista de URLs de prueba
     urls = [
-        'http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html'
+        'http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html', 'a', 'http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize'
         # Puedes agregar más URLs aquí si es necesario
     ]
     scanner = OnionPptScanner(urls)

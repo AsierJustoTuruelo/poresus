@@ -26,9 +26,9 @@ class OnionImageScanner:
         except Exception as e:
             return None
 
-    def scan_and_download_images(self):
+    def scan_images(self):
         results = {}
-        for onion_url in tqdm(self.urls, desc="Scanning Onion URLs"):
+        for onion_url in tqdm(self.urls, desc="Scanning URLs for Images Files"):
             response = self.make_tor_request(onion_url)
             if response:
                 if response.status_code == 404:
@@ -80,5 +80,5 @@ if __name__ == "__main__":
         "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/bitcoin_address/bitcoin_adress.html"
     ]
     scanner = OnionImageScanner(onion_urls)
-    results = scanner.scan_and_download_images()
+    results = scanner.scan_images()
     print(json.dumps(results, indent=2))

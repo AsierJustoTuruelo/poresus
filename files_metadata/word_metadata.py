@@ -7,6 +7,7 @@ import requests
 from urllib.parse import urljoin
 import json
 from datetime import datetime
+from tqdm import tqdm
 
 class OnionWordScanner:
     def __init__(self, urls):
@@ -15,70 +16,71 @@ class OnionWordScanner:
             'http': 'socks5h://127.0.0.1:9050',
             'https': 'socks5h://127.0.0.1:9050'
         }
+        self.results = {"word_metadata": {}}  # Diccionario para almacenar los resultados
 
     def make_tor_request(self, url):
         try:
             socks.setdefaultproxy(socks.SOCKS5, "127.0.0.1", 9050)
             socket.socket = socks.socksocket
-
             response = requests.get(url, proxies=self.proxies)
             return response
         except Exception as e:
-            print(f"Error al hacer la solicitud a través de Tor: {e}")
             return None
 
     def scan_word_files(self):
-        results = {"word_metadata": []}
-
-        for url in self.urls:
+        for url in tqdm(self.urls, desc="Scanning URLs for Word files"):
             # Obtener el contenido de la página web
-            respuesta = self.make_tor_request(url)
-            if respuesta is None:
-                print(f"No se pudo descargar la página web: {url}")
-                results['error'] = f"No se pudo descargar la página web: {url}"
+            response = self.make_tor_request(url)
+            if response is None:
+                self.results[url] = "No accesible"
                 continue
             
-            soup = BeautifulSoup(respuesta.text, 'html.parser')
+            soup = BeautifulSoup(response.text, 'html.parser')
 
             # Buscar todos los enlaces a archivos Word
-            enlaces_word = [a['href'] for a in soup.find_all('a', href=True) if a['href'].endswith('.docx')]
+            word_links = [a['href'] for a in soup.find_all('a', href=True) if a['href'].endswith('.docx')]
 
-            for enlace in enlaces_word:
+            if not word_links:
+                self.results[url] = "No Word files found on this URL"
+                continue
+
+            for word_link in word_links:
                 # Convertir enlace relativo a absoluto si es necesario
-                enlace_absoluto = urljoin(url, enlace)
-                print(f"Descargando archivo Word: {enlace_absoluto}")
+                absolute_link = urljoin(url, word_link)
+                
                 # Obtener el contenido del archivo Word
-                respuesta = self.make_tor_request(enlace_absoluto)
-                if respuesta is None:
-                    print(f"No se pudo descargar el archivo Word de {enlace_absoluto}")
-                    results['error'] = f"No se pudo descargar el archivo Word de {enlace_absoluto}"
+                response = self.make_tor_request(absolute_link)
+                if response is None:
+                    self.results[absolute_link] = "No accesible"
                     continue
 
-                archivo_word = io.BytesIO(respuesta.content)
+                word_file = io.BytesIO(response.content)
 
                 # Leer el archivo Word y extraer los metadatos
-                documento = Document(archivo_word)
-                metadatos = documento.core_properties
+                document = Document(word_file)
+                metadata = document.core_properties
 
                 metadata_dict = {}
-                for key in metadatos.__dir__():
+                for key in metadata.__dir__():
                     if not key.startswith('_'):
-                        value = getattr(metadatos, key)
+                        value = getattr(metadata, key)
                         # Convertir objetos datetime a strings
                         if isinstance(value, datetime):
                             value = value.isoformat()
                         metadata_dict[key] = value
 
-                results["word_metadata"].append({enlace: metadata_dict})
+                # Agregar el nombre del archivo al diccionario de metadatos
+                file_name = word_link.split('/')[-1]
+                self.results["word_metadata"][absolute_link] = metadata_dict
 
         # Convertir los resultados a JSON y devolverlos
-        return json.dumps(results, default=str)  # Convertir objetos datetime a strings
+        return json.dumps(self.results, default=str)  # Convertir objetos datetime a strings
 
 
 if __name__ == "__main__":
     # Prueba la función con la lista de URLs de tu elección
     urls = [
-        'http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html'
+        'http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html', 'a', 'http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion'
     ]
     scanner = OnionWordScanner(urls)
     results_json = scanner.scan_word_files()

@@ -13,9 +13,9 @@ class HtmlPhoneExtractor:
             'https': 'socks5h://127.0.0.1:9050'
         }
 
-    def fetch_html_and_extract_phones(self):
+    def extract_phone_numbers(self):
         results = {}
-        for url in tqdm(self.urls, desc="Extracting Phone Numbers"):
+        for url in tqdm(self.urls, desc="Scanning URLs for Phone Numbers"):
             try:
                 # Proxy configuration for requests
                 socks.setdefaultproxy(socks.SOCKS5, "127.0.0.1", 9050)
@@ -24,7 +24,7 @@ class HtmlPhoneExtractor:
                 response = requests.get(url, proxies=self.proxies, timeout=10)  # Add timeout to handle unreachable URLs
                 if response.status_code == 200:
                     html_content = response.text
-                    phones_found = self._extract_phones(html_content)
+                    phones_found = self.find_phones(html_content)
                     if phones_found:
                         results[url] = phones_found
                     else:
@@ -35,7 +35,7 @@ class HtmlPhoneExtractor:
                 results[url] = {"error": str(e)}
         return json.dumps({"Phone_numbers": results}, indent=2)
 
-    def _extract_phones(self, html_content):
+    def find_phones(self, html_content):
         # Regular expression to search for phone numbers in any international format
         phone_pattern = r'(?<!\d)(?<!\d-)(?<!\d\s)(?:\+\d{1,3}\s?)?(?:\(\d{1,4}\)\s*|\d{1,4}[-. ]?)?\d{1,4}[-. ]?\d{1,4}[-. ]?\d{1,4}(?!\d)'
         
@@ -56,5 +56,5 @@ if __name__ == "__main__":
         "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/"
     ]
     extractor = HtmlPhoneExtractor(urls)
-    phones_json = extractor.fetch_html_and_extract_phones()
+    phones_json = extractor.extract_phone_numbers()
     print(phones_json)
