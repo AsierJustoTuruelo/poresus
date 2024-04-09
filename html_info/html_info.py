@@ -48,7 +48,7 @@ class HtmlInfo:
                 all_results[url] = {"Error": str(e)}  # Manejo de errores: agregar el error al resultado
 
         # Devuelve el resultado completo como JSON
-        return json.dumps(all_results, indent=4)
+        return all_results
 
 if __name__ == "__main__":
     # Lista de URLs .onion de ejemplo
@@ -58,4 +58,4 @@ if __name__ == "__main__":
     
     server_info = HtmlInfo(onion_urls)
     result = server_info.analyze_html()
-    print(result)
+    print(json.dumps(result, indent=4))

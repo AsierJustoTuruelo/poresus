@@ -92,7 +92,7 @@ class OnionMediaScanner:
                 self.results["media_metadata"][enlace_absoluto] = metadata
 
         # Convertir los resultados a JSON y devolverlos
-        return json.dumps(self.results)
+        return self.results
 
 
 if __name__ == "__main__":
@@ -102,4 +102,4 @@ if __name__ == "__main__":
     ]
     scanner = OnionMediaScanner(urls)
     results_json = scanner.scan_media_files()
-    print(results_json)
+    print(json.dumps(scanner.results, indent=4))

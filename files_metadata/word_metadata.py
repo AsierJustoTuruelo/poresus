@@ -74,7 +74,7 @@ class OnionWordScanner:
                 self.results["word_metadata"][absolute_link] = metadata_dict
 
         # Convertir los resultados a JSON y devolverlos
-        return json.dumps(self.results, default=str)  # Convertir objetos datetime a strings
+        return self.results
 
 
 if __name__ == "__main__":
@@ -84,4 +84,4 @@ if __name__ == "__main__":
     ]
     scanner = OnionWordScanner(urls)
     results_json = scanner.scan_word_files()
-    print(results_json)
+    print(json.dumps(scanner.results, indent=4))

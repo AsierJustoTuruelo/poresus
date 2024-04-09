@@ -430,7 +430,7 @@ def main():
             "Binary Metadata Results": binary_metadata_results
         }
 
-        excel_metadata_urls = ["http://6nhmgdpnyoljh5uzr5kwlatx2u3diou4ldeommfxjz3wkhalzgjqxzqd.onion/"]
+        excel_metadata_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html"]
         excel_metadata_scanner = OnionExcelScanner(excel_metadata_urls)
         excel_metadata_results = excel_metadata_scanner.scan_excel_files()
         results["Excel Metadata Results"] = {
@@ -451,21 +451,21 @@ def main():
             "PDF Metadata Results": pdf_metadata_results
         }
 
-        ppt_metadata_urls = ["http://6nhmgdpnyoljh5uzr5kwlatx2u3diou4ldeommfxjz3wkhalzgjqxzqd.onion/"]
+        ppt_metadata_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html"]
         ppt_metadata_scanner = OnionPptScanner(ppt_metadata_urls)
         ppt_metadata_results = ppt_metadata_scanner.scan_ppt_files()
         results["PPT Metadata Results"] = {
             "PPT Metadata Results": ppt_metadata_results
         }
 
-        word_metadata_urls = ["http://6nhmgdpnyoljh5uzr5kwlatx2u3diou4ldeommfxjz3wkhalzgjqxzqd.onion/"]
+        word_metadata_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html"]
         word_metadata_scanner = OnionWordScanner(word_metadata_urls)
         word_metadata_results = word_metadata_scanner.scan_word_files()
         results["Word Metadata Results"] = {
             "Word Metadata Results": word_metadata_results
         }
 
-        media_metadata_urls = ["http://6nhmgdpnyoljh5uzr5kwlatx2u3diou4ldeommfxjz3wkhalzgjqxzqd.onion/"]
+        media_metadata_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html"]
         media_metadata_scanner = OnionMediaScanner(media_metadata_urls)
         media_metadata_results = media_metadata_scanner.scan_media_files()
         results["Media Metadata Results"] = {

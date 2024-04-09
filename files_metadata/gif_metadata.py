@@ -69,7 +69,7 @@ class OnionGifScanner:
                     print(f"Error al procesar el archivo GIF {enlace}: {e}")
 
         # Convertir los resultados a JSON y devolverlos
-        return json.dumps(self.results)
+        return self.results
 
 if __name__ == "__main__":
     # Lista de URLs de prueba
@@ -79,4 +79,4 @@ if __name__ == "__main__":
     ]
     scanner = OnionGifScanner(urls)
     results_json = scanner.scan_gif_files()
-    print(results_json)
+    print(json.dumps(scanner.results, indent=4))

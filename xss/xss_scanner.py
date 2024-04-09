@@ -71,7 +71,7 @@ class XSSScanner:
                     self.results[url] = {"error": str(e)}
 
     def scan_xss(self):
-        for url in tqdm(self.urls, desc="Scanning URLs"):
+        for url in tqdm(self.urls, desc="Scanning URLs for XSS vulnerabilities"):
             if not self.is_accessible(url):
                 self.results[url] = {"error": "URL no accesible"}
                 continue

@@ -58,12 +58,12 @@ class BinaryFileScanner:
                 data = binary_file.read()
                 binary_data = [format(byte, '08b') for byte in data]
 
-                binary_data_per_url[binary_link] = binary_data
+                binary_data_per_url[binary_link] = {"url": absolute_link, "binary_data": binary_data}
 
             self.results["binary_data"].update(binary_data_per_url)
 
         # Convertir los resultados a JSON y devolverlos
-        return json.dumps(self.results)
+        return self.results
 
 if __name__ == "__main__":
     # Lista de URLs de prueba
@@ -73,4 +73,4 @@ if __name__ == "__main__":
     ]
     scanner = BinaryFileScanner(urls)
     results_json = scanner.scan_binary_files()
-    print(results_json)
+    print(json.dumps(scanner.results, indent=4))

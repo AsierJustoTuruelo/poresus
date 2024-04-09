@@ -33,7 +33,7 @@ class HtmlPhoneExtractor:
                     results[url] = {"error": f"Status Code: {response.status_code}"}
             except requests.RequestException as e:
                 results[url] = {"error": str(e)}
-        return json.dumps({"Phone_numbers": results}, indent=2)
+        return {"Phone_numbers": results}
 
     def find_phones(self, html_content):
         # Regular expression to search for phone numbers in any international format
@@ -57,4 +57,4 @@ if __name__ == "__main__":
     ]
     extractor = HtmlPhoneExtractor(urls)
     phones_json = extractor.extract_phone_numbers()
-    print(phones_json)
+    print(json.dumps(phones_json, indent=4))

