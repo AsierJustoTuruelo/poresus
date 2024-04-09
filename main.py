@@ -120,7 +120,7 @@ def main():
         # Ejecutar Bitcoin address extractor
         bitcoin_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/bitcoin_address/bitcoin_adress.html", "http://kz62gxxlegswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/bitcoin_address/"]
         bitcoin_extractor = BitcoinAddressExtractor(bitcoin_urls)
-        bitcoin_addresses = bitcoin_extractor.fetch_html_and_extract_addresses()
+        bitcoin_addresses = bitcoin_extractor.extract_bitcoin_addresses()
         results["Bitcoin Results"] = {
             "Bitcoin Addresses": bitcoin_addresses if bitcoin_addresses else "No se encontraron direcciones Bitcoin."
         }
@@ -384,7 +384,7 @@ def main():
         # Ejecutar todos los escáneres
         bitcoin_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/bitcoin_address/bitcoin_adress.html", "http://kz62gxxlegswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/bitcoin_address/"]
         bitcoin_extractor = BitcoinAddressExtractor(bitcoin_urls)
-        bitcoin_addresses = bitcoin_extractor.fetch_html_and_extract_addresses()
+        bitcoin_addresses = bitcoin_extractor.extract_bitcoin_addresses()
         results["Bitcoin Results"] = {
             "Bitcoin Addresses": bitcoin_addresses if bitcoin_addresses else "No se encontraron direcciones Bitcoin."
         }
