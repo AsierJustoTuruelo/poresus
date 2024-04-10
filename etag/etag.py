@@ -56,7 +56,7 @@ class ETagScanner:
             self.scan_etag(url)
 
         # Devolver los resultados de ETag como un JSON
-        return json.dumps(self.results)
+        return self.results
 
 if __name__ == "__main__":
     # Lista de URLs de prueba
@@ -66,4 +66,4 @@ if __name__ == "__main__":
     ]
     scanner = ETagScanner(urls)
     results_json = scanner.scan_etags()
-    print(results_json)
+    print(json.dumps(results_json, indent=4))
