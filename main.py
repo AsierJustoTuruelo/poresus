@@ -66,6 +66,10 @@ def show_logo():
     """
     print(logo)
 
+def read_urls_from_file(file_path):
+    with open(file_path, 'r') as file:
+        urls = [line.strip() for line in file if line.strip()]
+    return urls
 
 
 def main():
@@ -110,16 +114,21 @@ def main():
     parser.add_argument("-all", "--all", action="store_true", help="Run all scanners")
 
     
-
+    # Agregar un argumento para el archivo de texto con las URL
+    parser.add_argument("url_file", help="Path to a file containing URLs, one per line")
+    
     # Parsear los argumentos de la línea de comandos
     args = parser.parse_args()
+
+    # Lee las URL desde el archivo
+    urls = read_urls_from_file(args.url_file)
 
     # Ejecutar los escáneres según los argumentos proporcionados
     results = {}
     if args.bitcoin:
         # Ejecutar Bitcoin address extractor
         bitcoin_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/bitcoin_address/bitcoin_adress.html", "http://kz62gxxlegswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/bitcoin_address/"]
-        bitcoin_extractor = BitcoinAddressExtractor(bitcoin_urls)
+        bitcoin_extractor = BitcoinAddressExtractor(urls)
         bitcoin_addresses = bitcoin_extractor.extract_bitcoin_addresses()
         results["Bitcoin Results"] = {
             "Bitcoin Addresses": bitcoin_addresses if bitcoin_addresses else "No se encontraron direcciones Bitcoin."
@@ -128,7 +137,7 @@ def main():
     if args.bruteforce:
         # Ejecutar Brute Force scanner
         brute_force_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_bruteforce/prueba_bruteforce.html", "http://kz62gxxl6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_bruteforce/prueba_bruteforce.html"]
-        brute_force_scanner = AdvancedBruteForceScanner(brute_force_urls)
+        brute_force_scanner = AdvancedBruteForceScanner(urls)
         brute_force_results_json = json.loads(brute_force_scanner.brute_force(usernames_file, passwords_file))
         results["Brute Force Results"] = {
             "Brute Force Results": brute_force_results_json
@@ -137,7 +146,7 @@ def main():
     if args.etag:
         # Ejecutar ETag scanner
         etag_urls = ["http://6nhmgdpnyoljh5uzr5kwlatx2u3diou4ldeommfxjz3wkhalzgjqxzqd.onion/", "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/"]
-        etag_scanner = ETagScanner(etag_urls)
+        etag_scanner = ETagScanner(urls)
         etag_results_json = json.loads(etag_scanner.scan_etags())
         results["ETag Results"] = {
             "ETag Results": etag_results_json
@@ -146,7 +155,7 @@ def main():
     if args.favicon:
         # Ejecutar Favicon downloader
         favicon_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/favicon-ico/favicon-ico.html","http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/" ,"http://6nhmgdpnyoljh5uzr5kwlatx2u3diou4ldeommfxjz3wkhalzgjqxzqd.onion/"]
-        favicon_downloader = OnionFaviconDownloader(favicon_urls)
+        favicon_downloader = OnionFaviconDownloader(urls)
         favicon_hashes = favicon_downloader.download_favicon()
         if favicon_hashes:
             results["Favicon Results"] = {
@@ -156,14 +165,14 @@ def main():
     if args.fileinput:
         # Ejecutar File Input validator
         file_input_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_file/index.html", "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/"]
-        file_input_validator = FileUploadValidator(file_input_urls)
+        file_input_validator = FileUploadValidator(urls)
         file_input_validator.run_tests()
         results["File Input Results"] = file_input_validator.results
     
     if args.filehashes:
         # Ejecutar File Hashes scanner
         file_hashes_urls = ["http://z62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/", "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html"]
-        file_hashes_scanner = OnionFileAnalyzer(file_hashes_urls)
+        file_hashes_scanner = OnionFileAnalyzer(urls)
         file_hashes_results = file_hashes_scanner.analyze_files()
         results["File Hashes Results"] = {
             "File Hashes Results": file_hashes_results
@@ -172,7 +181,7 @@ def main():
     if args.binarymetadata:
         # Ejecutar Binary Metadata scanner
         binary_metadata_urls = ['http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html']
-        binary_metadata_scanner = BinaryFileScanner(binary_metadata_urls)
+        binary_metadata_scanner = BinaryFileScanner(urls)
         binary_metadata_results = binary_metadata_scanner.scan_binary_files()
         results["Binary Metadata Results"] = {
             "Binary Metadata Results": binary_metadata_results
@@ -181,7 +190,7 @@ def main():
     if args.excelmetadata:
         # Ejecutar Excel Metadata scanner
         excel_metadata_urls = ["http://6nhmgdpnyoljh5uzr5kwlatx2u3diou4ldeommfxjz3wkhalzgjqxzqd.onion/"]
-        excel_metadata_scanner = OnionExcelScanner(excel_metadata_urls)
+        excel_metadata_scanner = OnionExcelScanner(urls)
         excel_metadata_results = excel_metadata_scanner.scan_excel_files()
         results["Excel Metadata Results"] = {
             "Excel Metadata Results": excel_metadata_results
@@ -190,7 +199,7 @@ def main():
     if args.gifmetadata:
         # Ejecutar GIF Metadata scanner
         gif_metadata_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html"]
-        gif_metadata_scanner = OnionGifScanner(gif_metadata_urls)
+        gif_metadata_scanner = OnionGifScanner(urls)
         gif_metadata_results = gif_metadata_scanner.scan_gif_files()
         results["GIF Metadata Results"] = {
             "GIF Metadata Results": gif_metadata_results
@@ -199,7 +208,7 @@ def main():
     if args.pdfmetadata:
         # Ejecutar PDF Metadata scanner
         pdf_metadata_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html"]
-        pdf_metadata_scanner = OnionPdfScanner(pdf_metadata_urls)
+        pdf_metadata_scanner = OnionPdfScanner(urls)
         pdf_metadata_results = pdf_metadata_scanner.scan_pdf_files()
         results["PDF Metadata Results"] = {
             "PDF Metadata Results": pdf_metadata_results
@@ -208,7 +217,7 @@ def main():
     if args.pptmetadata:
         # Ejecutar PPT Metadata scanner
         ppt_metadata_urls = ["http://6nhmgdpnyoljh5uzr5kwlatx2u3diou4ldeommfxjz3wkhalzgjqxzqd.onion/"]
-        ppt_metadata_scanner = OnionPptScanner(ppt_metadata_urls)
+        ppt_metadata_scanner = OnionPptScanner(urls)
         ppt_metadata_results = ppt_metadata_scanner.scan_ppt_files()
         results["PPT Metadata Results"] = {
             "PPT Metadata Results": ppt_metadata_results
@@ -217,7 +226,7 @@ def main():
     if args.wordmetadata:
         # Ejecutar Word Metadata scanner
         word_metadata_urls = ["http://6nhmgdpnyoljh5uzr5kwlatx2u3diou4ldeommfxjz3wkhalzgjqxzqd.onion/"]
-        word_metadata_scanner = OnionWordScanner(word_metadata_urls)
+        word_metadata_scanner = OnionWordScanner(urls)
         word_metadata_results = word_metadata_scanner.scan_word_files()
         results["Word Metadata Results"] = {
             "Word Metadata Results": word_metadata_results
@@ -226,7 +235,7 @@ def main():
     if args.mediametadata:
         # Ejecutar Media Metadata scanner
         media_metadata_urls = ["http://6nhmgdpnyoljh5uzr5kwlatx2u3diou4ldeommfxjz3wkhalzgjqxzqd.onion/"]
-        media_metadata_scanner = OnionMediaScanner(media_metadata_urls)
+        media_metadata_scanner = OnionMediaScanner(urls)
         media_metadata_results = media_metadata_scanner.scan_media_files()
         results["Media Metadata Results"] = {
             "Media Metadata Results": media_metadata_results
@@ -235,7 +244,7 @@ def main():
     if args.txtmetadata:
         # Ejecutar Text Metadata scanner
         text_metadata_urls = ["http://6nhmgdpnyoljh5uzr5kwlatx2u3diou4ldeommfxjz3wkhalzgjqxzqd.onion/"]
-        text_metadata_scanner = OnionTextScanner(text_metadata_urls)
+        text_metadata_scanner = OnionTextScanner(urls)
         text_metadata_results = text_metadata_scanner.scan_text_files()
         results["Text Metadata Results"] = {
             "Text Metadata Results": text_metadata_results
@@ -244,7 +253,7 @@ def main():
     if args.imagemetadata:
         # Ejecutar Image Metadata scanner
         image_metadata_urls = ['http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html']
-        image_metadata_scanner = OnionImageScanner(image_metadata_urls)
+        image_metadata_scanner = OnionImageScanner(urls)  # <- Aquí debería ser image_metadata_urls
         image_metadata_results = image_metadata_scanner.scan_images()
         results["Image Metadata Results"] = {
             "Image Metadata Results": image_metadata_results
@@ -253,7 +262,7 @@ def main():
     if args.googleids:
         # Ejecutar Google IDs extractor
         google_ids_urls = ['http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/google_ap/google_ap.html']
-        google_ids_extractor = GoogleIDsExtractor(google_ids_urls)
+        google_ids_extractor = GoogleIDsExtractor(urls)
         google_ids = google_ids_extractor.scan_google_services()
         results["Google IDs Results"] = {
             "Google IDs": google_ids if google_ids else "No se encontraron IDs de Google."
@@ -262,7 +271,7 @@ def main():
     if args.gzipheader:
         # Ejecutar Gzip Header scanner
         gzip_header_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html", "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/"]
-        gzip_header_scanner = GzipHeaderScanner(gzip_header_urls)
+        gzip_header_scanner = GzipHeaderScanner(urls)
         gzip_header_results = gzip_header_scanner.scan_gzip_headers()
         results["Gzip Header Results"] = {
             "Gzip Header Results": gzip_header_results
@@ -271,7 +280,7 @@ def main():
     if args.hostname:
         # Ejecutar Hostname Hacking scanner
         hostname_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_hostname/prueba_hostname.html", "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/"]
-        hostname_scanner = HostnameHackingScanner(hostname_urls)
+        hostname_scanner = HostnameHackingScanner(urls)
         hostname_results = hostname_scanner.scan_hostnames()
         results["Hostname Results"] = {
             "Hostname Results": hostname_results
@@ -280,7 +289,7 @@ def main():
     if args.htmlinfo:
         # Ejecutar HTML Info scanner
         html_info_urls = ["http://6nhmgdpnyoljh5uzr5kwlatx2u3diou4ldeommfxjz3wkhalzgjqxzqd.onion/"]
-        html_info_scanner = HtmlInfo(html_info_urls)
+        html_info_scanner = HtmlInfo(urls)
         html_info_results = html_info_scanner.analyze_html()
         results["HTML Info Results"] = {
             "HTML Info Results": html_info_results
@@ -289,7 +298,7 @@ def main():
     if args.mailextractor:
         # Ejecutar Mail extractor
         mail_extractor_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/mail/mail.html"]
-        mail_extractor = HtmlEmailExtractor(mail_extractor_urls)
+        mail_extractor = HtmlEmailExtractor(urls)
         mail_addresses = mail_extractor.extract_emails()
         results["Mail Results"] = {
             "Mail Addresses": mail_addresses if mail_addresses else "No se encontraron direcciones de correo."
@@ -298,7 +307,7 @@ def main():
     if args.otherservices:
         # Ejecutar Other Services scanner
         other_services_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/services/services.html"]
-        other_services_scanner = OnionServiceAnalyzer(other_services_urls)
+        other_services_scanner = OnionServiceAnalyzer(urls)
         other_services_results = other_services_scanner.analyze_services()
         results["Other Services Results"] = {
             "Other Services Results": other_services_results
@@ -307,7 +316,7 @@ def main():
     if args.phonescanner:
         # Ejecutar Phone scanner
         phone_scanner_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/phone/phone.html"]
-        phone_scanner = HtmlPhoneExtractor(phone_scanner_urls)
+        phone_scanner = HtmlPhoneExtractor(urls)
         phone_numbers = phone_scanner.extract_phone_numbers()
         results["Phone Results"] = {
             "Phone Numbers": phone_numbers if phone_numbers else "No se encontraron números de teléfono."
@@ -316,7 +325,7 @@ def main():
     if args.phpserver:
         # Ejecutar PHP Server Info scanner
         php_server_urls = ["http://6nhmgdpnyoljh5uzr5kwlatx2u3diou4ldeommfxjz3wkhalzgjqxzqd.onion/"]
-        php_server_scanner = PHPServerInfoScanner(php_server_urls)
+        php_server_scanner = PHPServerInfoScanner(urls)
         php_server_info = php_server_scanner.scan_php_server_info()
         results["PHP Server Results"] = {
             "PHP Server Info": php_server_info
@@ -325,7 +334,7 @@ def main():
     if args.serverinfo:
         # Ejecutar Server Info scanner
         server_info_urls = ["http://6nhmgdpnyoljh5uzr5kwlatx2u3diou4ldeommfxjz3wkhalzgjqxzqd.onion/"]
-        server_info_scanner = InformacionServidor(server_info_urls)
+        server_info_scanner = InformacionServidor(urls)
         server_info = server_info_scanner.get_server_info()
         results["Server Info Results"] = {
             "Server Info": server_info
@@ -334,8 +343,8 @@ def main():
     if args.serverstatus:
         # Ejecutar Server Status checker
         server_status_urls = ["http://6nhmgdpnyoljh5uzr5kwlatx2u3diou4ldeommfxjz3wkhalzgjqxzqd.onion/"]
-        server_status_checker = ServerStatusChecker(server_status_urls)
-        server_status = server_status_checker.check_server_status()
+        server_status_checker = ServerStatusChecker(urls)
+        server_status = server_status_checker.check_servers_status()
         results["Server Status Results"] = {
             "Server Status": server_status
         }
@@ -343,7 +352,7 @@ def main():
     if args.socialnets:
         # Ejecutar Social Networks scanner
         socialnets_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/social/social.html"]
-        socialnets_scanner = RedesSocialesScanner(socialnets_urls)
+        socialnets_scanner = RedesSocialesScanner(urls)
         socialnets_results = socialnets_scanner.extract_social_networks()
         results["Social Networks Results"] = {
             "Social Networks": socialnets_results if socialnets_results else "No se encontraron redes sociales."
@@ -352,8 +361,8 @@ def main():
     if args.sqlinjection:
         # Ejecutar SQL Injection scanner
         sqli_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.html"]
-        sqli_scanner = AdvancedSqlInjectionScanner(sqli_urls)
-        sqli_results = sqli_scanner.scan_sql_injection()
+        sqli_scanner = AdvancedSqlInjectionScanner()
+        sqli_results = sqli_scanner.scan_sql_injection(urls)
         results["SQL Injection Results"] = {
             "SQL Injection Results": sqli_results
         }
@@ -361,14 +370,14 @@ def main():
     if args.validacioninput:
         # Ejecutar Validacion Input scanner
         validacion_input_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_validacion_input/prueba_validacion_input.html"]
-        validacion_input_scanner = ValidacionInput(validacion_input_urls)
+        validacion_input_scanner = ValidacionInput(urls)
         validacion_input_results = validacion_input_scanner.run_tests()
         results["Validacion Input Results"] = validacion_input_results
     
     if args.xss:
         # Ejecutar XSS scanner
         xss_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_xss/prueba_xss.html"]
-        xss_scanner = XSSScanner(xss_urls)
+        xss_scanner = XSSScanner(urls)
         xss_results = xss_scanner.scan_xss()
         results["XSS Results"] = {
             "XSS Results": xss_results
@@ -377,34 +386,34 @@ def main():
     if args.database:
         # Ejecutar Data Base scanner
         database_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_dbtype/prueba_dbtype.html", "a", "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/"]
-        database_scanner = DatabaseTypeScanner(database_urls)
+        database_scanner = DatabaseTypeScanner(urls)
         results["Database Results"] = database_scanner.scan_urls()
     
     if args.all:
         # Ejecutar todos los escáneres
         bitcoin_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/bitcoin_address/bitcoin_adress.html", "http://kz62gxxlegswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/bitcoin_address/"]
-        bitcoin_extractor = BitcoinAddressExtractor(bitcoin_urls)
+        bitcoin_extractor = BitcoinAddressExtractor(urls)
         bitcoin_addresses = bitcoin_extractor.extract_bitcoin_addresses()
         results["Bitcoin Results"] = {
             "Bitcoin Addresses": bitcoin_addresses if bitcoin_addresses else "No se encontraron direcciones Bitcoin."
         }
         
         brute_force_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_bruteforce/prueba_bruteforce.html", "http://kz62gxxl6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_bruteforce/prueba_bruteforce.html"]
-        brute_force_scanner = AdvancedBruteForceScanner(brute_force_urls)
+        brute_force_scanner = AdvancedBruteForceScanner(urls)
         brute_force_results_json = json.loads(brute_force_scanner.brute_force(usernames_file, passwords_file))
         results["Brute Force Results"] = {
             "Brute Force Results": brute_force_results_json
         }
         
         etag_urls = ["http://6nhmgdpnyoljh5uzr5kwlatx2u3diou4ldeommfxjz3wkhalzgjqxzqd.onion/", "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/"]
-        etag_scanner = ETagScanner(etag_urls)
+        etag_scanner = ETagScanner(urls)
         etag_results_json = json.loads(etag_scanner.scan_etags())
         results["ETag Results"] = {
             "ETag Results": etag_results_json
         }
 
         favicon_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/favicon-ico/favicon-ico.html","http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/" ,"http://6nhmgdpnyoljh5uzr5kwlatx2u3diou4ldeommfxjz3wkhalzgjqxzqd.onion/"]
-        favicon_downloader = OnionFaviconDownloader(favicon_urls)
+        favicon_downloader = OnionFaviconDownloader(urls)
         favicon_hashes = favicon_downloader.download_favicon()
         if favicon_hashes:
             results["Favicon Results"] = {
@@ -412,145 +421,145 @@ def main():
             }
 
         file_input_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_file/index.html", "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/"]
-        file_input_validator = FileUploadValidator(file_input_urls)
+        file_input_validator = FileUploadValidator(urls)
         file_input_validator.run_tests()
         results["File Input Results"] = file_input_validator.results
 
         file_hashes_urls = ["http://z62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/", "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html"]
-        file_hashes_scanner = OnionFileAnalyzer(file_hashes_urls)
+        file_hashes_scanner = OnionFileAnalyzer(urls)
         file_hashes_results = file_hashes_scanner.analyze_files()
         results["File Hashes Results"] = {
             "File Hashes Results": file_hashes_results
         }
 
         binary_metadata_urls = ['http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html']
-        binary_metadata_scanner = BinaryFileScanner(binary_metadata_urls)
+        binary_metadata_scanner = BinaryFileScanner(urls)
         binary_metadata_results = binary_metadata_scanner.scan_binary_files()
         results["Binary Metadata Results"] = {
             "Binary Metadata Results": binary_metadata_results
         }
 
         excel_metadata_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html"]
-        excel_metadata_scanner = OnionExcelScanner(excel_metadata_urls)
+        excel_metadata_scanner = OnionExcelScanner(urls)
         excel_metadata_results = excel_metadata_scanner.scan_excel_files()
         results["Excel Metadata Results"] = {
             "Excel Metadata Results": excel_metadata_results
         }
 
         gif_metadata_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html"]
-        gif_metadata_scanner = OnionGifScanner(gif_metadata_urls)
+        gif_metadata_scanner = OnionGifScanner(urls)
         gif_metadata_results = gif_metadata_scanner.scan_gif_files()
         results["GIF Metadata Results"] = {
             "GIF Metadata Results": gif_metadata_results
         }
 
         pdf_metadata_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html"]
-        pdf_metadata_scanner = OnionPdfScanner(pdf_metadata_urls)
+        pdf_metadata_scanner = OnionPdfScanner(urls)
         pdf_metadata_results = pdf_metadata_scanner.scan_pdf_files()
         results["PDF Metadata Results"] = {
             "PDF Metadata Results": pdf_metadata_results
         }
 
         ppt_metadata_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html"]
-        ppt_metadata_scanner = OnionPptScanner(ppt_metadata_urls)
+        ppt_metadata_scanner = OnionPptScanner(urls)
         ppt_metadata_results = ppt_metadata_scanner.scan_ppt_files()
         results["PPT Metadata Results"] = {
             "PPT Metadata Results": ppt_metadata_results
         }
 
         word_metadata_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html"]
-        word_metadata_scanner = OnionWordScanner(word_metadata_urls)
+        word_metadata_scanner = OnionWordScanner(urls)
         word_metadata_results = word_metadata_scanner.scan_word_files()
         results["Word Metadata Results"] = {
             "Word Metadata Results": word_metadata_results
         }
 
         media_metadata_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html"]
-        media_metadata_scanner = OnionMediaScanner(media_metadata_urls)
+        media_metadata_scanner = OnionMediaScanner(urls)
         media_metadata_results = media_metadata_scanner.scan_media_files()
         results["Media Metadata Results"] = {
             "Media Metadata Results": media_metadata_results
         }
 
         image_metadata_urls = ['http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html']
-        image_metadata_scanner = OnionImageScanner(image_metadata_urls)
+        image_metadata_scanner = OnionImageScanner(urls)
         image_metadata_results = image_metadata_scanner.scan_images()
         results["Image Metadata Results"] = {
             "Image Metadata Results": image_metadata_results
         }
 
         google_ids_urls = ['http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/google_ap/google_ap.html']
-        google_ids_extractor = GoogleIDsExtractor(google_ids_urls)
+        google_ids_extractor = GoogleIDsExtractor(urls)
         google_ids = google_ids_extractor.scan_google_services()
         results["Google IDs Results"] = {
             "Google IDs": google_ids if google_ids else "No se encontraron IDs de Google."
         }
 
         gzip_header_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html", "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/"]
-        gzip_header_scanner = GzipHeaderScanner(gzip_header_urls)
+        gzip_header_scanner = GzipHeaderScanner(urls)
         gzip_header_results = gzip_header_scanner.scan_gzip_headers()
         results["Gzip Header Results"] = {
             "Gzip Header Results": gzip_header_results
         }
 
         hostname_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_hostname/prueba_hostname.html", "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/"]
-        hostname_scanner = HostnameHackingScanner(hostname_urls)
+        hostname_scanner = HostnameHackingScanner(urls)
         hostname_results = hostname_scanner.scan_hostnames()
         results["Hostname Results"] = {
             "Hostname Results": hostname_results
         }
 
         html_info_urls = ["http://6nhmgdpnyoljh5uzr5kwlatx2u3diou4ldeommfxjz3wkhalzgjqxzqd.onion/"]
-        html_info_scanner = HtmlInfo(html_info_urls)
+        html_info_scanner = HtmlInfo(urls)
         html_info_results = html_info_scanner.analyze_html()
         results["HTML Info Results"] = {
             "HTML Info Results": html_info_results
         }
 
         mail_extractor_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/mailweb/mailweb.html"]
-        mail_extractor = HtmlEmailExtractor(mail_extractor_urls)
+        mail_extractor = HtmlEmailExtractor(urls)
         mail_addresses = mail_extractor.extract_emails()
         results["Mail Results"] = {
             "Mail Addresses": mail_addresses if mail_addresses else "No se encontraron direcciones de correo."
         }
 
         other_services_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/otherservices/otherservices.html"]
-        other_services_scanner = OnionServiceAnalyzer(other_services_urls)
+        other_services_scanner = OnionServiceAnalyzer(urls)
         other_services_results = other_services_scanner.analyze_services()
         results["Other Services Results"] = {
             "Other Services Results": other_services_results
         }
 
         phone_scanner_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/phone_numbers/phone_numbers.html"]
-        phone_scanner = HtmlPhoneExtractor(phone_scanner_urls)
+        phone_scanner = HtmlPhoneExtractor(urls)
         phone_numbers = phone_scanner.extract_phone_numbers()
         results["Phone Results"] = {
             "Phone Numbers": phone_numbers
         }
 
         php_server_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/php_info/php_info.html"]
-        php_server_scanner = PHPServerInfoScanner(php_server_urls)
+        php_server_scanner = PHPServerInfoScanner(urls)
         php_server_info = php_server_scanner.scan_php_server_info()
         results["PHP Server Results"] = {
             "PHP Server Info": php_server_info
         }
 
         server_info_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/php_info/php_info.html"]
-        server_info_scanner = InformacionServidor(server_info_urls)
+        server_info_scanner = InformacionServidor(urls)
         server_info = server_info_scanner.get_server_info()
         results["Server Info Results"] = {
             "Server Info": server_info
         }
 
         server_status_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/"]
-        server_status_checker = ServerStatusChecker(server_status_urls)
+        server_status_checker = ServerStatusChecker(urls)
         server_status = server_status_checker.check_servers_status()
         results["Server Status Results"] = {
             "Server Status": server_status
         }
 
         socialnets_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/social/social.html"]
-        socialnets_scanner = RedesSocialesScanner(socialnets_urls)
+        socialnets_scanner = RedesSocialesScanner(urls)
         socialnets_results = socialnets_scanner.extract_social_networks()
         results["Social Networks Results"] = {
             "Social Networks": socialnets_results if socialnets_results else "No se encontraron redes sociales."
@@ -558,25 +567,25 @@ def main():
 
         sqli_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.html"]
         sqli_scanner = AdvancedSqlInjectionScanner()
-        sqli_results = sqli_scanner.scan_sql_injection(sqli_urls)
+        sqli_results = sqli_scanner.scan_sql_injection(urls)
         results["SQL Injection Results"] = {
             "SQL Injection Results": sqli_results
         }
 
         validacion_input_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_validacion_input/prueba_validacion_input.html"]
-        validacion_input_scanner = ValidacionInput(validacion_input_urls)
+        validacion_input_scanner = ValidacionInput(urls)
         validacion_input_results = validacion_input_scanner.run_tests()
         results["Validacion Input Results"] = validacion_input_results
 
         xss_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_xss/prueba_xss.html"]
-        xss_scanner = XSSScanner(xss_urls)
+        xss_scanner = XSSScanner(urls)
         xss_results = xss_scanner.scan_xss()
         results["XSS Results"] = {
             "XSS Results": xss_results
         }
 
         database_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_dbtype/prueba_dbtype.html", "a", "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/"]
-        database_scanner = DatabaseTypeScanner(database_urls)
+        database_scanner = DatabaseTypeScanner(urls)
         results["Database Results"] = database_scanner.scan_urls()
 
 
