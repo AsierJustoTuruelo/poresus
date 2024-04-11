@@ -146,6 +146,8 @@ class AdvancedBruteForceScanner:
             soup = BeautifulSoup(response.text, 'html.parser')
             login_inputs = soup.find_all('input', {'type': ['text', 'password']})
             form = soup.find("form")
+            if form is None:
+                raise KeyError("Form not found")
             input_names = {'action': form['action'], 'method': form['method']}
             self.input_name_users = [input_tag.attrs.get("name") for input_tag in login_inputs]
             return input_names
@@ -166,9 +168,10 @@ class AdvancedBruteForceScanner:
             self.results.setdefault(url, []).append(result)
             return {}
 
+
 if __name__ == "__main__":
     urls = [
-        "http://kz62gxxle6gswe5t6iv6wjt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_bruteforce/prueba_bruteforce.html","http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_bruteforce/prueba_bruteforce.html"
+        "http://kz62gxxle6gswe5t6iv6wjt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_bruteforce/prueba_bruteforce.html"
         # Add more URLs here if needed
     ]
     scanner = AdvancedBruteForceScanner(urls)
