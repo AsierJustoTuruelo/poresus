@@ -1,13 +1,10 @@
-import socks
-import socket
+from bs4 import BeautifulSoup, Comment
 import requests
-from datetime import datetime
-from urllib.parse import urljoin
-from bs4 import BeautifulSoup
 import json
+import os
 from tqdm import tqdm
 
-class GzipHeaderScanner:
+class HtmlInfo:
     def __init__(self, urls):
         self.urls = urls
         self.proxies = {
@@ -15,61 +12,57 @@ class GzipHeaderScanner:
             'https': 'socks5h://127.0.0.1:9050'
         }
 
-    def make_tor_request(self, url):
-        try:
-            socks.setdefaultproxy(socks.SOCKS5, "127.0.0.1", 9050)
-            socket.socket = socks.socksocket
-            response = requests.get(url, proxies=self.proxies)
-            return response
-        except Exception as e:
-            print(f"Error haciendo la solicitud a {url}: {e}")
-            return None
+    def analyze_html(self):
+        all_results = {}
+        for url in tqdm(self.urls, desc="Scanning URLs for HTML information"):  
+            try:
+                response = requests.get(url, proxies=self.proxies)
+                response.raise_for_status()
+                soup = BeautifulSoup(response.text, 'html.parser')
 
-    def extract_sensitive_data(self, headers):
-        # Definir los encabezados sensibles que queremos extraer
-        sensitive_headers = ["Date", "Otro encabezado sensible", "Otra información sensible"]
-        extracted_data = {}
-        for header in sensitive_headers:
-            if header in headers:
-                extracted_data[header] = headers[header]
-        return extracted_data
+                # Find all comments
+                comments = soup.findAll(string=lambda text: isinstance(text, Comment))
+                comments_list = [str(comment) for comment in comments]
 
-    def estimate_location(self):
-        # Estimar la ubicación aproximada en función de la hora actual
-        hora_actual = datetime.now().hour
-        if 0 <= hora_actual < 6:
-            return "Oceanía"
-        elif 6 <= hora_actual < 12:
-            return "Asia"
-        elif 12 <= hora_actual < 18:
-            return "Europa"
-        else:
-            return "América"
+                # Find all script tags
+                scripts = soup.find_all('script')
+                script_names = [os.path.basename(script['src']) for script in scripts if script.get('src')]
 
-    def scan_gzip_headers(self):
-        results = {}
-        try:
-            for url in tqdm(self.urls, desc="Scanning URLs for GZIP header"):
-                response = self.make_tor_request(url)
-                if response is None:
-                    results[url] = {"Error": "No se pudo obtener la respuesta de la página"}
-                    continue
+                # Find all meta tags
+                metas = soup.find_all('meta')
+                metas_list = [str(meta) for meta in metas]
 
-                headers = response.headers
+                # Find hidden elements
+                hidden_elements = soup.find_all(style=lambda value: 'display:none' in value or 'visibility:hidden' in value if value is not None else False)
+                hidden_elements_list = [str(hidden_element) for hidden_element in hidden_elements]
 
-                gzip_enabled = 'Content-Encoding' in headers and headers['Content-Encoding'] == 'gzip'
-
-                extracted_data = self.extract_sensitive_data(headers)
-
-                estimated_location = self.estimate_location()
-
-                results[url] = {
-                    "gzip_enabled": gzip_enabled,
-                    "sensitive_data": extracted_data,
-                    "estimated_location": estimated_location
+                result = {
+                    'comments': comments_list,
+                    'scripts': script_names,
+                    'metas': metas_list,
+                    'hidden_elements': hidden_elements_list
                 }
 
-            return results
+                all_results[url] = result
+            except requests.exceptions.RequestException as e:
+                all_results[url] = {"Error": str(e)}  # Manejo de errores: agregar el error al resultado
 
-        except Exception as e:
-            print(f"Error al escanear las páginas: {e}")
+        # Devuelve el resultado completo como JSON
+        return all_results
+
+if __name__ == "__main__":
+    urls = [
+        'http://example.com',
+        'http://another-example.com'
+    ]
+    html_info = HtmlInfo(urls)
+    results = html_info.analyze_html()
+
+    # Convertir conjuntos a listas antes de serializar a JSON
+    for url, result in results.items():
+        result['comments'] = list(result['comments'])  # Convertir a lista
+        result['scripts'] = list(result['scripts'])  # Convertir a lista
+        result['metas'] = list(result['metas'])  # Convertir a lista
+        result['hidden_elements'] = list(result['hidden_elements'])  # Convertir a lista
+
+    print(json.dumps(results, indent=4))
