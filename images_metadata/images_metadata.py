@@ -65,7 +65,7 @@ class OnionImageScanner:
             image_info = {
                 'size': image.size,
                 'mode': image.mode,
-                'metadata': image.info
+                'metadata': str(image.info)
                 
             }
             return image_info
