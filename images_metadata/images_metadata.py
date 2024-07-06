@@ -37,7 +37,6 @@ class OnionImageScanner:
                 soup = BeautifulSoup(response.content, 'html.parser')
                 image_tags = soup.find_all('img')
                 if not image_tags:
-                    print(f"No images found in {onion_url}")
                     results[onion_url] = "No images found"
                     continue
                 for img_tag in image_tags:
