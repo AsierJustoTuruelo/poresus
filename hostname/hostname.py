@@ -1,7 +1,7 @@
 import requests
 import socks
 import socket
-from tqdm import tqdm  # Import tqdm
+from tqdm import tqdm
 
 class HostnameHackingScanner:
     def __init__(self, onion_domains):
@@ -54,19 +54,21 @@ class HostnameHackingScanner:
                         'result': f'Error occurred: {e}',
                         'is_hostname_vulnerable': False
                     }
-                    results[onion_domain] = {f"Error scanning {onion_domain}"}
 
             # Return the result as a dictionary
             return results
 
         except Exception as e:
-            results[onion_domain] = "Error occurred while scanning the page"
-            return None
+            results["Error"] = "Error occurred while scanning the pages"
+            return results
+
 
 if __name__ == "__main__":
     # Sample list of .onion URLs
     onion_domains = [
-        'http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html',"a","http://juhanurmihxlp77nkq76byazcldy2hlmovfu2epvl5ankdibsot4csyd.onion/"
+        'http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html',
+        'a',
+        'http://juhanurmihxlp77nkq76byazcldy2hlmovfu2epvl5ankdibsot4csyd.onion/'
     ]
 
     # Test the function with the list of URLs
