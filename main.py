@@ -147,9 +147,9 @@ def main():
         # Ejecutar ETag scanner
         etag_urls = ["http://6nhmgdpnyoljh5uzr5kwlatx2u3diou4ldeommfxjz3wkhalzgjqxzqd.onion/", "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/"]
         etag_scanner = ETagScanner(urls)
-        etag_results_json = json.loads(etag_scanner.scan_etags())
+        etag_results_json = etag_scanner.scan_etags()
         results["ETag Results"] = {
-            "ETag Results": etag_results_json
+            "ETags": etag_results_json
         }
     
     if args.favicon:
@@ -407,11 +407,10 @@ def main():
         
         etag_urls = ["http://6nhmgdpnyoljh5uzr5kwlatx2u3diou4ldeommfxjz3wkhalzgjqxzqd.onion/", "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/"]
         etag_scanner = ETagScanner(urls)
-        etag_results_json = json.loads(etag_scanner.scan_etags())
+        etag_results_json = etag_scanner.scan_etags()
         results["ETag Results"] = {
-            "ETag Results": etag_results_json
+            "ETags": etag_results_json
         }
-
         favicon_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/favicon-ico/favicon-ico.html","http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/" ,"http://6nhmgdpnyoljh5uzr5kwlatx2u3diou4ldeommfxjz3wkhalzgjqxzqd.onion/"]
         favicon_downloader = OnionFaviconDownloader(urls)
         favicon_hashes = favicon_downloader.download_favicon()
