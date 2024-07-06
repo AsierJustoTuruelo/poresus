@@ -22,7 +22,6 @@ class ServerStatusChecker:
             response = requests.get(url, proxies=self.proxies)
             return response
         except Exception as e:
-            print(f"Error al hacer la solicitud a través de Tor: {e}")
             return None
 
     def extract_ip_from_html(self, html):
@@ -42,8 +41,7 @@ class ServerStatusChecker:
             # Realizar la solicitud a la URL dada
             response = self.make_tor_request(url + "/server-status")
             if response is None:
-                print("No se pudo obtener la respuesta de la página.")
-                return {"error": "No se pudo obtener la respuesta de la página."}
+                return {"Error": "No se pudo obtener la respuesta de la página."}
 
             # Verificar si la URL /server-status está disponible
             disponible = response.status_code == 200
@@ -64,8 +62,7 @@ class ServerStatusChecker:
             return result
             
         except Exception as e:
-            print(f"Error al verificar la URL {url}/server-status: {e}")
-            return {"error": f"Error al verificar la URL {url}/server-status: {e}"}
+            return {"Error": f"Error al verificar la URL {url}/server-status: {e}"}
 
     def check_servers_status(self):
         results = {}
