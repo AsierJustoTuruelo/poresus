@@ -109,7 +109,14 @@ class AdvancedBruteForceScanner:
     def brute_force(self, usernames_file, passwords_file):
         for url in tqdm(self.urls, desc="Scanning URLs for Brute Force"):  
             input_names = self.find_login_inputs_with_timeout(url)
-            if not input_names:
+            if not input_names or not self.input_name_users or len(self.input_name_users) < 2:
+                error_message = f"Error: Invalid form inputs in {url}"
+                print(error_message)
+                result = {
+                    "url": url,
+                    "error": error_message
+                }
+                self.results.setdefault(url, []).append(result)
                 continue  
 
             with open(usernames_file, 'r') as user_file:
