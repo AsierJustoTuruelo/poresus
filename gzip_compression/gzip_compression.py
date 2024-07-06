@@ -20,14 +20,14 @@ class GzipHeaderScanner:
         try:
             socks.setdefaultproxy(socks.SOCKS5, "127.0.0.1", 9050)
             socket.socket = socks.socksocket
-
             response = requests.get(url, proxies=self.proxies)
             return response
         except Exception as e:
+            print(f"Error haciendo la solicitud a {url}: {e}")
             return None
 
     def extract_sensitive_data(self, headers):
-        # Extraer información sensible de los encabezados HTTP
+        # Definir los encabezados sensibles que queremos extraer
         sensitive_headers = ["Date", "Otro encabezado sensible", "Otra información sensible"]
         extracted_data = {}
         for header in sensitive_headers:
@@ -50,43 +50,40 @@ class GzipHeaderScanner:
     def scan_gzip_headers(self):
         results = {}
         try:
-            for url in tqdm(self.urls, desc="Scanning URLs for GZIP header"):  # Barra de progreso para cada URL
-                # Realizar la solicitud a la URL dada
+            for url in tqdm(self.urls, desc="Scanning URLs for GZIP header"):
                 response = self.make_tor_request(url)
                 if response is None:
-                    results[url] = {f"No se pudo obtener la respuesta de la página"}
+                    results[url] = {"Error": "No se pudo obtener la respuesta de la página"}
                     continue
 
-                # Analizar los encabezados HTTP
                 headers = response.headers
 
-                # Verificar si la compresión GZIP está presente en los encabezados
                 gzip_enabled = 'Content-Encoding' in headers and headers['Content-Encoding'] == 'gzip'
 
-                # Extraer datos sensibles de los encabezados HTTP
                 extracted_data = self.extract_sensitive_data(headers)
 
-                # Estimar la ubicación basada en la hora actual
                 estimated_location = self.estimate_location()
 
-                # Agregar resultados al diccionario de resultados
                 results[url] = {
                     "gzip_enabled": gzip_enabled,
                     "sensitive_data": extracted_data,
                     "estimated_location": estimated_location
                 }
 
-            # Devolver los resultados
             return results
-            
+
         except Exception as e:
-            print(f"Error al escanear la página: {e}")
+            print(f"Error al escanear las páginas: {e}")
 
 
 if __name__ == "__main__":
     # Prueba la función con la lista de URLs de tu elección
     urls = [
-        "http://juhanurmihxlp77nkq76byazcldy2hlmovfu2epvl5ankdibsot4csyd.onion/"
+        'http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html',
+        'a',
+        'http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/',
+        'http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_bruteforce/prueba_bruteforce.html',
+        'http://juhanurmihxlp77nkq76byazcldy2hlmovfu2epvl5ankdibsot4csyd.onion/'
     ]
     scanner = GzipHeaderScanner(urls)
     results_json = scanner.scan_gzip_headers()
