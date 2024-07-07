@@ -21,7 +21,7 @@ class ETagScanner:
             response = requests.get(url, proxies=self.proxies)
             return response
         except Exception as e:
-            self.results[url] = f"Error al hacer la solicitud a través de Tor: {e}"
+            self.results[url] = f"Error trying to connect to Tor."
             return None
 
     def extract_etag(self, response):
@@ -37,7 +37,7 @@ class ETagScanner:
             # Realizar la solicitud a la URL dada
             response = self.make_tor_request(url)
             if response is None:
-                self.results[url] = "No se pudo obtener la respuesta"
+                self.results[url] = "No response from the server."
                 return
 
             # Extraer la etiqueta ETag de la respuesta
@@ -46,10 +46,10 @@ class ETagScanner:
             if etag:
                 self.results[url] = etag
             else:
-                self.results[url] = "No encontrado ETag"
+                self.results[url] = "No ETag found in the response."
             
         except Exception as e:
-            self.results[url] = f"Error al escanear la página {url}"
+            self.results[url] = f"Error scanning ETag: {str(e)}"
 
     def scan_etags(self):
         for url in tqdm(self.urls, desc="Scanning URLs for ETags"):  # Barra de progreso para cada URL

@@ -1,4 +1,945 @@
 {
+    "Bitcoin Results": {
+        "Bitcoin Addresses": {
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html": [
+                "No bitcoins found at this URL"
+            ],
+            "a": "Not accessible",
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/": [
+                "No bitcoins found at this URL"
+            ],
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_bruteforce/prueba_bruteforce.html": [
+                "No bitcoins found at this URL"
+            ],
+            "http://juhanurmihxlp77nkq76byazcldy2hlmovfu2epvl5ankdibsot4csyd.onion/": [
+                "1aGFudXJtaS4qY3N5ZFxcLm9uaW9ufGh",
+                "1hZ2VPdmVybGF5e2Rpc3BsYXk6bm9uZX19"
+            ]
+        }
+    },
+    "Brute Force Results": {
+        "Brute Force Results": {
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html": [
+                {
+                    "error": "Error: Unable to find form details."
+                },
+                {
+                    "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html",
+                    "error": "Error: Invalid form inputs in http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html"
+                }
+            ],
+            "a": [
+                {
+                    "url": "a",
+                    "error": "Error: Unable to retrieve content from a"
+                },
+                {
+                    "url": "a",
+                    "error": "Error: Invalid form inputs in a"
+                }
+            ],
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/": [
+                {
+                    "error": "Error: Unable to find form details."
+                },
+                {
+                    "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/",
+                    "error": "Error: Invalid form inputs in http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/"
+                }
+            ],
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_bruteforce/prueba_bruteforce.html": [
+                {
+                    "credentials": {
+                        "usernam": "test",
+                        "psw": "test"
+                    },
+                    "success": true,
+                    "response": "<h1>Inicio de sesi\u00f3n exitoso!</h1>"
+                }
+            ],
+            "http://juhanurmihxlp77nkq76byazcldy2hlmovfu2epvl5ankdibsot4csyd.onion/": [
+                {
+                    "url": "http://juhanurmihxlp77nkq76byazcldy2hlmovfu2epvl5ankdibsot4csyd.onion/",
+                    "error": "Error: Invalid form inputs in http://juhanurmihxlp77nkq76byazcldy2hlmovfu2epvl5ankdibsot4csyd.onion/"
+                }
+            ]
+        }
+    },
+    "ETag Results": {
+        "E-Tags": {
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html": "\"3d2-615966e3b92a1-gzip\"",
+            "a": "No se pudo obtener la respuesta",
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/": "No encontrado ETag",
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_bruteforce/prueba_bruteforce.html": "\"203-6102ba9f9f6e6-gzip\"",
+            "http://juhanurmihxlp77nkq76byazcldy2hlmovfu2epvl5ankdibsot4csyd.onion/": "No encontrado ETag"
+        }
+    },
+    "Favicon Results": {
+        "Favicon Hashes": {
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html": "Failed to download favicon",
+            "a": "Error making request through Tor: Invalid URL 'a': No scheme supplied. Perhaps you meant https://a?",
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/": "Failed to download favicon",
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_bruteforce/prueba_bruteforce.html": "Failed to download favicon",
+            "http://juhanurmihxlp77nkq76byazcldy2hlmovfu2epvl5ankdibsot4csyd.onion/": {
+                "MMH3": -603632201,
+                "SHA-256": "22e701a42518e7dd84a12562113d582274e1492fa2e0cfc9b5e58bbb942236b4",
+                "MD5": "1cbb64d0c4bb62644edf9dcafa112353"
+            }
+        }
+    },
+    "File Input Results": {
+        "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html": {
+            "result_file_input": "No forms found"
+        },
+        "a": {
+            "result_file_input": "No forms found"
+        },
+        "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/": {
+            "result_file_input": "No forms found"
+        },
+        "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_bruteforce/prueba_bruteforce.html": {
+            "result_file_input": "No forms found"
+        },
+        "http://juhanurmihxlp77nkq76byazcldy2hlmovfu2epvl5ankdibsot4csyd.onion/": {
+            "result_file_input": "No forms found"
+        }
+    },
+    "File Hashes Results": {
+        "File Hashes Results": {
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html": [
+                {
+                    "name": "prueba.docx",
+                    "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/prueba.docx",
+                    "hashes": {
+                        "SHA-256": "7e19caf8fa59ea40d2c546f60d52f682a605741ce4313f71119a6d88a376afed",
+                        "MD5": "96cf6a6c966153b86f0b6dcc7eed7901"
+                    }
+                },
+                {
+                    "name": "prueba.pdf",
+                    "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/prueba.pdf",
+                    "hashes": {
+                        "SHA-256": "498094837ba969cafd19629b4a8b9956cc48557220cf2614eb2d25cad26b42ca",
+                        "MD5": "a265029a1f0bc60e1d1bbbeec95b8bb9"
+                    }
+                },
+                {
+                    "name": "prueba.xlsx",
+                    "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/prueba.xlsx",
+                    "hashes": {
+                        "SHA-256": "7b39ca142c2d711eb4d1fae30cd2e810a8c441763f90ca2500af5f96dbe71726",
+                        "MD5": "b2241ab388407879b0b4cca6ebb7b8d3"
+                    }
+                },
+                {
+                    "name": "prueba.pptx",
+                    "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/prueba.pptx",
+                    "hashes": {
+                        "SHA-256": "15f1723eb2ed8a3a1ac9af81809868d7a29e1b825dec49267db4dc63e64c0790",
+                        "MD5": "18a22270001ff1c17a3653f4babe55fc"
+                    }
+                },
+                {
+                    "name": "prueba.mp3",
+                    "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/prueba.mp3",
+                    "hashes": {
+                        "SHA-256": "61ff4cb8d42114143d528694afb79e8a9457e11cc4da40052d80fa704560dca7",
+                        "MD5": "b62c75c4b1a9616b71257a4a75f9b017"
+                    }
+                },
+                {
+                    "name": "prueba.mp4",
+                    "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/prueba.mp4",
+                    "hashes": "Not accessible"
+                },
+                {
+                    "name": "prueba.gif",
+                    "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/prueba.gif",
+                    "hashes": {
+                        "SHA-256": "a4fccc9b3c9becd434c4dd0824a06a30e20f5fc2b26e5e23c40fe4c172995584",
+                        "MD5": "3da6c5040386b69bd325a2cfcd8242c5"
+                    }
+                },
+                {
+                    "name": "prueba.bin",
+                    "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/prueba.bin",
+                    "hashes": {
+                        "SHA-256": "7a2b95e1b46740e0ee928253c70b4e31b6dad43f59174dadd394657e2edeb942",
+                        "MD5": "fb87cd05d9d8669e8d9a128c4e11d7cf"
+                    }
+                },
+                {
+                    "name": "prueba.txt",
+                    "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/prueba.txt",
+                    "hashes": {
+                        "SHA-256": "133ee989293f92736301280c6f14c89d521200c17dcdcecca30cd20705332d44",
+                        "MD5": "916f4c31aaa35d6b867dae9a7f54270d"
+                    }
+                }
+            ],
+            "a": {
+                "Error": "Could not access .onion page: a"
+            },
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/": [
+                {
+                    "name": "Screenshot_2024-02-24_12_17_34.png",
+                    "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/Screenshot_2024-02-24_12_17_34.png",
+                    "hashes": {
+                        "SHA-256": "a1c3439e033be3a6c806dbf478e14af4223a8c40874ae5a430a2e0a98de217d5",
+                        "MD5": "30c9844540f28cfe6021eb24966dc9e4"
+                    }
+                },
+                {
+                    "name": "prueba.bin",
+                    "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/prueba.bin",
+                    "hashes": {
+                        "SHA-256": "7a2b95e1b46740e0ee928253c70b4e31b6dad43f59174dadd394657e2edeb942",
+                        "MD5": "fb87cd05d9d8669e8d9a128c4e11d7cf"
+                    }
+                },
+                {
+                    "name": "prueba.docx",
+                    "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/prueba.docx",
+                    "hashes": {
+                        "SHA-256": "7e19caf8fa59ea40d2c546f60d52f682a605741ce4313f71119a6d88a376afed",
+                        "MD5": "96cf6a6c966153b86f0b6dcc7eed7901"
+                    }
+                },
+                {
+                    "name": "prueba.gif",
+                    "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/prueba.gif",
+                    "hashes": {
+                        "SHA-256": "a4fccc9b3c9becd434c4dd0824a06a30e20f5fc2b26e5e23c40fe4c172995584",
+                        "MD5": "3da6c5040386b69bd325a2cfcd8242c5"
+                    }
+                },
+                {
+                    "name": "prueba.mp3",
+                    "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/prueba.mp3",
+                    "hashes": {
+                        "SHA-256": "61ff4cb8d42114143d528694afb79e8a9457e11cc4da40052d80fa704560dca7",
+                        "MD5": "b62c75c4b1a9616b71257a4a75f9b017"
+                    }
+                },
+                {
+                    "name": "prueba.pdf",
+                    "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/prueba.pdf",
+                    "hashes": {
+                        "SHA-256": "498094837ba969cafd19629b4a8b9956cc48557220cf2614eb2d25cad26b42ca",
+                        "MD5": "a265029a1f0bc60e1d1bbbeec95b8bb9"
+                    }
+                },
+                {
+                    "name": "prueba.pptx",
+                    "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/prueba.pptx",
+                    "hashes": {
+                        "SHA-256": "15f1723eb2ed8a3a1ac9af81809868d7a29e1b825dec49267db4dc63e64c0790",
+                        "MD5": "18a22270001ff1c17a3653f4babe55fc"
+                    }
+                },
+                {
+                    "name": "prueba.txt",
+                    "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/prueba.txt",
+                    "hashes": {
+                        "SHA-256": "133ee989293f92736301280c6f14c89d521200c17dcdcecca30cd20705332d44",
+                        "MD5": "916f4c31aaa35d6b867dae9a7f54270d"
+                    }
+                },
+                {
+                    "name": "prueba.xlsx",
+                    "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/prueba.xlsx",
+                    "hashes": {
+                        "SHA-256": "7b39ca142c2d711eb4d1fae30cd2e810a8c441763f90ca2500af5f96dbe71726",
+                        "MD5": "b2241ab388407879b0b4cca6ebb7b8d3"
+                    }
+                }
+            ],
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_bruteforce/prueba_bruteforce.html": "No files found to analyze.",
+            "http://juhanurmihxlp77nkq76byazcldy2hlmovfu2epvl5ankdibsot4csyd.onion/": "No files found to analyze."
+        }
+    },
+    "Binary Metadata Results": {
+        "Binary Metadata Results": {
+            "binary_data": {
+                "prueba.bin": {
+                    "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/prueba.bin",
+                    "binary_data": [
+                        "01000101",
+                        "01110011",
+                        "01110100",
+                        "01101111",
+                        "00100000",
+                        "01100101",
+                        "01110011",
+                        "00100000",
+                        "01110101",
+                        "01101110",
+                        "00100000",
+                        "01100001",
+                        "01110010",
+                        "01100011",
+                        "01101000",
+                        "01101001",
+                        "01110110",
+                        "01101111",
+                        "00100000",
+                        "01100010",
+                        "01101001",
+                        "01101110",
+                        "01100001",
+                        "01110010",
+                        "01101001",
+                        "01101111",
+                        "00100000",
+                        "01100100",
+                        "01100101",
+                        "00100000",
+                        "01110000",
+                        "01110010",
+                        "01110101",
+                        "01100101",
+                        "01100010",
+                        "01100001",
+                        "00001010"
+                    ]
+                }
+            },
+            "a": "Url not accessible",
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_bruteforce/prueba_bruteforce.html": "No binary files found on this URL",
+            "http://juhanurmihxlp77nkq76byazcldy2hlmovfu2epvl5ankdibsot4csyd.onion/": "No binary files found on this URL"
+        }
+    },
+    "Excel Metadata Results": {
+        "Excel Metadata Results": {
+            "excel_metadata": {
+                "prueba.xlsx": "[]"
+            },
+            "a": "Url not accessible",
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_bruteforce/prueba_bruteforce.html": "No Excel files found on this URL",
+            "http://juhanurmihxlp77nkq76byazcldy2hlmovfu2epvl5ankdibsot4csyd.onion/": "No Excel files found on this URL"
+        }
+    },
+    "GIF Metadata Results": {
+        "GIF Metadata Results": {
+            "gif_metadata": {
+                "prueba.gif": {
+                    "version": "b'GIF89a'",
+                    "background": "0",
+                    "loop": "0",
+                    "comment": "b'Please visit my site https://hola.com/'",
+                    "extension": "(b'NETSCAPE2.0', 795)"
+                }
+            },
+            "a": "Url not accessible",
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_bruteforce/prueba_bruteforce.html": "No GIF files found on this URL",
+            "http://juhanurmihxlp77nkq76byazcldy2hlmovfu2epvl5ankdibsot4csyd.onion/": "No GIF files found on this URL"
+        }
+    },
+    "PDF Metadata Results": {
+        "PDF Metadata Results": "{\"pdf_metadata\": {\"http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html\": {\"file_name\": \"prueba.pdf\", \"/Author\": \"Asier Justo\", \"/Creator\": \"Microsoft\\u00ae Word for Microsoft 365\", \"/CreationDate\": \"D:20240227172119+01'00'\", \"/ModDate\": \"D:20240227172119+01'00'\", \"/Producer\": \"Microsoft\\u00ae Word for Microsoft 365\"}, \"http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/\": {\"file_name\": \"prueba.pdf\", \"/Author\": \"Asier Justo\", \"/Creator\": \"Microsoft\\u00ae Word for Microsoft 365\", \"/CreationDate\": \"D:20240227172119+01'00'\", \"/ModDate\": \"D:20240227172119+01'00'\", \"/Producer\": \"Microsoft\\u00ae Word for Microsoft 365\"}}, \"a\": \"Url not accessible\", \"http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_bruteforce/prueba_bruteforce.html\": \"No PDF files found on this URL\", \"http://juhanurmihxlp77nkq76byazcldy2hlmovfu2epvl5ankdibsot4csyd.onion/\": \"No PDF files found on this URL\"}"
+    },
+    "PPT Metadata Results": {
+        "PPT Metadata Results": {
+            "ppt_metadata": {
+                "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html": {
+                    "T\u00edtulo": "PowerPoint Presentation",
+                    "Autor": "Asier Justo",
+                    "Fecha de creaci\u00f3n": "2024-02-27 16:09:20",
+                    "\u00daltima fecha de modificaci\u00f3n": "2024-02-27 16:09:30",
+                    "Nombre de archivo": "prueba.pptx"
+                },
+                "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/": {
+                    "T\u00edtulo": "PowerPoint Presentation",
+                    "Autor": "Asier Justo",
+                    "Fecha de creaci\u00f3n": "2024-02-27 16:09:20",
+                    "\u00daltima fecha de modificaci\u00f3n": "2024-02-27 16:09:30",
+                    "Nombre de archivo": "prueba.pptx"
+                }
+            },
+            "a": "Url not accessible",
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_bruteforce/prueba_bruteforce.html": "No PowerPoint files found on this URL",
+            "http://juhanurmihxlp77nkq76byazcldy2hlmovfu2epvl5ankdibsot4csyd.onion/": "No PowerPoint files found on this URL"
+        }
+    },
+    "Word Metadata Results": {
+        "Word Metadata Results": {
+            "word_metadata": {
+                "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/prueba.docx": {
+                    "author": "Asier Justo",
+                    "category": "",
+                    "comments": "",
+                    "content_status": "",
+                    "created": "2024-02-27T16:06:00",
+                    "identifier": "",
+                    "keywords": "",
+                    "language": "",
+                    "last_modified_by": "Asier Justo",
+                    "last_printed": null,
+                    "modified": "2024-02-27T16:06:00",
+                    "revision": 1,
+                    "subject": "",
+                    "title": "",
+                    "version": ""
+                }
+            },
+            "a": "No accesible",
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_bruteforce/prueba_bruteforce.html": "No Word files found on this URL",
+            "http://juhanurmihxlp77nkq76byazcldy2hlmovfu2epvl5ankdibsot4csyd.onion/": "No Word files found on this URL"
+        }
+    },
+    "Media Metadata Results": {
+        "Media Metadata Results": {
+            "media_metadata": {
+                "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/prueba.mp3": {
+                    "format": "MP3",
+                    "title": [
+                        "T\u00edtulo de la canci\u00f3n"
+                    ],
+                    "artist": [
+                        "Nombre del artista"
+                    ],
+                    "File Name": "prueba.mp3"
+                }
+            },
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/prueba.mp4": "Invalid MP4 file",
+            "a": "No accesible",
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_bruteforce/prueba_bruteforce.html": "No media files found on this URL",
+            "http://juhanurmihxlp77nkq76byazcldy2hlmovfu2epvl5ankdibsot4csyd.onion/": "No media files found on this URL"
+        }
+    },
+    "Image Metadata Results": {
+        "Image Metadata Results": {
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html": [
+                {
+                    "image_url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/Screenshot_2024-02-24_12_17_34.png",
+                    "image_info": {
+                        "size": [
+                            2560,
+                            1465
+                        ],
+                        "mode": "RGB",
+                        "metadata": "{'Title': 'Imagen mia', 'Author': 'Tu Nombre', 'Software': 'ExifTool'}"
+                    }
+                }
+            ],
+            "a": "Url not reachable",
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/": [
+                {
+                    "image_url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/icons/blank.gif",
+                    "image_info": {
+                        "size": [
+                            20,
+                            22
+                        ],
+                        "mode": "P",
+                        "metadata": "{'version': b'GIF89a', 'background': 0, 'transparency': 1, 'comment': b'This art is in the public domain. Kevin Hughes, kevinh@eit.com, September 1995', 'duration': 0}"
+                    }
+                },
+                {
+                    "image_url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/icons/back.gif",
+                    "image_info": {
+                        "size": [
+                            20,
+                            22
+                        ],
+                        "mode": "P",
+                        "metadata": "{'version': b'GIF89a', 'background': 0, 'transparency': 1, 'comment': b'This art is in the public domain. Kevin Hughes, kevinh@eit.com, September 1995', 'duration': 0}"
+                    }
+                },
+                {
+                    "image_url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/icons/image2.gif",
+                    "image_info": {
+                        "size": [
+                            20,
+                            22
+                        ],
+                        "mode": "P",
+                        "metadata": "{'version': b'GIF89a', 'background': 0, 'transparency': 2, 'comment': b'This art is in the public domain. Kevin Hughes, kevinh@eit.com, September 1995', 'duration': 0}"
+                    }
+                },
+                {
+                    "image_url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/icons/unknown.gif",
+                    "image_info": {
+                        "size": [
+                            20,
+                            22
+                        ],
+                        "mode": "P",
+                        "metadata": "{'version': b'GIF89a', 'background': 0, 'transparency': 1, 'comment': b'This art is in the public domain. Kevin Hughes, kevinh@eit.com, September 1995', 'duration': 0}"
+                    }
+                },
+                {
+                    "image_url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/icons/text.gif",
+                    "image_info": {
+                        "size": [
+                            20,
+                            22
+                        ],
+                        "mode": "P",
+                        "metadata": "{'version': b'GIF89a', 'background': 0, 'transparency': 1, 'comment': b'This art is in the public domain. Kevin Hughes, kevinh@eit.com, September 1995', 'duration': 0}"
+                    }
+                },
+                {
+                    "image_url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/icons/binary.gif",
+                    "image_info": {
+                        "size": [
+                            20,
+                            22
+                        ],
+                        "mode": "P",
+                        "metadata": "{'version': b'GIF89a', 'background': 0, 'transparency': 1, 'comment': b'This art is in the public domain. Kevin Hughes, kevinh@eit.com, September 1995', 'duration': 0}"
+                    }
+                },
+                {
+                    "image_url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/icons/unknown.gif",
+                    "image_info": {
+                        "size": [
+                            20,
+                            22
+                        ],
+                        "mode": "P",
+                        "metadata": "{'version': b'GIF89a', 'background': 0, 'transparency': 1, 'comment': b'This art is in the public domain. Kevin Hughes, kevinh@eit.com, September 1995', 'duration': 0}"
+                    }
+                },
+                {
+                    "image_url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/icons/image2.gif",
+                    "image_info": {
+                        "size": [
+                            20,
+                            22
+                        ],
+                        "mode": "P",
+                        "metadata": "{'version': b'GIF89a', 'background': 0, 'transparency': 2, 'comment': b'This art is in the public domain. Kevin Hughes, kevinh@eit.com, September 1995', 'duration': 0}"
+                    }
+                },
+                {
+                    "image_url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/icons/unknown.gif",
+                    "image_info": {
+                        "size": [
+                            20,
+                            22
+                        ],
+                        "mode": "P",
+                        "metadata": "{'version': b'GIF89a', 'background': 0, 'transparency': 1, 'comment': b'This art is in the public domain. Kevin Hughes, kevinh@eit.com, September 1995', 'duration': 0}"
+                    }
+                },
+                {
+                    "image_url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/icons/sound2.gif",
+                    "image_info": {
+                        "size": [
+                            20,
+                            22
+                        ],
+                        "mode": "P",
+                        "metadata": "{'version': b'GIF89a', 'background': 0, 'transparency': 1, 'comment': b'This art is in the public domain. Kevin Hughes, kevinh@eit.com, September 1995', 'duration': 0}"
+                    }
+                },
+                {
+                    "image_url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/icons/layout.gif",
+                    "image_info": {
+                        "size": [
+                            20,
+                            22
+                        ],
+                        "mode": "P",
+                        "metadata": "{'version': b'GIF89a', 'background': 0, 'transparency': 3, 'comment': b'This art is in the public domain. Kevin Hughes, kevinh@eit.com, September 1995', 'duration': 0}"
+                    }
+                },
+                {
+                    "image_url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/icons/unknown.gif",
+                    "image_info": {
+                        "size": [
+                            20,
+                            22
+                        ],
+                        "mode": "P",
+                        "metadata": "{'version': b'GIF89a', 'background': 0, 'transparency': 1, 'comment': b'This art is in the public domain. Kevin Hughes, kevinh@eit.com, September 1995', 'duration': 0}"
+                    }
+                },
+                {
+                    "image_url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/icons/text.gif",
+                    "image_info": {
+                        "size": [
+                            20,
+                            22
+                        ],
+                        "mode": "P",
+                        "metadata": "{'version': b'GIF89a', 'background': 0, 'transparency': 1, 'comment': b'This art is in the public domain. Kevin Hughes, kevinh@eit.com, September 1995', 'duration': 0}"
+                    }
+                },
+                {
+                    "image_url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/icons/unknown.gif",
+                    "image_info": {
+                        "size": [
+                            20,
+                            22
+                        ],
+                        "mode": "P",
+                        "metadata": "{'version': b'GIF89a', 'background': 0, 'transparency': 1, 'comment': b'This art is in the public domain. Kevin Hughes, kevinh@eit.com, September 1995', 'duration': 0}"
+                    }
+                }
+            ],
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_bruteforce/prueba_bruteforce.html": "No images found",
+            "http://juhanurmihxlp77nkq76byazcldy2hlmovfu2epvl5ankdibsot4csyd.onion/": [
+                {
+                    "image_url": "http://juhanurmihxlp77nkq76byazcldy2hlmovfu2epvl5ankdibsot4csyd.onion/static/images/ahmiafi_black.png",
+                    "image_info": {
+                        "size": [
+                            874,
+                            79
+                        ],
+                        "mode": "RGBA",
+                        "metadata": "{'dpi': (91.9988, 91.0082)}"
+                    }
+                }
+            ]
+        }
+    },
+    "Google IDs Results": {
+        "Google IDs": "{\"http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html\": {\"analytics_ids\": \"No Google Analytics or Publisher IDs found\"}, \"a\": {\"error\": \"Error making request: Invalid URL 'a': No scheme supplied. Perhaps you meant https://a?\"}, \"http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/\": {\"analytics_ids\": \"No Google Analytics or Publisher IDs found\"}, \"http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_bruteforce/prueba_bruteforce.html\": {\"analytics_ids\": \"No Google Analytics or Publisher IDs found\"}, \"http://juhanurmihxlp77nkq76byazcldy2hlmovfu2epvl5ankdibsot4csyd.onion/\": {\"analytics_ids\": \"No Google Analytics or Publisher IDs found\"}}"
+    },
+    "Gzip Header Results": {
+        "Gzip Header Results": {
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html": {
+                "gzip_enabled": true,
+                "sensitive_data": {
+                    "Date": "Sat, 06 Jul 2024 13:31:51 GMT"
+                },
+                "estimated_location": "Europa"
+            },
+            "a": {
+                "Error": "No se pudo obtener la respuesta de la p\u00e1gina"
+            },
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/": {
+                "gzip_enabled": true,
+                "sensitive_data": {
+                    "Date": "Sat, 06 Jul 2024 13:31:53 GMT"
+                },
+                "estimated_location": "Europa"
+            },
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_bruteforce/prueba_bruteforce.html": {
+                "gzip_enabled": true,
+                "sensitive_data": {
+                    "Date": "Sat, 06 Jul 2024 13:31:54 GMT"
+                },
+                "estimated_location": "Europa"
+            },
+            "http://juhanurmihxlp77nkq76byazcldy2hlmovfu2epvl5ankdibsot4csyd.onion/": {
+                "gzip_enabled": true,
+                "sensitive_data": {
+                    "Date": "Sat, 06 Jul 2024 13:31:48 GMT"
+                },
+                "estimated_location": "Europa"
+            }
+        }
+    },
+    "Hostname Results": {
+        "Hostname Results": {
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html": {
+                "result": "The service at http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html is not vulnerable to Hostname Hacking",
+                "is_hostname_vulnerable": false
+            },
+            "a": {
+                "result": "Error occurred: Invalid URL 'a': No scheme supplied. Perhaps you meant https://a?",
+                "is_hostname_vulnerable": false
+            },
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/": {
+                "result": "The service at http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/ is vulnerable to Hostname Hacking",
+                "is_hostname_vulnerable": true
+            },
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_bruteforce/prueba_bruteforce.html": {
+                "result": "The service at http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_bruteforce/prueba_bruteforce.html is not vulnerable to Hostname Hacking",
+                "is_hostname_vulnerable": false
+            },
+            "http://juhanurmihxlp77nkq76byazcldy2hlmovfu2epvl5ankdibsot4csyd.onion/": {
+                "result": "The service at http://juhanurmihxlp77nkq76byazcldy2hlmovfu2epvl5ankdibsot4csyd.onion/ is not vulnerable to Hostname Hacking",
+                "is_hostname_vulnerable": false
+            }
+        }
+    },
+    "HTML Info Results": {
+        "HTML Info Results": {
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html": {
+                "comments": [
+                    " Agregado el enlace al archivo GIF "
+                ],
+                "scripts": [],
+                "metas": [
+                    "<meta charset=\"utf-8\"/>",
+                    "<meta content=\"width=device-width, initial-scale=1.0\" name=\"viewport\"/>"
+                ],
+                "hidden_elements": []
+            },
+            "a": {
+                "Error": "Invalid URL 'a': No scheme supplied. Perhaps you meant https://a?"
+            },
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/": {
+                "comments": [],
+                "scripts": [],
+                "metas": [],
+                "hidden_elements": []
+            },
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_bruteforce/prueba_bruteforce.html": {
+                "comments": [],
+                "scripts": [],
+                "metas": [],
+                "hidden_elements": []
+            },
+            "http://juhanurmihxlp77nkq76byazcldy2hlmovfu2epvl5ankdibsot4csyd.onion/": {
+                "comments": [
+                    " <li><a href=\"/directory\" title=\"A directory of .onion services.\">Directory</a></li> "
+                ],
+                "scripts": [
+                    "jquery.min.js"
+                ],
+                "metas": [
+                    "<meta charset=\"utf-8\"/>",
+                    "<meta content=\"ie=edge\" http-equiv=\"x-ua-compatible\"/>",
+                    "<meta content=\"A search engine for services accessible on the Tor network.\" name=\"description\"/>",
+                    "<meta content=\"width=device-width, initial-scale=1\" name=\"viewport\"/>"
+                ],
+                "hidden_elements": [
+                    "<div id=\"notTorBrowserWarning\" style=\"display:none\">\n<p>\n        Unfortunately we have not deployd non-JavaScript version of Ahmia yet.\n      </p>\n</div>"
+                ]
+            }
+        }
+    },
+    "Mail Results": {
+        "Mail Addresses": {
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html": {
+                "error": "No mails found"
+            },
+            "a": {
+                "error": "Invalid URL 'a': No scheme supplied. Perhaps you meant https://a?"
+            },
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/": {
+                "error": "No mails found"
+            },
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_bruteforce/prueba_bruteforce.html": {
+                "error": "No mails found"
+            },
+            "http://juhanurmihxlp77nkq76byazcldy2hlmovfu2epvl5ankdibsot4csyd.onion/": {
+                "error": "No mails found"
+            }
+        }
+    },
+    "Other Services Results": {
+        "Other Services Results": {
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html": {
+                "ssh_found": false,
+                "ftp_found": false,
+                "smtp_found": false,
+                "http_traces_found": false
+            },
+            "a": {
+                "error": "Invalid URL 'a': No scheme supplied. Perhaps you meant https://a?"
+            },
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/": {
+                "ssh_found": false,
+                "ftp_found": false,
+                "smtp_found": false,
+                "http_traces_found": false
+            },
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_bruteforce/prueba_bruteforce.html": {
+                "ssh_found": false,
+                "ftp_found": false,
+                "smtp_found": false,
+                "http_traces_found": false
+            },
+            "http://juhanurmihxlp77nkq76byazcldy2hlmovfu2epvl5ankdibsot4csyd.onion/": {
+                "ssh_found": false,
+                "ftp_found": false,
+                "smtp_found": false,
+                "http_traces_found": true
+            }
+        }
+    },
+    "Phone Results": {
+        "Phone Numbers": {
+            "Phone_numbers": {
+                "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html": "No phones found",
+                "a": {
+                    "error": "Invalid URL 'a': No scheme supplied. Perhaps you meant https://a?"
+                },
+                "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/": [
+                    "208"
+                ],
+                "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_bruteforce/prueba_bruteforce.html": "No phones found",
+                "http://juhanurmihxlp77nkq76byazcldy2hlmovfu2epvl5ankdibsot4csyd.onion/": [
+                    "250",
+                    "200"
+                ]
+            }
+        }
+    },
+    "PHP Server Results": {
+        "PHP Server Info": {
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html": {
+                "error": "No PHP files found"
+            },
+            "a": {
+                "error": "Unable to access URL"
+            },
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/": {
+                "error": "No PHP files found"
+            },
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_bruteforce/prueba_bruteforce.html": {
+                "exposes_sensitive_information": false,
+                "sensitive_info": []
+            },
+            "http://juhanurmihxlp77nkq76byazcldy2hlmovfu2epvl5ankdibsot4csyd.onion/": {
+                "error": "No PHP files found"
+            }
+        }
+    },
+    "Server Info Results": {
+        "Server Info": {
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html": {
+                "servidor": "Apache"
+            },
+            "a": {
+                "error": "Error al acceder a a: Invalid URL 'a': No scheme supplied. Perhaps you meant https://a?"
+            },
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/": {
+                "servidor": "Apache"
+            },
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_bruteforce/prueba_bruteforce.html": {
+                "servidor": "Apache"
+            },
+            "http://juhanurmihxlp77nkq76byazcldy2hlmovfu2epvl5ankdibsot4csyd.onion/": {
+                "servidor": "Nginx"
+            }
+        }
+    },
+    "Server Status Results": {
+        "Server Status": {
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html": {
+                "Disponible": false,
+                "Direcciones IP Encontradas": null,
+                "Servidores": null
+            },
+            "a": {
+                "error": "No se pudo obtener la respuesta de la p\u00e1gina."
+            },
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/": {
+                "Disponible": false,
+                "Direcciones IP Encontradas": null,
+                "Servidores": null
+            },
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_bruteforce/prueba_bruteforce.html": {
+                "Disponible": false,
+                "Direcciones IP Encontradas": null,
+                "Servidores": null
+            },
+            "http://juhanurmihxlp77nkq76byazcldy2hlmovfu2epvl5ankdibsot4csyd.onion/": {
+                "Disponible": false,
+                "Direcciones IP Encontradas": null,
+                "Servidores": null
+            }
+        }
+    },
+    "Social Networks Results": {
+        "Social Networks": {
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html": {
+                "No socialnet found": null
+            },
+            "a": {
+                "error": "No se pudo obtener la respuesta de la p\u00e1gina: a"
+            },
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/": {
+                "No socialnet found": null
+            },
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_bruteforce/prueba_bruteforce.html": {
+                "No socialnet found": null
+            },
+            "http://juhanurmihxlp77nkq76byazcldy2hlmovfu2epvl5ankdibsot4csyd.onion/": {
+                "No socialnet found": null
+            }
+        }
+    },
+    "SQL Injection Results": {
+        "SQL Injection Results": {
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html": {
+                "Error": "No forms found"
+            },
+            "a": {
+                "error": "Not accessible: Invalid URL 'a': No scheme supplied. Perhaps you meant https://a?"
+            },
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/": {
+                "Error": "No forms found"
+            },
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_bruteforce/prueba_bruteforce.html": {
+                "forms_info": [
+                    {
+                        "action": "prueba_bruteforce.php",
+                        "inputs": [
+                            {
+                                "name": "usernam"
+                            },
+                            {
+                                "name": "psw"
+                            }
+                        ]
+                    }
+                ],
+                "sql_injection_result": {
+                    "vulnerable_forms": [
+                        {
+                            "url": "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_bruteforce/prueba_bruteforce.php",
+                            "payload": {
+                                "usernam": "' OR 1=1 -- ",
+                                "psw": "1234"
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "Validacion Input Results": {
+        "a": {
+            "error": "URL no accesible"
+        },
+        "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html": {
+            "Error": "No se encontraron formularios"
+        },
+        "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/": {
+            "Error": "No se encontraron formularios"
+        },
+        "http://juhanurmihxlp77nkq76byazcldy2hlmovfu2epvl5ankdibsot4csyd.onion/": {
+            "q": {
+                "status_code": 405,
+                "response_text": ""
+            },
+            "null": {
+                "status_code": 405,
+                "response_text": ""
+            }
+        },
+        "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_bruteforce/prueba_bruteforce.html": {
+            "usernam": {
+                "status_code": 200,
+                "response_text": "<h1>Nombre de usuario o contrasena incorrectos.</h1>"
+            },
+            "psw": {
+                "status_code": 200,
+                "response_text": "<h1>Nombre de usuario o contrasena incorrectos.</h1>"
+            }
+        }
+    },
+    "XSS Results": {
+        "XSS Results": {
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html": {
+                "error": "No se encontraron formularios"
+            },
+            "a": {
+                "error": "URL no accesible"
+            },
+            "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/": {
+                "error": "No se encontraron formularios"
+            }
+        }
+    },
     "Database Results": {
         "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html": "No form found",
         "a": "Not accessible",

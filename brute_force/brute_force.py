@@ -190,10 +190,9 @@ class AdvancedBruteForceScanner:
 
             if self.login_successful(res):
                 result = {
-                    "url": url,
-                    "credentials": credentials,
-                    "success": True,
-                    "response": res.text
+                    "Credentials": credentials,
+                    "Success": True,
+                    "Response": res.text
                 }
                 self.results.setdefault(url, []).append(result)
             elif res.is_redirect:
@@ -202,19 +201,15 @@ class AdvancedBruteForceScanner:
                 new_response_text = new_response.content.decode('utf-8')
                 if self.login_successful(new_response):
                     result = {
-                        "url": url,
-                        "credentials": credentials,
-                        "success": True,
-                        "response": new_response_text
+                        "Credentials": credentials,
+                        "Success": True,
+                        "Response": new_response_text
                     }
                     self.results.setdefault(url, []).append(result)
         except Exception as e:
-            error_message = f"Error: {str(e)}"
+            error_message = f"{str(e)}"
             result = {
-                "url": url,
-                "credentials": credentials,
-                "success": False,
-                "error": error_message
+                "Error": error_message
             }
             self.results.setdefault(url, []).append(result)
 
@@ -222,11 +217,10 @@ class AdvancedBruteForceScanner:
         for url in tqdm(self.urls, desc="Scanning URLs for Brute Force"):  
             input_names = self.find_login_inputs_with_timeout(url)
             if not input_names or not self.input_name_users or len(self.input_name_users) < 2:
-                error_message = f"Error: Invalid form inputs in {url}"
+                error_message = f"Invalid form inputs."
                 print(error_message)
                 result = {
-                    "url": url,
-                    "error": error_message
+                    "Error": error_message
                 }
                 self.results.setdefault(url, []).append(result)
                 continue  
@@ -248,10 +242,10 @@ class AdvancedBruteForceScanner:
                     try:
                         future.result(timeout=self.timeout)
                     except Exception as e:
-                        print(f"Error en thread: {e}")
+                        print(f"Error in thread: {e}")
 
         if not self.results:
-            return json.dumps({"No encontrado fuerza bruta"})
+            return json.dumps({"No results found."})
         return json.dumps(self.results)
 
     def find_login_inputs_with_timeout(self, url):
@@ -260,11 +254,10 @@ class AdvancedBruteForceScanner:
             try:
                 return future.result(timeout=self.timeout)
             except TimeoutError:
-                error_message = f"Error: Timeout retrieving content from {url}"
+                error_message = f"Timeout retrieving content."
                 print(error_message)
                 result = {
-                    "url": url,
-                    "error": error_message
+                    "Error": error_message
                 }
                 self.results.setdefault(url, []).append(result)
                 return {}
@@ -282,20 +275,18 @@ class AdvancedBruteForceScanner:
             self.input_name_users = [input_tag.attrs.get("name") for input_tag in login_inputs]
             return input_names
         except requests.exceptions.RequestException as e:
-            error_message = f"Error: Unable to retrieve content from {url}"
+            error_message = f"Unable to retrieve content."
             print(error_message)
             result = {
-                "url": url,
-                "error": error_message
+                "Error": error_message
             }
             self.results.setdefault(url, []).append(result)
             return {}
         except KeyError as ke:
-            error_message = f"Error: Unable to find form details in {url}"
+            error_message = f"Error: Unable to find form details."
             print(error_message)
             result = {
-                "url": url,
-                "error": error_message
+                "Error": error_message
             }
             self.results.setdefault(url, []).append(result)
             return {}
