@@ -6,7 +6,8 @@ from datetime import datetime
 from urllib.parse import urljoin
 from bs4 import BeautifulSoup
 import json
-from tqdm import tqdm  # Importa tqdm
+from tqdm import tqdm
+import pytz
 
 class GzipHeaderScanner:
     def __init__(self, urls):
@@ -23,37 +24,64 @@ class GzipHeaderScanner:
             response = requests.get(url, proxies=self.proxies)
             return response
         except Exception as e:
-            print(f"Error haciendo la solicitud a {url}: {e}")
-            return None
+            return {"Error": f"Could not make request to URL: {e}"}
 
     def extract_sensitive_data(self, headers):
-        # Definir los encabezados sensibles que queremos extraer
-        sensitive_headers = ["Date", "Otro encabezado sensible", "Otra información sensible"]
+        sensitive_headers = [
+            "Date",
+            "Server",
+            "Set-Cookie",
+            "X-Powered-By",
+            "X-Frame-Options",
+            "Content-Security-Policy",
+            "Strict-Transport-Security",
+            "X-Content-Type-Options"
+        ]
         extracted_data = {}
-        for header in sensitive_headers:
-            if header in headers:
-                extracted_data[header] = headers[header]
+        try:
+            for header in sensitive_headers:
+                if header in headers:
+                    extracted_data[header] = headers[header]
+        except Exception as e:
+            extracted_data["Error"] = f"Error extracting headers: {e}"
         return extracted_data
 
-    def estimate_location(self):
-        # Estimar la ubicación aproximada en función de la hora actual
-        hora_actual = datetime.now().hour
-        if 0 <= hora_actual < 6:
-            return "Oceanía"
-        elif 6 <= hora_actual < 12:
-            return "Asia"
-        elif 12 <= hora_actual < 18:
-            return "Europa"
-        else:
-            return "América"
+    def convert_server_time(self, date_str):
+        try:
+            server_time = datetime.strptime(date_str, '%a, %d %b %Y %H:%M:%S %Z')
+            return server_time
+        except ValueError as e:
+            return {"Error": f"Error converting server time: {e}"}
+
+    def estimate_location(self, server_time):
+        try:
+            if server_time is None:
+                return "Unknown"
+
+            # Convert server time to UTC if not already in UTC
+            if server_time.tzinfo is None:
+                server_time = pytz.utc.localize(server_time)
+
+            server_hour = server_time.hour
+
+            if 0 <= server_hour < 6:
+                return "Oceanía"
+            elif 6 <= server_hour < 12:
+                return "Asia"
+            elif 12 <= server_hour < 18:
+                return "Europa"
+            else:
+                return "América"
+        except Exception as e:
+            return {"Error": f"Error estimating location: {e}"}
 
     def scan_gzip_headers(self):
         results = {}
         try:
             for url in tqdm(self.urls, desc="Scanning URLs for GZIP header"):
                 response = self.make_tor_request(url)
-                if response is None:
-                    results[url] = {"Error": "No se pudo obtener la respuesta de la página"}
+                if isinstance(response, dict) and "Error" in response:
+                    results[url] = response
                     continue
 
                 headers = response.headers
@@ -61,23 +89,33 @@ class GzipHeaderScanner:
                 gzip_enabled = 'Content-Encoding' in headers and headers['Content-Encoding'] == 'gzip'
 
                 extracted_data = self.extract_sensitive_data(headers)
+                server_time_str = extracted_data.get("Date")
+                if "Error" in extracted_data:
+                    results[url] = extracted_data
+                    continue
 
-                estimated_location = self.estimate_location()
+                server_time = self.convert_server_time(server_time_str) if server_time_str else None
+                if isinstance(server_time, dict) and "Error" in server_time:
+                    results[url] = server_time
+                    continue
+
+                estimated_location = self.estimate_location(server_time)
+                if isinstance(estimated_location, dict) and "Error" in estimated_location:
+                    results[url] = estimated_location
+                    continue
 
                 results[url] = {
-                    "gzip_enabled": gzip_enabled,
-                    "sensitive_data": extracted_data,
-                    "estimated_location": estimated_location
+                    "GZIP enabled": gzip_enabled,
+                    "Header Sensitive Data": extracted_data,
+                    "Estimated Location": estimated_location
                 }
 
             return results
 
         except Exception as e:
-            print(f"Error al escanear las páginas: {e}")
-
+            return {"Error": f"Error scanning GZIP headers: {e}"}
 
 if __name__ == "__main__":
-    # Prueba la función con la lista de URLs de tu elección
     urls = [
         'http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html',
         'a',

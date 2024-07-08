@@ -18,6 +18,7 @@ setup(
         'python-docx',
         'python-pptx',
         'mutagen',
+        'pytz'
         
     ]
 )

@@ -14,7 +14,7 @@ class OnionTextScanner:
             'http': 'socks5h://127.0.0.1:9050',
             'https': 'socks5h://127.0.0.1:9050'
         }
-        self.results = {"text_metadata": {}}  # Diccionario para almacenar los resultados
+        self.results = {"TXT Metadata": {}}  # Diccionario para almacenar los resultados
 
     def make_tor_request(self, url):
         try:
@@ -31,7 +31,7 @@ class OnionTextScanner:
             # Obtener el contenido de la página web
             response = self.make_tor_request(url)
             if response is None:
-                self.results[url] = "No accesible"
+                self.results[url] = "URL not accessible though TOR."
                 continue
             
             # Obtener los enlaces a archivos de texto
@@ -48,7 +48,7 @@ class OnionTextScanner:
                 # Obtener el contenido del archivo de texto
                 response = self.make_tor_request(absolute_link)
                 if response is None:
-                    self.results[absolute_link] = "No accesible"
+                    self.results[absolute_link] = "URL not accessible"
                     continue
 
                 text_content = response.text
@@ -58,7 +58,7 @@ class OnionTextScanner:
 
                 # Agregar el nombre del archivo al diccionario de metadatos
                 file_name = text_link.split('/')[-1]
-                self.results["text_metadata"][absolute_link] = metadata
+                self.results["TXT Metadata"][absolute_link] = metadata
 
         # Convertir los resultados a JSON y devolverlos
         return self.results

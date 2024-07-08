@@ -30,7 +30,7 @@ class BitcoinAddressExtractor:
                     else:
                         print(f"Error making request to {url}. Status code: {response.status_code}")
                 except requests.RequestException as e:
-                    addresses_found[url] = "Not accessible"
+                    addresses_found[url] = "The URL is not accessible through Tor"
         except Exception as e:
             addresses_found[url] = "Unknown error"
 

@@ -30,7 +30,7 @@ class OnionFaviconDownloader:
             response = requests.get(url, proxies=self.proxies)
             return response
         except Exception as e:
-            self.results[url] = f"Error making request through Tor: {e}"
+            self.results[url] = f"Error making request through Tor, URL not accessible: {e}"
             return None
 
     def download_favicon(self):
@@ -45,10 +45,12 @@ class OnionFaviconDownloader:
                         favicon_response = self.make_tor_request(favicon_url)
                         if favicon_response and favicon_response.status_code == 200:
                             favicon_content = favicon_response.content
+                            
                             # Steps 1 to 3: Convert to base64 and add newlines every 76 characters
                             b64 = base64.b64encode(favicon_content)
                             utf8_b64 = b64.decode('utf-8')
                             with_newlines = re.sub("(.{76}|$)", "\\1\n", utf8_b64, 0, re.DOTALL)
+                            
                             # Calculate MMH3 hash
                             mmh3_hash = mmh3.hash(with_newlines.encode())
 
@@ -69,10 +71,10 @@ class OnionFaviconDownloader:
                     else:
                             self.results[url] = "Failed to download favicon"
                 except Exception as e:
-                    self.results[url] = f"Error processing URL {url}: {e}"
+                    self.results[url] = f"Error processing URL: {e}"
                     
         if not self.results:
-            print("Failed to download favicon from any of the provided URLs.")
+            self.results[url] = "Error URL not accesisble through Tor."
         return self.results
 
 if __name__ == "__main__":

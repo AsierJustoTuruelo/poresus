@@ -37,10 +37,10 @@ class HtmlInfo:
                 hidden_elements_list = [str(hidden_element) for hidden_element in hidden_elements]
 
                 result = {
-                    'comments': comments_list,
-                    'scripts': script_names,
-                    'metas': metas_list,
-                    'hidden_elements': hidden_elements_list
+                    'Comments': comments_list,
+                    'Scrips': script_names,
+                    'Metas': metas_list,
+                    'Hidden Elements': hidden_elements_list
                 }
 
                 all_results[url] = result

@@ -15,7 +15,7 @@ class OnionPdfScanner:
             'http': 'socks5h://127.0.0.1:9050',
             'https': 'socks5h://127.0.0.1:9050'
         }
-        self.results = {"pdf_metadata": {}}
+        self.results = {"PDF Metadata": {}}
 
     def make_tor_request(self, url):
         try:
@@ -32,7 +32,7 @@ class OnionPdfScanner:
             # Obtener el contenido de la página web
             response = self.make_tor_request(url)
             if response is None:
-                self.results[url] = "Url not accessible"
+                self.results[url] = "URL not accessible"
                 continue
 
             soup = BeautifulSoup(response.text, 'html.parser')
@@ -50,7 +50,6 @@ class OnionPdfScanner:
                 # Obtener el contenido del archivo PDF
                 response = self.make_tor_request(absolute_link)
                 if response is None:
-                    print(f"No se pudo descargar el archivo PDF de {absolute_link}")
                     continue
 
                 pdf_file = io.BytesIO(response.content)
@@ -72,7 +71,7 @@ class OnionPdfScanner:
 
                     self.results["pdf_metadata"][url] = serializable_metadata
                 except Exception as e:
-                    self.results["pdf_metadata"][url] = "Error al leer los metadatos del archivo PDF"
+                    self.results["pdf_metadata"][url] = "Error reading PDF file"
                     pass
 
         # Convertir los resultados a JSON y devolverlos

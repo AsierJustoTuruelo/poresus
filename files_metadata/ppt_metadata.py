@@ -16,7 +16,7 @@ class OnionPptScanner:
             'http': 'socks5h://127.0.0.1:9050',
             'https': 'socks5h://127.0.0.1:9050'
         }
-        self.results = {"ppt_metadata": {}}  # Diccionario para almacenar los resultados
+        self.results = {"PowerPoint Metadata": {}}  # Diccionario para almacenar los resultados
 
     def make_tor_request(self, url):
         try:
@@ -33,7 +33,7 @@ class OnionPptScanner:
             # Obtener el contenido de la página web
             response = self.make_tor_request(url)
             if response is None:
-                self.results[url] = "Url not accessible"
+                self.results[url] = "URL not accessible"
                 continue
 
             soup = BeautifulSoup(response.text, 'html.parser')
@@ -61,17 +61,17 @@ class OnionPptScanner:
 
                 # Convertir los metadatos a un formato serializable
                 serializable_metadatos = {
-                    "Título": metadatos.title,
-                    "Autor": metadatos.author,
-                    "Fecha de creación": str(metadatos.created),
-                    "Última fecha de modificación": str(metadatos.modified),
-                    "Nombre de archivo": enlace  # Agregar el nombre del archivo entre los metadatos
+                    "Title": metadatos.title,
+                    "Author": metadatos.author,
+                    "Date of creation": str(metadatos.created),
+                    "Last modification": str(metadatos.modified),
+                    "File Name": enlace  
                 }
 
                 # Usar la URL como clave en el diccionario de resultados y agregar los metadatos al diccionario ppt_metadata
-                if "ppt_metadata" not in self.results:
-                    self.results["ppt_metadata"] = {}
-                self.results["ppt_metadata"][url] = serializable_metadatos
+                if "PowerPoint Metadata" not in self.results:
+                    self.results["PowerPoint Metadata"] = {}
+                self.results["PowerPoint Metadata"][url] = serializable_metadatos
 
         # Convertir los resultados a JSON y devolverlos
         return self.results

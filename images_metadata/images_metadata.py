@@ -32,7 +32,7 @@ class OnionImageScanner:
             response = self.make_tor_request(onion_url)
             if response:
                 if response.status_code == 404:
-                    results[onion_url] = "not found"
+                    results[onion_url] = "URL not accessible through TOR."
                     continue
                 soup = BeautifulSoup(response.content, 'html.parser')
                 image_tags = soup.find_all('img')
@@ -49,11 +49,11 @@ class OnionImageScanner:
                             if image_info:
                                 results[onion_url] = results.get(onion_url, [])
                                 results[onion_url].append({
-                                    'image_url': full_img_url,
-                                    'image_info': image_info
+                                    "Image's URL": full_img_url,
+                                    "Image's info": image_info
                                 })
             else:
-                results[onion_url] = "Url not reachable"
+                results[onion_url] = "URL not accessible through TOR."
         return results
 
     def is_image_response(self, response):
@@ -63,9 +63,9 @@ class OnionImageScanner:
         try:
             image = Image.open(BytesIO(image_data))
             image_info = {
-                'size': image.size,
-                'mode': image.mode,
-                'metadata': str(image.info)
+                'Image Size': image.size,
+                'Image Mode': image.mode,
+                'Image Metadata': str(image.info)
                 
             }
             return image_info

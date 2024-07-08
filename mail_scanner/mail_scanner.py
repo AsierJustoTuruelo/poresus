@@ -26,13 +26,13 @@ class HtmlEmailExtractor:
                     html_content = response.text
                     emails_found = self.find_mails(html_content)
                     if emails_found:
-                        results[url] = {"emails": emails_found}
+                        results[url] = {"Emails": emails_found}
                     else:
-                        results[url] = {"error": "No mails found"}
+                        results[url] = {"Error": "No emails found."}
                 else:
-                    results[url] = {"error": f"Status Code: {response.status_code}"}
+                    results[url] = {"Error": f"Status Code: {response.status_code}"}
             except requests.RequestException as e:
-                results[url] = {"error": str(e)}
+                results[url] = {"Error": str(e)}
         return results
 
     def find_mails(self, html_content):

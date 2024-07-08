@@ -36,23 +36,23 @@ class HostnameHackingScanner:
                     # Compare responses to detect differences
                     if response_normal is None:
                         results[onion_domain] = {
-                            'result': f'The service at {onion_domain} is not accessible',
-                            'is_hostname_vulnerable': False
+                            'Result': f'The service at {onion_domain} is not accessible',
+                            'Vulnerable to Hostname': False
                         }
                     elif response_hacked.text != response_normal.text:
                         results[onion_domain] = {
-                            'result': f'The service at {onion_domain} is vulnerable to Hostname Hacking',
-                            'is_hostname_vulnerable': True
+                            'Result': f'The service at {onion_domain} is vulnerable to Hostname Hacking',
+                            'Vulnerable to Hostname': True
                         }
                     else:
                         results[onion_domain] = {
-                            'result': f'The service at {onion_domain} is not vulnerable to Hostname Hacking',
-                            'is_hostname_vulnerable': False
+                            'Result': f'The service at {onion_domain} is not vulnerable to Hostname Hacking',
+                            'Vulnerable to Hostname': False
                         }
                 except Exception as e:
                     results[onion_domain] = {
-                        'result': f'Error occurred: {e}',
-                        'is_hostname_vulnerable': False
+                        'Result': f'Error occurred: {e}',
+                        'Vulnerable to Hostname': False
                     }
 
             # Return the result as a dictionary

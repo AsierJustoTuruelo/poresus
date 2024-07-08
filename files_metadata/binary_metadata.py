@@ -31,7 +31,7 @@ class BinaryFileScanner:
             # Obtener el contenido de la página web
             response = self.make_tor_request(url)
             if response is None:
-                self.results[url] = "Url not accessible"
+                self.results[url] = "URL not accessible through Tor"
                 continue
 
             soup = BeautifulSoup(response.text, 'html.parser')
@@ -58,9 +58,9 @@ class BinaryFileScanner:
                 data = binary_file.read()
                 binary_data = [format(byte, '08b') for byte in data]
 
-                binary_data_per_url[binary_link] = {"url": absolute_link, "binary_data": binary_data}
+                binary_data_per_url[binary_link] = {"File's URL": absolute_link, "Binary Data": binary_data}
 
-            self.results["binary_data"].update(binary_data_per_url)
+            self.results["Binary Data"].update(binary_data_per_url)
 
         # Convertir los resultados a JSON y devolverlos
         return self.results

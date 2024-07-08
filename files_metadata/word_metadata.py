@@ -16,7 +16,7 @@ class OnionWordScanner:
             'http': 'socks5h://127.0.0.1:9050',
             'https': 'socks5h://127.0.0.1:9050'
         }
-        self.results = {"word_metadata": {}}  # Diccionario para almacenar los resultados
+        self.results = {"Word Metadata": {}}  # Diccionario para almacenar los resultados
 
     def make_tor_request(self, url):
         try:
@@ -32,7 +32,7 @@ class OnionWordScanner:
             # Obtener el contenido de la página web
             response = self.make_tor_request(url)
             if response is None:
-                self.results[url] = "No accesible"
+                self.results[url] = "URL not accessible through TOR."
                 continue
             
             soup = BeautifulSoup(response.text, 'html.parser')
@@ -51,7 +51,7 @@ class OnionWordScanner:
                 # Obtener el contenido del archivo Word
                 response = self.make_tor_request(absolute_link)
                 if response is None:
-                    self.results[absolute_link] = "No accesible"
+                    self.results[absolute_link] = "URL not accessible through TOR."
                     continue
 
                 word_file = io.BytesIO(response.content)
@@ -71,7 +71,7 @@ class OnionWordScanner:
 
                 # Agregar el nombre del archivo al diccionario de metadatos
                 file_name = word_link.split('/')[-1]
-                self.results["word_metadata"][absolute_link] = metadata_dict
+                self.results["Word Metadata"][absolute_link] = metadata_dict
 
         # Convertir los resultados a JSON y devolverlos
         return self.results

@@ -15,7 +15,7 @@ class OnionExcelScanner:
             'http': 'socks5h://127.0.0.1:9050',
             'https': 'socks5h://127.0.0.1:9050'
         }
-        self.results = {"excel_metadata": {}}  # Diccionario para almacenar los resultados
+        self.results = {"Excel Metadata": {}}  # Diccionario para almacenar los resultados
 
     def make_tor_request(self, url):
         try:
@@ -32,7 +32,7 @@ class OnionExcelScanner:
             # Obtener el contenido de la página web
             respuesta = self.make_tor_request(url)
             if respuesta is None:
-                self.results[url] = "Url not accessible"
+                self.results[url] = "URL not accessible"
                 continue
 
             soup = BeautifulSoup(respuesta.text, 'html.parser')
@@ -50,7 +50,6 @@ class OnionExcelScanner:
                 # Obtener el contenido del archivo Excel
                 respuesta = self.make_tor_request(enlace_absoluto)
                 if respuesta is None:
-                    print(f"No se pudo descargar el archivo Excel de {enlace_absoluto}")
                     continue
 
                 try:
@@ -60,10 +59,9 @@ class OnionExcelScanner:
                     df = pd.read_excel(archivo_excel)
                     json_data = df.to_json(orient="records")
 
-                    self.results["excel_metadata"][enlace] = json_data
+                    self.results["Excel Metadata"][enlace] = json_data
                 except Exception as e:
-                    print(f"Error al procesar el archivo Excel {enlace}: {e}")
-
+                    self.results["Excel Metadata"][enlace] = "Error reading Excel file"
         # Convertir los resultados a JSON y devolverlos
         return self.results
 

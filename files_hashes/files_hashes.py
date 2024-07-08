@@ -58,16 +58,16 @@ class OnionFileAnalyzer:
             except Exception as e:
                 return {"Error": str(e)}
         else:
-            return {"Error": f"Could not access .onion page: {onion_url}"}
+            return {"Error": f"Could not access onion URL: {onion_url}"}
 
     def process_file(self, file_link):
         file_content = self.download_file(file_link)
         if file_content:
             file_name = os.path.basename(file_link)
             file_hashes = self.calculate_hashes(file_content)
-            return {"name": file_name, "url": file_link, "hashes": file_hashes}
+            return {"File Name": file_name, "File's URL": file_link, "File Hashes": file_hashes}
         else:
-            return {"name": os.path.basename(file_link), "url": file_link, "hashes": "Not accessible"}
+            return {"File Name": os.path.basename(file_link), "File's URL": file_link, "Error": "Unable to download file"}
 
     def calculate_hashes(self, file_content):
         try:
@@ -84,7 +84,7 @@ class OnionFileAnalyzer:
             if files is not None and len(files) != 0:
                 all_files[onion_url] = files
             else:
-                all_files[onion_url] = "No files found to analyze."
+                all_files[onion_url] = {"Error": "No files found to analyze."}
 
         return all_files
 

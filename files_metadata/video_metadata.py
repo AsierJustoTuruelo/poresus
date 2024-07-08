@@ -20,7 +20,7 @@ class OnionMediaScanner:
             'http': 'socks5h://127.0.0.1:9050',
             'https': 'socks5h://127.0.0.1:9050'
         }
-        self.results = {"media_metadata": {}}  # Diccionario para almacenar los resultados
+        self.results = {"Media Metadata": {}}  # Diccionario para almacenar los resultados
 
     def make_tor_request(self, url):
         try:
@@ -37,7 +37,7 @@ class OnionMediaScanner:
             # Obtener el contenido de la página web
             respuesta = self.make_tor_request(url)
             if respuesta is None:
-                self.results[url] = "No accesible"
+                self.results[url] = "URL not accessible through TOR."
                 continue
             
             soup = BeautifulSoup(respuesta.text, 'html.parser')
@@ -55,7 +55,7 @@ class OnionMediaScanner:
                 # Obtener el contenido del archivo de medios
                 respuesta = self.make_tor_request(enlace_absoluto)
                 if respuesta is None:
-                    self.results[enlace_absoluto] = "No accesible"
+                    self.results[enlace_absoluto] = "URL not accessible through TOR."
                     continue
 
                 archivo_media = io.BytesIO(respuesta.content)
@@ -89,7 +89,7 @@ class OnionMediaScanner:
                 # Agregar el nombre del archivo al diccionario de metadatos
                 metadata["File Name"] = file_name
 
-                self.results["media_metadata"][enlace_absoluto] = metadata
+                self.results["Media Metadata"][enlace_absoluto] = metadata
 
         # Convertir los resultados a JSON y devolverlos
         return self.results

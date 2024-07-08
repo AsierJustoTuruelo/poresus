@@ -42,14 +42,13 @@ class FileUploadValidator:
                 
         except requests.exceptions.RequestException as e:
             self.results[onion_url] = {
-                "result_file_input": "No results"
+                "Results": "The URL is not accessible through Tor."
             }
 
     def test_file_upload(self, onion_url, form, input_name, allowed_file_types):
         try:
             action = form.get('action')
             if not action:
-                print(f"No action found in form for {onion_url}")
                 return
             
             malicious_files = [
@@ -101,7 +100,7 @@ class FileUploadValidator:
             if onion_url not in self.results:
                 self.results[onion_url] = {}
             self.results[onion_url] = {
-                "result_file_input": "No results"
+                "Results": "Error obtaining the form."
             }
 
     def run_tests(self):
@@ -111,7 +110,7 @@ class FileUploadValidator:
                 total_forms = len(file_upload_forms)
                 if total_forms == 0:
                     self.results[onion_url] = {
-                        "result_file_input": "No forms found"
+                        "Results": "No upload forms found, maybe the URL is not accessible through Tor."
                     }
                 else:
                     threads = []
@@ -125,9 +124,8 @@ class FileUploadValidator:
 
             except Exception as e:
                 self.results[onion_url] = {
-                    "result_file_input": f"Error processing URL {onion_url}"
+                    "Results": f"Error processing URL."
                 }
-                print(f"Error processing URL {onion_url}: {e}")
 
 if __name__ == "__main__":
     onion_urls = [
