@@ -34,7 +34,7 @@ class InformacionServidor:
                     servidor_header = self.detectar_servidor_header(response)
                     if servidor_header:
                         resultados[url] = {
-                            "servidor": servidor_header
+                            "Server Type": servidor_header
                         }
                         continue
 
@@ -44,12 +44,12 @@ class InformacionServidor:
 
                     servidor_mas_comun = self.detectar_servidor_mas_comun(servidores_detectados)
                     resultados[url] = {
-                        "servidor": servidor_mas_comun
+                        "Server Type": servidor_mas_comun
                     }
                 else:
-                    resultados[url] = {"error": f"Error al acceder a {url}: {response.status_code}"}
+                    resultados[url] = {"Error": f"Error accessing URL. Status Code: {response.status_code}"}
             except Exception as e:
-                resultados[url] = {"error": f"Error al acceder a {url}: {e}"}
+                resultados[url] = {"Error": f"Error accessing URL: {str(e)}"}
         return resultados
 
     def detectar_servidor_html(self, soup):

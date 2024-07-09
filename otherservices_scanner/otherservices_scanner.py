@@ -31,16 +31,16 @@ class OnionServiceAnalyzer:
                     http_traces_found = self._analyze_http_traces(html_content)
 
                     result = {
-                        "ssh_found": ssh_found,
-                        "ftp_found": ftp_found,
-                        "smtp_found": smtp_found,
-                        "http_traces_found": http_traces_found
+                        "SSH Traces Found": ssh_found,
+                        "FTP Traces Found": ftp_found,
+                        "SMTP Traces Found": smtp_found,
+                        "HTTP Traces Found": http_traces_found
                     }
                     results[url] = result
                 else:
-                    results[url] = {"error": f"Status Code: {response.status_code}"}
+                    results[url] = {"Error": f"Error accessing URL. Status Code: {response.status_code}"}
             except requests.RequestException as e:
-                results[url] = {"error": str(e)}
+                results[url] = {"Error": str(e)}
         return results
 
     def _analyze_ssh(self, html_content):

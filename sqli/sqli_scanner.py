@@ -31,12 +31,12 @@ class AdvancedSqlInjectionScanner:
                         input_info['name'] = nombre
                         inputs_info.append(input_info)
                 forms_info.append({
-                    'action': form.attrs.get("action"),
-                    'inputs': inputs_info
+                    'Action': form.attrs.get("action"),
+                    'Inputs': inputs_info
                 })
             return forms_info
         except requests.exceptions.RequestException as e:
-            return {'error': f"Not accessible: {e}"}
+            return {'Error': f"URL not accessible: {str(e)}"}
 
     def vulnerable(self, response):
         # Lista de posibles mensajes de error o éxito relacionados con SQL
@@ -129,7 +129,7 @@ class AdvancedSqlInjectionScanner:
                 if self.vulnerable(res) and res.url != current_url:
                     new_url = res.url
                     if current_url != new_url:  # si la URL cambió, entonces es vulnerable (redirección)
-                        vulnerable_forms.append({'url': new_url, 'payload': payload})
+                        vulnerable_forms.append({'URL': new_url, 'Payload': payload})
                         self.found_vulnerability = True
                         return
 
@@ -146,7 +146,7 @@ class AdvancedSqlInjectionScanner:
             for future in as_completed(futures):
                 future.result()
 
-        return {'vulnerable_forms': vulnerable_forms}
+        return {'Vulnerable forms': vulnerable_forms}
     
     def scan_sql_injection(self, urls):
         results = {}
@@ -164,19 +164,19 @@ class AdvancedSqlInjectionScanner:
                     continue
 
                 if not forms_info:
-                    results[url] = {'Error': 'No forms found'}
+                    results[url] = {'Error': 'No forms found.'}
                     continue
 
                 for form_info in forms_info:
                     action = form_info.get("action")
                     if action and (".php" in url or ".php" in action):
                         result = self.inject_sql(url, action, {'User-Agent': 'pentest'})
-                        results[url] = {'forms_info': forms_info, 'sql_injection_result': result}
+                        results[url] = {'Forms Info': forms_info, 'SQL Injection Result': result}
                         if self.found_vulnerability:  # Si se encontró una vulnerabilidad, salir del bucle
                             break
 
             except Exception as e:
-                results[url] = {'error': str(e)}
+                results[url] = {'Error': "Error trying to access URL."}
                 
         return results
 

@@ -41,7 +41,7 @@ class ServerStatusChecker:
             # Realizar la solicitud a la URL dada
             response = self.make_tor_request(url + "/server-status")
             if response is None:
-                return {"Error": "No se pudo obtener la respuesta de la página."}
+                return {"Error": "Could not access URL"}
 
             # Verificar si la URL /server-status está disponible
             disponible = response.status_code == 200
@@ -55,14 +55,14 @@ class ServerStatusChecker:
 
             result = {
                 "Disponible": disponible,
-                "Direcciones IP Encontradas": ip_addresses,
-                "Servidores": servers
+                "IP Addresses ": ip_addresses,
+                "Servers": servers
             }
 
             return result
             
         except Exception as e:
-            return {"Error": f"Error al verificar la URL {url}/server-status: {e}"}
+            return {"Error": f"Error verifying{url}/server-status: {e}"}
 
     def check_servers_status(self):
         results = {}

@@ -28,13 +28,12 @@ class XSSScanner:
             forms = soup.find_all('form')
             return forms
         except Exception as e:
-            print(f"Error al obtener los formularios de {url}: {e}")
-            self.results[url] = {"error": str(e)}
+            self.results[url] = {"Error": "Error obtaining forms."}
             return []
 
     def submit_forms(self, forms, url):
         if not forms:
-            self.results[url] = {"error": "No se encontraron formularios"}
+            self.results[url] = {"Error": "Could not find any forms."}
             return
 
         for form in forms:
@@ -59,21 +58,21 @@ class XSSScanner:
                 response = requests.post(full_url, data=form_data, proxies=self.proxies)
                 if self.payload in response.text:
                     self.results[url] = {
-                        "vulnerable_form": action,
-                        "vulnerable": True
+                        "Vulnerable Form": action,
+                        "Is Vulnerable": True
                     }
             
             except Exception as e:
                 print(f"Error al enviar el formulario en {url}: {e}")
                 if url in self.results:
-                    self.results[url]["error"] = str(e)
+                    self.results[url]["Error"] = str(e)
                 else:
-                    self.results[url] = {"error": str(e)}
+                    self.results[url] = {"Error": str(e)}
 
     def scan_xss(self):
         for url in tqdm(self.urls, desc="Scanning URLs for XSS vulnerabilities"):
             if not self.is_accessible(url):
-                self.results[url] = {"error": "URL no accesible"}
+                self.results[url] = {"Error": "URL not accessible."}
                 continue
             forms = self.get_forms(url)
             self.submit_forms(forms, url)

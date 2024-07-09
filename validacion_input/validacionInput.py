@@ -43,12 +43,12 @@ class ValidacionInput:
     def test_input(self, onion_url):
         try:
             if not self.is_accessible(onion_url):
-                self.results[onion_url] = {"error": "URL no accesible"}
+                self.results[onion_url] = {"Error": "URL not accessible."}
                 return
             
             inputs = list(self.get_form_inputs(onion_url))
             if inputs == []:
-                self.results[onion_url] = {"Error": "No se encontraron formularios"}
+                self.results[onion_url] = {"Error": "Could not find any form inputs."}
                 return
 
             results_for_url = {}
@@ -58,26 +58,26 @@ class ValidacionInput:
                     soup = BeautifulSoup(response.text, 'html.parser')
                     form = soup.find('form')
                     if not form:
-                        results_for_url[input_name] = {"error": "No se encontró ningún formulario"}
+                        results_for_url[input_name] = {"Error": "Could not find any form in the page."}
                         continue
 
                     action = form.get('action')
                     if not action:
-                        results_for_url[input_name] = {"error": "No se encontró ninguna acción en el formulario"}
+                        results_for_url[input_name] = {"Error": "Could not find any action in the form."}
                         continue
 
                     res = self.session.post(urljoin(onion_url, action), data={input_name: "A" * 10000},
                                             proxies=self.session.proxies, allow_redirects=True)
 
                     results_for_url[input_name] = {
-                        "status_code": res.status_code,
-                        "response_text": res.text
+                        "Status Code": res.status_code,
+                        "Response Text": res.text
                     }
                 except requests.exceptions.RequestException as e:
-                    results_for_url[input_name] = {"error": str(e)}
+                    results_for_url[input_name] = {"Error": "Error sending POST request."}
             self.results[onion_url] = results_for_url
         except requests.exceptions.RequestException as e:
-            self.results[onion_url] = {"error": str(e)}
+            self.results[onion_url] = {"Error": "Error sending request."}
 
     def run_tests(self):
         threads = []

@@ -24,7 +24,7 @@ class DatabaseTypeScanner:
     def detect_database_type(self, url):
         try:
             if not self.is_accessible(url):
-                return "Not accessible"
+                return "URL not accessible."
 
             response = self.session.get(url, proxies=self.proxies, allow_redirects=True)
             response.raise_for_status()
@@ -67,7 +67,7 @@ class DatabaseTypeScanner:
 
         for url in tqdm(self.urls, desc="Scanning URLs for Database Type"):
             if not self.is_accessible(url):
-                results[url] = "Not accessible"
+                results[url] = "URL not accessible"
                 continue
             database_type = self.detect_database_type(url)
             results[url] = database_type

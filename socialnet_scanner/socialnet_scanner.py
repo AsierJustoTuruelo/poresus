@@ -56,15 +56,15 @@ class RedesSocialesScanner:
         try:
             response = self.make_tor_request(url)
             if response is None:
-                return {"error": f"No se pudo obtener la respuesta de la página: {url}"}
+                return {"Error": f"Could not access URL."}
 
             if response.status_code == 200:
                 social_media_found = self.extract_social_media(response.text)
                 return social_media_found
             else:
-                return {"error": f"No se pudo acceder a la página: {url}"}
+                return {"Error": f"Coud not access URL. Status code: {response.status_code}"}
         except Exception as e:
-            return {"error": f"Error al escanear redes sociales en {url}: {e}"}
+            return {"Error": f"Error trying to access URL: {str(e)}"}
 
     def extract_social_networks(self):
         results = {}

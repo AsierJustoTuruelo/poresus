@@ -33,7 +33,7 @@ class PHPServerInfoScanner:
                 base_page_response = self.make_tor_request(url)
                 if base_page_response is None:
                     results[url] = {
-                        "error": "Unable to access URL"
+                        "Error": "Unable to access URL"
                     }
                     continue
 
@@ -42,7 +42,7 @@ class PHPServerInfoScanner:
 
                 if not php_files:
                     results[url] = {
-                        "error": "No PHP files found"
+                        "Error": "No PHP files found on the page"
                     }
                     continue
 
@@ -76,18 +76,18 @@ class PHPServerInfoScanner:
                         
                         if sensitive_info:
                             results[url] = {
-                                "exposes_sensitive_information": True,
-                                "sensitive_info": sensitive_info
+                                "Exposes sensitive information": True,
+                                "Sensitive information": sensitive_info
                             }
                         else:
                             results[url] = {
-                                "exposes_sensitive_information": False,
-                                "sensitive_info": []
+                                "Exposes sensitive information": False,
+                                "Sensitive information": []
                             }
                             
             except Exception as e:
                 results[url] = {
-                    "error": str(e)
+                    "Error": "Unable to access URL"
                 }
         
         return results
