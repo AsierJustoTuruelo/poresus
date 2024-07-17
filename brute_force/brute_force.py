@@ -275,7 +275,6 @@ class AdvancedBruteForceScanner:
             return input_names
         except requests.exceptions.RequestException as e:
             error_message = f"Unable to retrieve content."
-            print(error_message)
             result = {
                 "Error": error_message
             }

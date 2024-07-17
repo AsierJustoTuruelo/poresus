@@ -29,53 +29,43 @@ class OnionPdfScanner:
 
     def scan_pdf_files(self):
         for url in tqdm(self.urls, desc="Scanning URLs for PDF files"):
-            # Obtener el contenido de la página web
             response = self.make_tor_request(url)
             if response is None:
                 self.results[url] = "URL not accessible"
                 continue
 
             soup = BeautifulSoup(response.text, 'html.parser')
-
-            # Buscar todos los enlaces a archivos PDF
             pdf_links = [a['href'] for a in soup.find_all('a', href=True) if a['href'].endswith('.pdf')]
 
             if not pdf_links:
                 self.results[url] = "No PDF files found on this URL"
 
             for pdf_link in pdf_links:
-                # Convertir enlace relativo a absoluto si es necesario
                 absolute_link = urljoin(url, pdf_link)
-
-                # Obtener el contenido del archivo PDF
                 response = self.make_tor_request(absolute_link)
                 if response is None:
                     continue
 
                 pdf_file = io.BytesIO(response.content)
 
-                # Leer el archivo PDF y extraer los metadatos
                 try:
                     pdf_reader = PyPDF2.PdfFileReader(pdf_file)
                     metadata = pdf_reader.getDocumentInfo()
 
-                    # Obtener el nombre del archivo PDF
                     file_name = pdf_link.split('/')[-1]
-
-                    # Convertir los metadatos a un formato serializable
                     serializable_metadata = {
                         "file_name": file_name
                     }
                     for key, value in metadata.items():
                         serializable_metadata[key] = str(value)
 
-                    self.results["pdf_metadata"][url] = serializable_metadata
+                    self.results["PDF Metadata"][url] = serializable_metadata
                 except Exception as e:
-                    self.results["pdf_metadata"][url] = "Error reading PDF file"
+                    self.results["PDF Metadata"][url] = "Error reading PDF file"
                     pass
 
-        # Convertir los resultados a JSON y devolverlos
         return json.dumps(self.results)
+
 
 
 if __name__ == "__main__":
