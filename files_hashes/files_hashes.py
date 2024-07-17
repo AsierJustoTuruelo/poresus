@@ -49,7 +49,7 @@ class OnionFileAnalyzer:
                         if any(file_link.endswith(extension) for extension in common_file_extensions):
                             futures.append(executor.submit(self.process_file, file_link))
                     
-                    for future in tqdm(futures, desc="Scanning URLs for extract File Hashes", unit="file"):
+                    for future in futures:
                         result = future.result()
                         if result:
                             files.append(result)
@@ -79,7 +79,7 @@ class OnionFileAnalyzer:
 
     def analyze_files(self):
         all_files = {}
-        for onion_url in self.onion_urls:
+        for onion_url in tqdm(self.onion_urls, desc="Scanning URLs for Files Hashes"):
             files = self.analyze_files_on_page(onion_url)
             if files is not None and len(files) != 0:
                 all_files[onion_url] = files

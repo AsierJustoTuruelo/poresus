@@ -29,7 +29,6 @@ class AdvancedBruteForceScanner:
             soup = BeautifulSoup(response.content, "html.parser")
             return soup.find_all("form")
         except requests.exceptions.RequestException as e:
-            print(f"Error al acceder a {url}: {e}")
             return []
 
     def form_details(self, form):
@@ -217,11 +216,8 @@ class AdvancedBruteForceScanner:
         for url in tqdm(self.urls, desc="Scanning URLs for Brute Force"):  
             input_names = self.find_login_inputs_with_timeout(url)
             if not input_names or not self.input_name_users or len(self.input_name_users) < 2:
-                error_message = f"Invalid form inputs."
-                print(error_message)
-                result = {
-                    "Error": error_message
-                }
+                error_message = "Invalid form inputs."
+                result = {"Error": error_message}
                 self.results.setdefault(url, []).append(result)
                 continue  
 
@@ -230,19 +226,23 @@ class AdvancedBruteForceScanner:
             with open(passwords_file, 'r') as password_file:
                 passwords = [line.strip() for line in password_file]
 
-            credentials_list = [{self.input_name_users[0]: user, self.input_name_users[1]: password} for user in usernames[:10] for password in passwords[:10]]
+            credentials_list = [{self.input_name_users[0]: user, self.input_name_users[1]: password}
+                                for user in usernames[:10] for password in passwords[:10]]
 
             with ThreadPoolExecutor(max_workers=self.num_threads) as executor:
                 futures = []
                 for credentials in credentials_list:
                     futures.append(executor.submit(self.send_login_request,
-                                                url, input_names['action'], input_names['method'],
-                                                {'User-Agent': 'pentest'}, credentials))
-                for future in as_completed(futures):
+                                                    url, input_names['action'], input_names['method'],
+                                                    {'User-Agent': 'pentest'}, credentials))
+
+                # Actualiza la barra de progreso por cada futuro completado
+                for future in tqdm(as_completed(futures), total=len(futures), desc="Attempting logins"):
                     try:
                         future.result(timeout=self.timeout)
                     except Exception as e:
-                        print(f"Error in thread: {e}")
+                        result = {"Error": str(e)}
+                        self.results.setdefault(url, []).append(result)
 
         if not self.results:
             return json.dumps({"No results found."})
@@ -255,7 +255,6 @@ class AdvancedBruteForceScanner:
                 return future.result(timeout=self.timeout)
             except TimeoutError:
                 error_message = f"Timeout retrieving content."
-                print(error_message)
                 result = {
                     "Error": error_message
                 }
@@ -284,7 +283,6 @@ class AdvancedBruteForceScanner:
             return {}
         except KeyError as ke:
             error_message = f"Error: Unable to find form details."
-            print(error_message)
             result = {
                 "Error": error_message
             }

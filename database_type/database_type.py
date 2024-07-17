@@ -22,6 +22,7 @@ class DatabaseTypeScanner:
             return False
 
     def detect_database_type(self, url):
+        res = None  # Initialize res
         try:
             if not self.is_accessible(url):
                 return "URL not accessible."
@@ -54,7 +55,7 @@ class DatabaseTypeScanner:
 
             # Iterate over error patterns and check if any is present in the server response
             for db_type, error_pattern in database_errors.items():
-                if re.search(error_pattern, res.text, re.IGNORECASE):
+                if res and re.search(error_pattern, res.text, re.IGNORECASE):
                     return db_type
 
             return 'Unknown'
