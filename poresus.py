@@ -21,7 +21,7 @@ import json
 from bitcoin_scanner.bitcoin_scanner import BitcoinAddressExtractor
 from brute_force.brute_force import AdvancedBruteForceScanner
 from etag.etag import ETagScanner
-from favicon_ico.favicon_ico import OnionFaviconDownloader
+from favicon_ico.favicon_ico import FaviconAnalyzer
 from file_input.file_input import FileUploadValidator
 from files_hashes.files_hashes import OnionFileAnalyzer
 from files_metadata.binary_metadata import BinaryFileScanner
@@ -155,7 +155,7 @@ def main():
     if args.favicon:
         # Ejecutar Favicon downloader
         favicon_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/favicon-ico/favicon-ico.html","http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/" ,"http://6nhmgdpnyoljh5uzr5kwlatx2u3diou4ldeommfxjz3wkhalzgjqxzqd.onion/"]
-        favicon_downloader = OnionFaviconDownloader(urls)
+        favicon_downloader = FaviconAnalyzer(urls)
         favicon_hashes = favicon_downloader.download_favicon()
         if favicon_hashes:
             results["Favicon Results"] = {
@@ -412,7 +412,7 @@ def main():
             "ETags": etag_results_json
         }
         favicon_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/favicon-ico/favicon-ico.html","http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/" ,"http://6nhmgdpnyoljh5uzr5kwlatx2u3diou4ldeommfxjz3wkhalzgjqxzqd.onion/"]
-        favicon_downloader = OnionFaviconDownloader(urls)
+        favicon_downloader = FaviconAnalyzer(urls)
         favicon_hashes = favicon_downloader.download_favicon()
         if favicon_hashes:
             results["Favicon Results"] = {
