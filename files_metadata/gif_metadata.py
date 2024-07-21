@@ -8,7 +8,7 @@ from urllib.parse import urljoin
 import json
 from tqdm import tqdm
 
-class OnionGifScanner:
+class GifMdataExtractor:
     def __init__(self, urls):
         self.urls = urls
         self.proxies = {
@@ -76,6 +76,6 @@ if __name__ == "__main__":
         'http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html', 'a', 'http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/'
         # Puedes agregar más URLs aquí si es necesario
     ]
-    scanner = OnionGifScanner(urls)
+    scanner = GifMdataExtractor(urls)
     results_json = scanner.scan_gif_files()
     print(json.dumps(scanner.results, indent=4))

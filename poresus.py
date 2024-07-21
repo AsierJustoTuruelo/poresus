@@ -24,28 +24,28 @@ from etag.etag import ETagScanner
 from favicon_ico.favicon_ico import FaviconAnalyzer
 from file_input.file_input import FileUploadValidator
 from files_hashes.files_hashes import OnionFileAnalyzer
-from files_metadata.binary_metadata import BinaryFileScanner
-from files_metadata.excel_metadata import OnionExcelScanner
-from files_metadata.gif_metadata import OnionGifScanner
-from files_metadata.pdf_metadata import OnionPdfScanner
-from files_metadata.ppt_metadata import OnionPptScanner
-from files_metadata.txt_metadata import OnionTextScanner
-from files_metadata.video_metadata import OnionMediaScanner
-from files_metadata.word_metadata import OnionWordScanner
+from files_metadata.binary_metadata import BinaryFileMetadataExtractor
+from files_metadata.excel_metadata import ExcelMetadataExtractor
+from files_metadata.gif_metadata import GifMdataExtractor
+from files_metadata.pdf_metadata import PdfMetadataExtractor
+from files_metadata.ppt_metadata import PptMetadataExtractor
+from files_metadata.txt_metadata import TxtMetadataExtractor
+from files_metadata.video_metadata import MediaMetadataExtractor
+from files_metadata.word_metadata import WordMetadataExtractor
 from google_services.google_services import GoogleIDsExtractor
 from gzip_compression.gzip_compression import GzipHeaderScanner
-from hostname.hostname import HostnameHackingScanner
-from html_info.html_info import HtmlInfo
-from images_metadata.images_metadata import OnionImageScanner
+from hostname.hostname import HostnameScanner
+from html_info.html_info import HtmlInfoExtractor
+from images_metadata.images_metadata import ImageMetadataExtractor
 from mail_scanner.mail_scanner import HtmlEmailExtractor
 from otherservices_scanner.otherservices_scanner import OnionServiceAnalyzer
 from phone_scanner.phone_scanner import HtmlPhoneExtractor
-from php_server.php_server import PHPServerInfoScanner
+from php_server.php_server import PHPServerInfoAnalyzer
 from server_info.server_info import InformacionServidor
-from server_status.server_status import ServerStatusChecker
-from socialnet_scanner.socialnet_scanner import RedesSocialesScanner
+from server_status.server_status import ServerStatusAnalyzer
+from socialnet_scanner.socialnet_scanner import SocialMediaExtractor
 from sqli.sqli_scanner import AdvancedSqlInjectionScanner
-from validacion_input.validacionInput import ValidacionInput
+from validacion_input.InputValidator import InputValidator
 from xss.xss_scanner import XSSScanner
 from database_type.database_type import DatabaseTypeScanner
 #from xml.xml_injector import XXEScanner
@@ -107,7 +107,7 @@ def main():
     parser.add_argument("-ss", "--serverstatus", action="store_true", help="Run Server Status checker")
     parser.add_argument("-rs", "--socialnets", action="store_true", help="Run Social Networks scanner")
     parser.add_argument("-sqli", "--sqlinjection", action="store_true", help="Run SQL Injection scanner")
-    parser.add_argument("-vi", "--validacioninput", action="store_true", help="Run Validacion Input scanner")
+    parser.add_argument("-vi", "--InputValidator", action="store_true", help="Run Validacion Input scanner")
     parser.add_argument("-xss", "--xss", action="store_true", help="Run XSS scanner")
     #parser.add_argument("-xxe", "--xxe", action="store_true", help="Run XXE scanner")
     parser.add_argument("-db", "--database", action="store_true", help="Run Data Base scanner")
@@ -181,7 +181,7 @@ def main():
     if args.binarymetadata:
         # Ejecutar Binary Metadata scanner
         binary_metadata_urls = ['http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html']
-        binary_metadata_scanner = BinaryFileScanner(urls)
+        binary_metadata_scanner = BinaryFileMetadataExtractor(urls)
         binary_metadata_results = binary_metadata_scanner.scan_binary_files()
         results["Binary Metadata Results"] = {
             "Binary Metadata Results": binary_metadata_results
@@ -190,7 +190,7 @@ def main():
     if args.excelmetadata:
         # Ejecutar Excel Metadata scanner
         excel_metadata_urls = ["http://6nhmgdpnyoljh5uzr5kwlatx2u3diou4ldeommfxjz3wkhalzgjqxzqd.onion/"]
-        excel_metadata_scanner = OnionExcelScanner(urls)
+        excel_metadata_scanner = ExcelMetadataExtractor(urls)
         excel_metadata_results = excel_metadata_scanner.scan_excel_files()
         results["Excel Metadata Results"] = {
             "Excel Metadata Results": excel_metadata_results
@@ -199,7 +199,7 @@ def main():
     if args.gifmetadata:
         # Ejecutar GIF Metadata scanner
         gif_metadata_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html"]
-        gif_metadata_scanner = OnionGifScanner(urls)
+        gif_metadata_scanner = GifMdataExtractor(urls)
         gif_metadata_results = gif_metadata_scanner.scan_gif_files()
         results["GIF Metadata Results"] = {
             "GIF Metadata Results": gif_metadata_results
@@ -208,7 +208,7 @@ def main():
     if args.pdfmetadata:
         # Ejecutar PDF Metadata scanner
         pdf_metadata_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html"]
-        pdf_metadata_scanner = OnionPdfScanner(urls)
+        pdf_metadata_scanner = PdfMetadataExtractor(urls)
         pdf_metadata_results = pdf_metadata_scanner.scan_pdf_files()
         results["PDF Metadata Results"] = {
             "PDF Metadata Results": pdf_metadata_results
@@ -217,7 +217,7 @@ def main():
     if args.pptmetadata:
         # Ejecutar PPT Metadata scanner
         ppt_metadata_urls = ["http://6nhmgdpnyoljh5uzr5kwlatx2u3diou4ldeommfxjz3wkhalzgjqxzqd.onion/"]
-        ppt_metadata_scanner = OnionPptScanner(urls)
+        ppt_metadata_scanner = PptMetadataExtractor(urls)
         ppt_metadata_results = ppt_metadata_scanner.scan_ppt_files()
         results["PPT Metadata Results"] = {
             "PPT Metadata Results": ppt_metadata_results
@@ -226,7 +226,7 @@ def main():
     if args.wordmetadata:
         # Ejecutar Word Metadata scanner
         word_metadata_urls = ["http://6nhmgdpnyoljh5uzr5kwlatx2u3diou4ldeommfxjz3wkhalzgjqxzqd.onion/"]
-        word_metadata_scanner = OnionWordScanner(urls)
+        word_metadata_scanner = WordMetadataExtractor(urls)
         word_metadata_results = word_metadata_scanner.scan_word_files()
         results["Word Metadata Results"] = {
             "Word Metadata Results": word_metadata_results
@@ -235,7 +235,7 @@ def main():
     if args.mediametadata:
         # Ejecutar Media Metadata scanner
         media_metadata_urls = ["http://6nhmgdpnyoljh5uzr5kwlatx2u3diou4ldeommfxjz3wkhalzgjqxzqd.onion/"]
-        media_metadata_scanner = OnionMediaScanner(urls)
+        media_metadata_scanner = MediaMetadataExtractor(urls)
         media_metadata_results = media_metadata_scanner.scan_media_files()
         results["Media Metadata Results"] = {
             "Media Metadata Results": media_metadata_results
@@ -244,7 +244,7 @@ def main():
     if args.txtmetadata:
         # Ejecutar Text Metadata scanner
         text_metadata_urls = ["http://6nhmgdpnyoljh5uzr5kwlatx2u3diou4ldeommfxjz3wkhalzgjqxzqd.onion/"]
-        text_metadata_scanner = OnionTextScanner(urls)
+        text_metadata_scanner = TxtMetadataExtractor(urls)
         text_metadata_results = text_metadata_scanner.scan_text_files()
         results["Text Metadata Results"] = {
             "Text Metadata Results": text_metadata_results
@@ -253,7 +253,7 @@ def main():
     if args.imagemetadata:
         # Ejecutar Image Metadata scanner
         image_metadata_urls = ['http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html']
-        image_metadata_scanner = OnionImageScanner(urls)  # <- Aquí debería ser image_metadata_urls
+        image_metadata_scanner = ImageMetadataExtractor(urls)  # <- Aquí debería ser image_metadata_urls
         image_metadata_results = image_metadata_scanner.scan_images()
         results["Image Metadata Results"] = {
             "Image Metadata Results": image_metadata_results
@@ -280,7 +280,7 @@ def main():
     if args.hostname:
         # Ejecutar Hostname Hacking scanner
         hostname_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_hostname/prueba_hostname.html", "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/"]
-        hostname_scanner = HostnameHackingScanner(urls)
+        hostname_scanner = HostnameScanner(urls)
         hostname_results = hostname_scanner.scan_hostnames()
         results["Hostname Results"] = {
             "Hostname Results": hostname_results
@@ -325,7 +325,7 @@ def main():
     if args.phpserver:
         # Ejecutar PHP Server Info scanner
         php_server_urls = ["http://6nhmgdpnyoljh5uzr5kwlatx2u3diou4ldeommfxjz3wkhalzgjqxzqd.onion/"]
-        php_server_scanner = PHPServerInfoScanner(urls)
+        php_server_scanner = PHPServerInfoAnalyzer(urls)
         php_server_info = php_server_scanner.scan_php_server_info()
         results["PHP Server Results"] = {
             "PHP Server Info": php_server_info
@@ -343,7 +343,7 @@ def main():
     if args.serverstatus:
         # Ejecutar Server Status checker
         server_status_urls = ["http://6nhmgdpnyoljh5uzr5kwlatx2u3diou4ldeommfxjz3wkhalzgjqxzqd.onion/"]
-        server_status_checker = ServerStatusChecker(urls)
+        server_status_checker = ServerStatusAnalyzer(urls)
         server_status = server_status_checker.check_servers_status()
         results["Server Status Results"] = {
             "Server Status": server_status
@@ -352,7 +352,7 @@ def main():
     if args.socialnets:
         # Ejecutar Social Networks scanner
         socialnets_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/social/social.html"]
-        socialnets_scanner = RedesSocialesScanner(urls)
+        socialnets_scanner = SocialMediaExtractor(urls)
         socialnets_results = socialnets_scanner.extract_social_networks()
         results["Social Networks Results"] = {
             "Social Networks": socialnets_results if socialnets_results else "No se encontraron redes sociales."
@@ -367,10 +367,10 @@ def main():
             "SQL Injection Results": sqli_results
         }
     
-    if args.validacioninput:
+    if args.InputValidator:
         # Ejecutar Validacion Input scanner
         validacion_input_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_validacion_input/prueba_validacion_input.html"]
-        validacion_input_scanner = ValidacionInput(urls)
+        validacion_input_scanner = InputValidator(urls)
         validacion_input_results = validacion_input_scanner.run_tests()
         results["Validacion Input Results"] = validacion_input_results
     
@@ -432,56 +432,56 @@ def main():
         }
 
         binary_metadata_urls = ['http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html']
-        binary_metadata_scanner = BinaryFileScanner(urls)
+        binary_metadata_scanner = BinaryFileMetadataExtractor(urls)
         binary_metadata_results = binary_metadata_scanner.scan_binary_files()
         results["Binary Metadata Results"] = {
             "Binary Metadata Results": binary_metadata_results
         }
 
         excel_metadata_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html"]
-        excel_metadata_scanner = OnionExcelScanner(urls)
+        excel_metadata_scanner = ExcelMetadataExtractor(urls)
         excel_metadata_results = excel_metadata_scanner.scan_excel_files()
         results["Excel Metadata Results"] = {
             "Excel Metadata Results": excel_metadata_results
         }
 
         gif_metadata_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html"]
-        gif_metadata_scanner = OnionGifScanner(urls)
+        gif_metadata_scanner = GifMdataExtractor(urls)
         gif_metadata_results = gif_metadata_scanner.scan_gif_files()
         results["GIF Metadata Results"] = {
             "GIF Metadata Results": gif_metadata_results
         }
 
         pdf_metadata_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html"]
-        pdf_metadata_scanner = OnionPdfScanner(urls)
+        pdf_metadata_scanner = PdfMetadataExtractor(urls)
         pdf_metadata_results = pdf_metadata_scanner.scan_pdf_files()
         results["PDF Metadata Results"] = {
             "PDF Metadata Results": pdf_metadata_results
         }
 
         ppt_metadata_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html"]
-        ppt_metadata_scanner = OnionPptScanner(urls)
+        ppt_metadata_scanner = PptMetadataExtractor(urls)
         ppt_metadata_results = ppt_metadata_scanner.scan_ppt_files()
         results["PPT Metadata Results"] = {
             "PPT Metadata Results": ppt_metadata_results
         }
 
         word_metadata_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html"]
-        word_metadata_scanner = OnionWordScanner(urls)
+        word_metadata_scanner = WordMetadataExtractor(urls)
         word_metadata_results = word_metadata_scanner.scan_word_files()
         results["Word Metadata Results"] = {
             "Word Metadata Results": word_metadata_results
         }
 
         media_metadata_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html"]
-        media_metadata_scanner = OnionMediaScanner(urls)
+        media_metadata_scanner = MediaMetadataExtractor(urls)
         media_metadata_results = media_metadata_scanner.scan_media_files()
         results["Media Metadata Results"] = {
             "Media Metadata Results": media_metadata_results
         }
 
         image_metadata_urls = ['http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html']
-        image_metadata_scanner = OnionImageScanner(urls)
+        image_metadata_scanner = ImageMetadataExtractor(urls)
         image_metadata_results = image_metadata_scanner.scan_images()
         results["Image Metadata Results"] = {
             "Image Metadata Results": image_metadata_results
@@ -502,7 +502,7 @@ def main():
         }
 
         hostname_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_hostname/prueba_hostname.html", "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/"]
-        hostname_scanner = HostnameHackingScanner(urls)
+        hostname_scanner = HostnameScanner(urls)
         hostname_results = hostname_scanner.scan_hostnames()
         results["Hostname Results"] = {
             "Hostname Results": hostname_results
@@ -537,7 +537,7 @@ def main():
         }
 
         php_server_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/php_info/php_info.html"]
-        php_server_scanner = PHPServerInfoScanner(urls)
+        php_server_scanner = PHPServerInfoAnalyzer(urls)
         php_server_info = php_server_scanner.scan_php_server_info()
         results["PHP Server Results"] = {
             "PHP Server Info": php_server_info
@@ -551,14 +551,14 @@ def main():
         }
 
         server_status_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/"]
-        server_status_checker = ServerStatusChecker(urls)
+        server_status_checker = ServerStatusAnalyzer(urls)
         server_status = server_status_checker.check_servers_status()
         results["Server Status Results"] = {
             "Server Status": server_status
         }
 
         socialnets_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/social/social.html"]
-        socialnets_scanner = RedesSocialesScanner(urls)
+        socialnets_scanner = SocialMediaExtractor(urls)
         socialnets_results = socialnets_scanner.extract_social_networks()
         results["Social Networks Results"] = {
             "Social Networks": socialnets_results if socialnets_results else "No se encontraron redes sociales."
@@ -572,7 +572,7 @@ def main():
         }
 
         validacion_input_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_validacion_input/prueba_validacion_input.html"]
-        validacion_input_scanner = ValidacionInput(urls)
+        validacion_input_scanner = InputValidator(urls)
         validacion_input_results = validacion_input_scanner.run_tests()
         results["Validacion Input Results"] = validacion_input_results
 
@@ -587,17 +587,10 @@ def main():
         database_scanner = DatabaseTypeScanner(urls)
         results["Database Results"] = database_scanner.scan_urls()
 
-
-
-
-
-    
-
-
       
     # Imprimir los resultados en formato JSON
     print(json.dumps(results, indent=4))
-    with open('res.json', 'w') as file:
+    with open('results.json', 'w') as file:
         json.dump(results, file, indent=4)
 
     print("Resultados escritos en res.json exitosamente.")
