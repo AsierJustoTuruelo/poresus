@@ -4,7 +4,7 @@ import json
 import os
 from tqdm import tqdm
 
-class HtmlInfo:
+class HtmlInfoExtractor:
     def __init__(self, urls):
         self.urls = urls
         self.proxies = {
@@ -56,6 +56,6 @@ if __name__ == "__main__":
         "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html","a","http://juhanurmihxlp77nkq76byazcldy2hlmovfu2epvl5ankdibsot4csyd.onion/"
     ]
     
-    server_info = HtmlInfo(onion_urls)
+    server_info = HtmlInfoExtractor(onion_urls)
     result = server_info.analyze_html()
     print(json.dumps(result, indent=4))

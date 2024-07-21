@@ -3,7 +3,7 @@ import requests
 import json
 from tqdm import tqdm
 
-class PHPServerInfoScanner:
+class PHPServerInfoAnalyzer:
     def __init__(self, urls):
         self.urls = urls
         self.proxies = {
@@ -104,7 +104,7 @@ if __name__ == "__main__":
     ]
 
     # Crear instancia del escáner
-    scanner = PHPServerInfoScanner(urls)
+    scanner = PHPServerInfoAnalyzer(urls)
 
     # Probar la exposición de phpinfo() en los archivos PHP encontrados
     results = scanner.scan_php_server_info()
