@@ -5,7 +5,7 @@ import socket
 import json
 from tqdm import tqdm
 
-class OnionServiceAnalyzer:
+class OtherServicesAnalyzer:
     def __init__(self, urls):
         self.urls = urls
         self.proxies = {
@@ -69,6 +69,6 @@ if __name__ == "__main__":
         "a",
         "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/"
     ]
-    analyzer = OnionServiceAnalyzer(urls)
+    analyzer = OtherServicesAnalyzer(urls)
     result = analyzer.analyze_services()
     print(json.dumps(result, indent=2))

@@ -23,7 +23,7 @@ from brute_force.brute_force import AdvancedBruteForceScanner
 from etag.etag import ETagScanner
 from favicon_ico.favicon_ico import FaviconAnalyzer
 from file_input.file_input import FileUploadValidator
-from files_hashes.files_hashes import OnionFileAnalyzer
+from files_hashes.files_hashes import FileAnalyzer
 from files_metadata.binary_metadata import BinaryFileMetadataExtractor
 from files_metadata.excel_metadata import ExcelMetadataExtractor
 from files_metadata.gif_metadata import GifMdataExtractor
@@ -38,14 +38,14 @@ from hostname.hostname import HostnameScanner
 from html_info.html_info import HtmlInfoExtractor
 from images_metadata.images_metadata import ImageMetadataExtractor
 from mail_scanner.mail_scanner import HtmlEmailExtractor
-from otherservices_scanner.otherservices_scanner import OnionServiceAnalyzer
+from otherservices_scanner.otherservices_scanner import OtherServicesAnalyzer
 from phone_scanner.phone_scanner import HtmlPhoneExtractor
 from php_server.php_server import PHPServerInfoAnalyzer
 from server_info.server_info import InformacionServidor
 from server_status.server_status import ServerStatusAnalyzer
 from socialnet_scanner.socialnet_scanner import SocialMediaExtractor
 from sqli.sqli_scanner import AdvancedSqlInjectionScanner
-from validacion_input.InputValidator import InputValidator
+from validacion_input.validacionInput import InputValidator
 from xss.xss_scanner import XSSScanner
 from database_type.database_type import DatabaseTypeScanner
 #from xml.xml_injector import XXEScanner
@@ -172,7 +172,7 @@ def main():
     if args.filehashes:
         # Ejecutar File Hashes scanner
         file_hashes_urls = ["http://z62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/", "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html"]
-        file_hashes_scanner = OnionFileAnalyzer(urls)
+        file_hashes_scanner = FileAnalyzer(urls)
         file_hashes_results = file_hashes_scanner.analyze_files()
         results["File Hashes Results"] = {
             "File Hashes Results": file_hashes_results
@@ -307,7 +307,7 @@ def main():
     if args.otherservices:
         # Ejecutar Other Services scanner
         other_services_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/services/services.html"]
-        other_services_scanner = OnionServiceAnalyzer(urls)
+        other_services_scanner = OtherServicesAnalyzer(urls)
         other_services_results = other_services_scanner.analyze_services()
         results["Other Services Results"] = {
             "Other Services Results": other_services_results
@@ -425,7 +425,7 @@ def main():
         results["File Input Results"] = file_input_validator.results
 
         file_hashes_urls = ["http://z62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/", "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html"]
-        file_hashes_scanner = OnionFileAnalyzer(urls)
+        file_hashes_scanner = FileAnalyzer(urls)
         file_hashes_results = file_hashes_scanner.analyze_files()
         results["File Hashes Results"] = {
             "File Hashes Results": file_hashes_results
@@ -523,7 +523,7 @@ def main():
         }
 
         other_services_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/otherservices/otherservices.html"]
-        other_services_scanner = OnionServiceAnalyzer(urls)
+        other_services_scanner = OtherServicesAnalyzer(urls)
         other_services_results = other_services_scanner.analyze_services()
         results["Other Services Results"] = {
             "Other Services Results": other_services_results
