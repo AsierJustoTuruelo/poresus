@@ -41,7 +41,7 @@ from mail_scanner.mail_scanner import HtmlEmailExtractor
 from otherservices_scanner.otherservices_scanner import OtherServicesAnalyzer
 from phone_scanner.phone_scanner import HtmlPhoneExtractor
 from php_server.php_server import PHPServerInfoAnalyzer
-from server_info.server_info import InformacionServidor
+from server_info.server_info import ServerInfoAnalyzer
 from server_status.server_status import ServerStatusAnalyzer
 from socialnet_scanner.socialnet_scanner import SocialMediaExtractor
 from sqli.sqli_scanner import AdvancedSqlInjectionScanner
@@ -289,7 +289,7 @@ def main():
     if args.htmlinfo:
         # Ejecutar HTML Info scanner
         html_info_urls = ["http://6nhmgdpnyoljh5uzr5kwlatx2u3diou4ldeommfxjz3wkhalzgjqxzqd.onion/"]
-        html_info_scanner = HtmlInfo(urls)
+        html_info_scanner = HtmlInfoExtractor(urls)
         html_info_results = html_info_scanner.analyze_html()
         results["HTML Info Results"] = {
             "HTML Info Results": html_info_results
@@ -334,7 +334,7 @@ def main():
     if args.serverinfo:
         # Ejecutar Server Info scanner
         server_info_urls = ["http://6nhmgdpnyoljh5uzr5kwlatx2u3diou4ldeommfxjz3wkhalzgjqxzqd.onion/"]
-        server_info_scanner = InformacionServidor(urls)
+        server_info_scanner = ServerInfoAnalyzer(urls)
         server_info = server_info_scanner.get_server_info()
         results["Server Info Results"] = {
             "Server Info": server_info
@@ -544,7 +544,7 @@ def main():
         }
 
         server_info_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/php_info/php_info.html"]
-        server_info_scanner = InformacionServidor(urls)
+        server_info_scanner = ServerInfoAnalyzer(urls)
         server_info = server_info_scanner.get_server_info()
         results["Server Info Results"] = {
             "Server Info": server_info
