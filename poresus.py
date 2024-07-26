@@ -19,39 +19,39 @@ instalar stem --> pip install stem
 """
 import json
 from BitcoinAddressExtractorFunc.BitcoinAddressExtractor import BitcoinAddressExtractor
-from brute_force.brute_force import AdvancedBruteForceScanner
-from etag.etag import ETagScanner
-from favicon_ico.favicon_ico import FaviconAnalyzer
-from file_input.file_input import FileUploadValidator
-from files_hashes.files_hashes import FileAnalyzer
-from files_metadata.binary_metadata import BinaryFileMetadataExtractor
-from files_metadata.excel_metadata import ExcelMetadataExtractor
-from files_metadata.gif_metadata import GifMdataExtractor
-from files_metadata.pdf_metadata import PdfMetadataExtractor
-from files_metadata.ppt_metadata import PptMetadataExtractor
-from files_metadata.txt_metadata import TxtMetadataExtractor
-from files_metadata.video_metadata import MediaMetadataExtractor
-from files_metadata.word_metadata import WordMetadataExtractor
-from google_services.google_services import GoogleIDsExtractor
-from gzip_compression.gzip_compression import GzipHeaderScanner
-from hostname.hostname import HostnameScanner
-from html_info.html_info import HtmlInfoExtractor
-from images_metadata.images_metadata import ImageMetadataExtractor
-from mail_scanner.mail_scanner import HtmlEmailExtractor
-from otherservices_scanner.otherservices_scanner import OtherServicesAnalyzer
-from phone_scanner.phone_scanner import HtmlPhoneExtractor
-from php_server.php_server import PHPServerInfoAnalyzer
-from server_info.server_info import ServerInfoAnalyzer
-from server_status.server_status import ServerStatusAnalyzer
-from socialnet_scanner.socialnet_scanner import SocialMediaExtractor
-from sqli.sqli_scanner import AdvancedSqlInjectionScanner
-from validacion_input.validacionInput import InputValidator
-from xss.xss_scanner import XSSScanner
-from database_type.database_type import DatabaseTypeScanner
-#from xml.xml_injector import XXEScanner
-
+from BruteForceScannerFunc.BruteForceScanner import BruteForceScanner
+from ETagScannerFunc.ETagScanner import ETagScanner
+from FaviconAnalyzerFunc.FaviconAnalyzer import FaviconAnalyzer
+from FileUploadValidatorFunc.FileUploadValidator import FileUploadValidator
+from FileAnalyzerFunc.FileAnalyzer import FileAnalyzer
+from MetadataExtractorsFunc.binary_metadata import BinaryFileMetadataExtractor
+from MetadataExtractorsFunc.excel_metadata import ExcelMetadataExtractor
+from MetadataExtractorsFunc.gif_metadata import GifMdataExtractor
+from MetadataExtractorsFunc.pdf_metadata import PdfMetadataExtractor
+from MetadataExtractorsFunc.ppt_metadata import PptMetadataExtractor
+from MetadataExtractorsFunc.txt_metadata import TxtMetadataExtractor
+from MetadataExtractorsFunc.video_metadata import MediaMetadataExtractor
+from MetadataExtractorsFunc.word_metadata import WordMetadataExtractor
+from GoogleIDsExtractorFunc.GoogleIDsExtractor import GoogleIDsExtractor
+from GzipHeaderScannerFunc.GzipHeaderScanner import GzipHeaderScanner
+from HostnameScannerFunc.HostnameScanner import HostnameScanner
+from HtmlInfoExtractorFunc.HtmlInfoExtractor import HtmlInfoExtractor
+from ImageMetadataExtractorFunc.images_metadata import ImageMetadataExtractor
+from HtmlEmailExtractorFunc.HtmlEmailExtractor import HtmlEmailExtractor
+from OtherServicesAnalyzerFunc.OtherServicesAnalyzer import OtherServicesAnalyzer
+from HtmlPhoneExtractorFunc.HtmlPhoneExtractor import HtmlPhoneExtractor
+from PHPServerInfoAnalyzerFunc.PHPServerInfoAnalyzer import PHPServerInfoAnalyzer
+from ServerInfoAnalyzerFunc.ServerInfoAnalyzer import ServerInfoAnalyzer
+from ServerStatusAnalyzerFunc.ServerStatusAnalyzer import ServerStatusAnalyzer
+from SocialMediaExtractorFunc.SocialMediaExtractor import SocialMediaExtractor
+from AdvancedSqlInjectionScannerFunc.AdvancedSqlInjectionScanner import AdvancedSqlInjectionScanner
+from InputValidatorFunc.InputValidator import InputValidator
+from XSSScannerFunc.XSSScanner import XSSScanner
+from DatabaseTypeScannerFunc.DatabaseTypeScanner import DatabaseTypeScanner
 import argparse
 import json
+
+# Adjust this to the path of the usernames and passwords files
 usernames_file = "./dics/usernames.txt"
 passwords_file = "./dics/rockyou.txt"
 
