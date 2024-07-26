@@ -8,7 +8,7 @@ from tqdm import tqdm
 usernames_file = "./dics/usernames.txt" 
 passwords_file = "./dics/rockyou.txt"
 
-class AdvancedBruteForceScanner:
+class BruteForceScanner:
 
     def __init__(self, urls, proxy_address="127.0.0.1", proxy_port=9050):
         self.urls = urls

@@ -18,7 +18,7 @@ instalar stem --> pip install stem
 
 """
 import json
-from bitcoin_scanner.bitcoin_scanner import BitcoinAddressExtractor
+from BitcoinAddressExtractorFunc.BitcoinAddressExtractor import BitcoinAddressExtractor
 from brute_force.brute_force import AdvancedBruteForceScanner
 from etag.etag import ETagScanner
 from favicon_ico.favicon_ico import FaviconAnalyzer
