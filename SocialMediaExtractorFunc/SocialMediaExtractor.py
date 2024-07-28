@@ -5,7 +5,7 @@ import socket
 import requests
 from tqdm import tqdm
 
-class SocialMediaExtractor:
+class SocialMediaExtractorClass:
     def __init__(self, urls):
         self.urls = urls
         self.proxies = {

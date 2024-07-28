@@ -8,7 +8,7 @@ from urllib.parse import urljoin
 import json
 from tqdm import tqdm
 
-class ExcelMetadataExtractor:
+class ExcelMetadataExtractorClass:
     def __init__(self, urls):
         self.urls = urls
         self.proxies = {
@@ -71,6 +71,6 @@ if __name__ == "__main__":
         'http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html', 'a', 'http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/'
         # Agrega más URLs aquí si es necesario
     ]
-    scanner = ExcelMetadataExtractor(urls)
+    scanner = ExcelMetadataExtractorClass(urls)
     results_json = scanner.scan_excel_files()
     print(json.dumps(scanner.results, indent=4))

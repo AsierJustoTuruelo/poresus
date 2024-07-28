@@ -1,1 +1,1 @@
-from . import brute_force
+from . import BruteForceScanner

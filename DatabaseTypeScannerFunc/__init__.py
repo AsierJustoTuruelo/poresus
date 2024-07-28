@@ -1,1 +1,1 @@
-from . import database_type
+from . import DatabaseTypeScanner

@@ -3,7 +3,7 @@ import requests
 import json
 from tqdm import tqdm
 
-class PHPServerInfoAnalyzer:
+class PHPServerInfoAnalyzerClass:
     def __init__(self, urls):
         self.urls = urls
         self.proxies = {

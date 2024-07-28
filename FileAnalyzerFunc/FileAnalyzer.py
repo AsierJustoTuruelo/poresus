@@ -9,7 +9,7 @@ import json
 from concurrent.futures import ThreadPoolExecutor
 from tqdm import tqdm
 
-class FileAnalyzer:
+class FileAnalyzerClass:
     def __init__(self, onion_urls):
         self.onion_urls = onion_urls
         self.proxies = {
@@ -94,6 +94,6 @@ if __name__ == "__main__":
         'http://kz62gxxle6gwe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html',"http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html"
         # Add more URLs here if necessary
     ]
-    analyzer = FileAnalyzer(onion_urls)
+    analyzer = FileAnalyzerClass(onion_urls)
     files_json = analyzer.analyze_files()
     print(json.dumps(files_json, indent=4))

@@ -5,7 +5,7 @@ import threading
 import json
 from tqdm import tqdm
 
-class InputValidator:
+class InputValidatorClass:
     def __init__(self, onion_urls):
         self.onion_urls = onion_urls
         self.tor_proxy = "socks5h://127.0.0.1:9050"
@@ -98,7 +98,7 @@ if __name__ == "__main__":
         "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/",
         "http://example.invalid"  # URL no válida para generar un error
     ]
-    pentester = InputValidator(onion_urls)
+    pentester = InputValidatorClass(onion_urls)
     results = pentester.run_tests()
 
     print(json.dumps(results))

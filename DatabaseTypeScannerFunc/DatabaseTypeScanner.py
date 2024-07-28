@@ -5,7 +5,7 @@ import re
 import json
 from tqdm import tqdm
 
-class DatabaseTypeScanner:
+class DatabaseTypeScannerClass:
     def __init__(self, urls):
         self.session = requests.Session()
         self.proxies = {
@@ -85,7 +85,7 @@ if __name__ == "__main__":
         # Add more URLs here
     ]
 
-    scanner = DatabaseTypeScanner(urls)
+    scanner = DatabaseTypeScannerClass(urls)
     results = scanner.scan_urls()
 
     print(json.dumps(results, indent=4))

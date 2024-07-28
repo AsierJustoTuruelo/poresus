@@ -1,1 +1,1 @@
-from . import validacionInput
+from . import InputValidator

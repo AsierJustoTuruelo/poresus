@@ -1,1 +1,1 @@
-from . import php_server
+from . import PHPServerInfoAnalyzer

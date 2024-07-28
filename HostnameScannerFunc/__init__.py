@@ -1,1 +1,1 @@
-from . import hostname
+from . import HostnameScanner

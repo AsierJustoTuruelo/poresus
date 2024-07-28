@@ -1,1 +1,1 @@
-from . import bitcoin_scanner
+from . import BitcoinAddressExtractor

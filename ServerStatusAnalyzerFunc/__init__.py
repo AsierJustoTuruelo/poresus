@@ -1,1 +1,1 @@
-from . import server_status
+from . import ServerStatusAnalyzer

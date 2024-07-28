@@ -1,1 +1,1 @@
-from . import xss_scanner
+from . import XSSScanner

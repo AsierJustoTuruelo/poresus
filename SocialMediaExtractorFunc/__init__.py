@@ -1,1 +1,1 @@
-from . import socialnet_scanner
+from . import SocialMediaExtractor

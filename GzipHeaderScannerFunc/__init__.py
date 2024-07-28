@@ -1,1 +1,1 @@
-from . import gzip_compression
+from . import GzipHeaderScanner

@@ -7,7 +7,7 @@ from stem import Signal
 from stem.control import Controller
 from tqdm import tqdm
 
-class GoogleIDsExtractor:
+class GoogleIDsExtractorClass:
     def __init__(self, urls):
         self.urls = urls
         self.proxies = {
@@ -56,7 +56,7 @@ if __name__ == "__main__":
         'a', 
         'http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/google_ap/'
     ]
-    extractor = GoogleIDsExtractor(urls)
+    extractor = GoogleIDsExtractorClass(urls)
     results = extractor.scan_google_services()
     results_json = json.dumps(results, indent=4)
     print(results_json)

@@ -1,1 +1,1 @@
-from . import server_info
+from . import ServerInfoAnalyzer

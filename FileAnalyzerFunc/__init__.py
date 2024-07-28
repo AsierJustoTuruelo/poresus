@@ -1,1 +1,1 @@
-from . import files_hashes
+from . import FileAnalyzer

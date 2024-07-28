@@ -9,7 +9,7 @@ from tqdm import tqdm
 from io import BytesIO
 import base64
 
-class ImageMetadataExtractor:
+class ImageMetadataExtractorClass:
     def __init__(self, urls):
         self.urls = urls
         self.proxies = {
@@ -78,6 +78,6 @@ if __name__ == "__main__":
         "A", 
         "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/bitcoin_address/bitcoin_adress.html"
     ]
-    scanner = ImageMetadataExtractor(onion_urls)
+    scanner = ImageMetadataExtractorClass(onion_urls)
     results = scanner.scan_images()
     print(json.dumps(results, indent=2))

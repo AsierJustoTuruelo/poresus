@@ -9,7 +9,7 @@ import json
 from tqdm import tqdm
 import pytz
 
-class GzipHeaderScanner:
+class GzipHeaderScannerClass:
     def __init__(self, urls):
         self.urls = urls
         self.proxies = {
@@ -123,6 +123,6 @@ if __name__ == "__main__":
         'http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_bruteforce/prueba_bruteforce.html',
         'http://juhanurmihxlp77nkq76byazcldy2hlmovfu2epvl5ankdibsot4csyd.onion/'
     ]
-    scanner = GzipHeaderScanner(urls)
+    scanner = GzipHeaderScannerClass(urls)
     results_json = scanner.scan_gzip_headers()
     print(results_json)

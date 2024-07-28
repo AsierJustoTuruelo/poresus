@@ -1,1 +1,1 @@
-from . import mail_scanner
+from . import HtmlEmailExtractor

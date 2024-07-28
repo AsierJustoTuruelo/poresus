@@ -13,7 +13,7 @@ import re
 import json
 from tqdm import tqdm
 
-class FaviconAnalyzer:
+class FaviconAnalyzerClass:
     def __init__(self, urls):
         self.urls = urls
         self.proxies = {
@@ -79,7 +79,7 @@ class FaviconAnalyzer:
 
 if __name__ == "__main__":
     urls = ["http://53d5skw4ypzku4bfq2tk2mr3xh5yqrzss25sooiubmjz67lb3gdivcad.onion/","https://www.reddittorjg6rue252oqsxryoxengawnmo46qy4kyii5wtqnwfj4ooad.onion/?rdt=41078", "a"]
-    downloader = FaviconAnalyzer(urls)
+    downloader = FaviconAnalyzerClass(urls)
     hashes = downloader.download_favicon()
     if hashes:
         print(json.dumps(hashes, indent=4))

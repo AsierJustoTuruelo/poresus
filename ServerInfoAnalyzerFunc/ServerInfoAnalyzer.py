@@ -4,7 +4,7 @@ import json
 from collections import Counter
 from tqdm import tqdm
 
-class ServerInfoAnalyzer:
+class ServerInfoAnalyzerClass:
     def __init__(self, urls):
         self.urls = urls
         self.proxies = {
@@ -138,6 +138,6 @@ class ServerInfoAnalyzer:
 
 if __name__ == "__main__":
     urls = ['http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/php_info/php_info.html',"a"]
-    informacion_servidor = ServerInfoAnalyzer(urls)
+    informacion_servidor = ServerInfoAnalyzerClass(urls)
     resultados = informacion_servidor.get_server_info()
     print(json.dumps(resultados, indent=4))

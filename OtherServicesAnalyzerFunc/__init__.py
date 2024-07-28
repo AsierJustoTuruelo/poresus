@@ -1,1 +1,1 @@
-from . import otherservices_scanner
+from . import OtherServicesAnalyzer

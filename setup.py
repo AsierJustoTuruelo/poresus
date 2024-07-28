@@ -1,9 +1,9 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='deanonymize',  # Nombre de tu paquete
+    name='poresus',  # Nombre de tu paquete
     version='0.1',  # Versión de tu paquete
-    description='Una librería para deanonymize',  # Descripción corta
+    description='Library for testing missconfigurations on THS',  # Descripción corta
     packages=find_packages(),  # Esto encuentra todos los paquetes (directorios con __init__.py) automáticamente
     install_requires=[
         'requests',

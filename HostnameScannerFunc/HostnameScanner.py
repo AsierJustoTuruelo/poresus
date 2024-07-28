@@ -3,7 +3,7 @@ import socks
 import socket
 from tqdm import tqdm
 
-class HostnameScanner:
+class HostnameScannerClass:
     def __init__(self, onion_domains):
         self.onion_domains = onion_domains
         self.proxies = {
@@ -72,6 +72,6 @@ if __name__ == "__main__":
     ]
 
     # Test the function with the list of URLs
-    scanner = HostnameScanner(onion_domains)
+    scanner = HostnameScannerClass(onion_domains)
     result = scanner.scan_hostnames()
     print(result)

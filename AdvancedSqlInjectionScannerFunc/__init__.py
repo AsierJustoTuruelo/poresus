@@ -1,1 +1,1 @@
-from . import sqli_scanner
+from . import AdvancedSqlInjectionScanner

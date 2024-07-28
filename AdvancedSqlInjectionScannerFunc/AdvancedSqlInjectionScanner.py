@@ -5,7 +5,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 import json
 from tqdm import tqdm
 
-class AdvancedSqlInjectionScanner:
+class AdvancedSqlInjectionScannerClass:
     def __init__(self):
         self.session = requests.Session()
         self.proxies = {
@@ -185,7 +185,7 @@ if __name__ == "__main__":
         "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/prueba_sqli.html","a","http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_sqli/"
     ]
 
-    sql_scanner = AdvancedSqlInjectionScanner()
+    sql_scanner = AdvancedSqlInjectionScannerClass()
     results = sql_scanner.scan_sql_injection(urls)
 
     # Imprimir resultados en formato JSON

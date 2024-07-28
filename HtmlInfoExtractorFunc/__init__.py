@@ -1,1 +1,1 @@
-from . import html_info
+from . import HtmlInfoExtractor

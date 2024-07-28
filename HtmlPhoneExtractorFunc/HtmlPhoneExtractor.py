@@ -5,7 +5,7 @@ import socket
 import json
 from tqdm import tqdm
 
-class HtmlPhoneExtractor:
+class HtmlPhoneExtractorClass:
     def __init__(self, urls):
         self.urls = urls
         self.proxies = {
@@ -54,6 +54,6 @@ if __name__ == "__main__":
         "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/phone_numbers/phone_numbers.html",
         "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/"
     ]
-    extractor = HtmlPhoneExtractor(urls)
+    extractor = HtmlPhoneExtractorClass(urls)
     phones_json = extractor.extract_phone_numbers()
     print(json.dumps(phones_json, indent=4))

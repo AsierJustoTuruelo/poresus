@@ -7,7 +7,7 @@ from bs4 import BeautifulSoup
 import json
 from tqdm import tqdm
 
-class BinaryFileMetadataExtractor:
+class BinaryFileMetadataExtractorClass:
     def __init__(self, urls):
         self.urls = urls
         self.proxies = {
@@ -71,6 +71,6 @@ if __name__ == "__main__":
         'http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/image_metadata/metadata.html', 'a', 'http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/'
         # Puedes agregar más URLs aquí si es necesario
     ]
-    scanner = BinaryFileMetadataExtractor(urls)
+    scanner = BinaryFileMetadataExtractorClass(urls)
     results_json = scanner.scan_binary_files()
     print(json.dumps(scanner.results, indent=4))

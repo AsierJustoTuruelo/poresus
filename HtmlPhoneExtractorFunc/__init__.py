@@ -1,1 +1,1 @@
-from . import phone_scanner
+from . import HtmlPhoneExtractor

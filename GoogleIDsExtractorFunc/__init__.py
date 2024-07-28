@@ -1,1 +1,1 @@
-from . import google_services
+from . import GoogleIDsExtractor

@@ -4,7 +4,7 @@ from urllib.parse import urljoin
 import json
 from tqdm import tqdm
 
-class XSSScanner:
+class XSSScannerClass:
     def __init__(self, urls):
         self.urls = urls
         self.proxies = {
@@ -85,6 +85,6 @@ if __name__ == "__main__":
         "a",
         "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_xss/"
     ]
-    scanner = XSSScanner(urls)
+    scanner = XSSScannerClass(urls)
     results = scanner.scan_xss()
     print(json.dumps(results, indent=4))

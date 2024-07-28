@@ -5,7 +5,7 @@ import socket
 import json
 from tqdm import tqdm
 
-class BitcoinAddressExtractor:
+class BitcoinAddressExtractorClass:
     def __init__(self, urls):
         self.urls = urls
         self.proxies = {
@@ -65,7 +65,7 @@ if __name__ == "__main__":
         "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/",
         "aaa"
     ]
-    extractor = BitcoinAddressExtractor(urls)
+    extractor = BitcoinAddressExtractorClass(urls)
     addresses = extractor.extract_bitcoin_addresses()
     
     result = {

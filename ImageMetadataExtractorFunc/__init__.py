@@ -1,1 +1,1 @@
-from . import images_metadata
+from . import ImagesMetadataExtractor

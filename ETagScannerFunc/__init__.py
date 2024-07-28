@@ -1,1 +1,1 @@
-from . import etag
+from . import ETagScanner

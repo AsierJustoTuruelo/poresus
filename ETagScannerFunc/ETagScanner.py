@@ -4,7 +4,7 @@ import requests
 import json
 from tqdm import tqdm
 
-class ETagScanner:
+class ETagScannerClass:
     def __init__(self, urls):
         self.urls = urls
         self.proxies = {
@@ -64,6 +64,6 @@ if __name__ == "__main__":
         'http://6nhmgdpnyoljh5uzr5kwlatx2u3diou4ldeommfxjz3wkhalzgjqxzqd.onion/',"a", "http://6nhmgdpnyoljh5uzr5kwlatx2u3diou4ldeommfxjz3wkhalzgjqxzqd.onion/tests/"
         # Agrega más URLs aquí si es necesario
     ]
-    scanner = ETagScanner(urls)
+    scanner = ETagScannerClass(urls)
     results_json = scanner.scan_etags()
     print(json.dumps(results_json, indent=4))

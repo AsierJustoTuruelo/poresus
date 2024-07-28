@@ -1,1 +1,1 @@
-from . import favicon_ico
+from . import FaviconAnalyzer

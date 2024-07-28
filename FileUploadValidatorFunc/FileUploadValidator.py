@@ -6,7 +6,7 @@ import json
 import os
 from tqdm import tqdm
 
-class FileUploadValidator:
+class FileUploadValidatorClass:
     def __init__(self, onion_urls):
         self.onion_urls = onion_urls
         self.tor_proxy = "socks5h://127.0.0.1:9050"
@@ -131,6 +131,6 @@ if __name__ == "__main__":
     onion_urls = [
         "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests", "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_file/", "a"
     ]
-    validator = FileUploadValidator(onion_urls)
+    validator = FileUploadValidatorClass(onion_urls)
     validator.run_tests()
     print(json.dumps(validator.results, indent=4))
