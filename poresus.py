@@ -97,7 +97,6 @@ def main():
     parser.add_argument("-sqli", "--sqlinjection", action="store_true", help="Run SQL Injection scanner")
     parser.add_argument("-vi", "--InputValidator", action="store_true", help="Run Validacion Input scanner")
     parser.add_argument("-xss", "--xss", action="store_true", help="Run XSS scanner")
-    #parser.add_argument("-xxe", "--xxe", action="store_true", help="Run XXE scanner")
     parser.add_argument("-db", "--database", action="store_true", help="Run Data Base scanner")
     parser.add_argument("-all", "--all", action="store_true", help="Run all scanners")
 
@@ -125,7 +124,7 @@ def main():
     if args.bruteforce:
         # Ejecutar Brute Force scanner
         brute_force_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_bruteforce/prueba_bruteforce.html", "http://kz62gxxl6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_bruteforce/prueba_bruteforce.html"]
-        brute_force_scanner = AdvancedBruteForceScanner(urls)
+        brute_force_scanner = BruteForceScanner(urls)
         brute_force_results_json = json.loads(brute_force_scanner.brute_force(usernames_file, passwords_file))
         results["Brute Force Results"] = {
             "Brute Force Results": brute_force_results_json
@@ -387,7 +386,7 @@ def main():
         }
         
         brute_force_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_bruteforce/prueba_bruteforce.html", "http://kz62gxxl6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/tests/prueba_bruteforce/prueba_bruteforce.html"]
-        brute_force_scanner = AdvancedBruteForceScanner(urls)
+        brute_force_scanner = BruteForceScanner(urls)
         brute_force_results_json = json.loads(brute_force_scanner.brute_force(usernames_file, passwords_file))
         results["Brute Force Results"] = {
             "Brute Force Results": brute_force_results_json
@@ -497,7 +496,7 @@ def main():
         }
 
         html_info_urls = ["http://6nhmgdpnyoljh5uzr5kwlatx2u3diou4ldeommfxjz3wkhalzgjqxzqd.onion/"]
-        html_info_scanner = HtmlInfo(urls)
+        html_info_scanner = HtmlInfoExtractor(urls)
         html_info_results = html_info_scanner.analyze_html()
         results["HTML Info Results"] = {
             "HTML Info Results": html_info_results
