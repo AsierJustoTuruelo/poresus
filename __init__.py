@@ -5,7 +5,14 @@ from .ETagScannerFunc import ETagScanner
 from .FaviconAnalyzerFunc import FaviconAnalyzer
 from .FileAnalyzerFunc import FileAnalyzer
 from .FileUploadValidatorFunc import FileUploadValidator
-from .MetadataExtractorsFunc import FileMetadataExtractor
+from .MetadataExtractorsFunc import binary_metadata
+from .MetadataExtractorsFunc import excel_metadata
+from .MetadataExtractorsFunc import gif_metadata
+from .MetadataExtractorsFunc import pdf_metadata
+from .MetadataExtractorsFunc import ppt_metadata
+from .MetadataExtractorsFunc import txt_metadata
+from .MetadataExtractorsFunc import video_metadata
+from .MetadataExtractorsFunc import word_metadata
 from .GoogleIDsExtractorFunc import GoogleIDsExtractor
 from .GzipHeaderScannerFunc import GzipHeaderScanner
 from .HostnameScannerFunc import HostnameScanner
