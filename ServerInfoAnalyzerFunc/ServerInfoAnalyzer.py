@@ -53,7 +53,7 @@ class ServerInfoAnalyzerClass:
         return resultados
 
     def detectar_servidor_html(self, soup):
-        text = soup.get_text().lower()  # Convertir el texto a minúsculas para hacer coincidencias de forma insensible a mayúsculas
+        text = soup.get_text().lower()  # Convert the HTML content to lowercase
         servidores = {
             "Nginx": "nginx",
             "Apache": "apache",

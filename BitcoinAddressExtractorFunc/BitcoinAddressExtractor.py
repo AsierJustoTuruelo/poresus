@@ -40,6 +40,7 @@ class BitcoinAddressExtractorClass:
         return addresses_found
 
     def find_addresses(self, html_content):
+        
         # Regular expressions to search for Bitcoin addresses
         bitcoin_address_legacy_pattern = r'\b[13][a-km-zA-HJ-NP-Z1-9]{26,34}\b'  # Legacy addresses (1 or 3)
         bitcoin_address_segwit_pattern = r'\b[3][a-km-zA-HJ-NP-Z1-9]{26,35}\b'    # SegWit addresses (3)
