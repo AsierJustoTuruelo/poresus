@@ -79,7 +79,7 @@ if __name__ == "__main__":
         'http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/redes_sociales/redes_sociales.html', "a", "http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/"
     ]
 
-    scanner = SocialMediaExtractor(onion_urls)
+    scanner = SocialMediaExtractorClass(onion_urls)
     results = scanner.extract_social_networks()
     if results:
         print(json.dumps(results, indent=4))

@@ -55,19 +55,24 @@ def show_logo():
     print(logo)
 
 def read_urls_from_file(file_path):
+    # Open the file at the given file path in read mode
     with open(file_path, 'r') as file:
+        # Read each line in the file, strip any leading/trailing whitespace,
+        # and add to the list 'urls' if the line is not empty
         urls = [line.strip() for line in file if line.strip()]
+    # Return the list of URLs
     return urls
 
 
+
 def main():
-    # Mostrar el logo al inicio
+    # Show the logo
     show_logo()
 
-    # Crear un analizador de argumentos
+    # Create an argument parser
     parser = argparse.ArgumentParser(description="Run specified scanners")
 
-    # Agregar argumentos para cada escáner
+    # Add arguments for each scanner
     parser.add_argument("-b", "--bitcoin", action="store_true", help="Run Bitcoin address extractor")
     parser.add_argument("-bf", "--bruteforce", action="store_true", help="Run Brute Force scanner")
     parser.add_argument("-e", "--etag", action="store_true", help="Run ETag scanner")
@@ -101,17 +106,19 @@ def main():
     parser.add_argument("-all", "--all", action="store_true", help="Run all scanners")
 
     
-    # Agregar un argumento para el archivo de texto con las URL
+    # Add an argument for the URL file
     parser.add_argument("url_file", help="Path to a file containing URLs, one per line")
     
-    # Parsear los argumentos de la línea de comandos
+    # Parse the arguments
     args = parser.parse_args()
 
-    # Lee las URL desde el archivo
+    # Read the URLs from the file
     urls = read_urls_from_file(args.url_file)
 
-    # Ejecutar los escáneres según los argumentos proporcionados
+    # Execute the selected scanners
     results = {}
+
+
     if args.bitcoin:
         # Ejecutar Bitcoin address extractor
         bitcoin_urls = ["http://kz62gxxle6gswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/bitcoin_address/bitcoin_adress.html", "http://kz62gxxlegswe5t6iv6wjmt4dxi2l57zys73igvltcenhq7k3sa2mad.onion/deanonymize/bitcoin_address/"]

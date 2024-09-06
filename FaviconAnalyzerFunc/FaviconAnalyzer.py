@@ -24,24 +24,33 @@ class FaviconAnalyzerClass:
 
     def make_tor_request(self, url):
         try:
+            # Set the SOCKS5 proxy to the local Tor instance
             socks.setdefaultproxy(socks.SOCKS5, "127.0.0.1", 9050)
             socket.socket = socks.socksocket
 
+            # Make the request through the Tor network
             response = requests.get(url, proxies=self.proxies)
             return response
         except Exception as e:
+            # If there's an error, store the error message in the results dictionary for the URL
             self.results[url] = f"Error making request through Tor, URL not accessible: {e}"
             return None
 
     def download_favicon(self):
-        for url in tqdm(self.urls, desc="Scanning URLs for Favicons"):  
+        # Iterate over the list of URLs with a progress bar
+        for url in tqdm(self.urls, desc="Scanning URLs for Favicons"):
+            # Make a request to the URL through Tor
             response = self.make_tor_request(url)
             if response:
                 try:
+                    # Parse the HTML content of the response
                     soup = BeautifulSoup(response.content, 'html.parser')
+                    # Find the link tag with the rel attribute set to 'icon'
                     link_tag = soup.find('link', rel='icon')
                     if link_tag:
+                        # Construct the full URL for the favicon
                         favicon_url = urljoin(url, link_tag.get('href'))
+                        # Make a request to the favicon URL through Tor
                         favicon_response = self.make_tor_request(favicon_url)
                         if favicon_response and favicon_response.status_code == 200:
                             favicon_content = favicon_response.content
@@ -60,7 +69,7 @@ class FaviconAnalyzerClass:
                             # Calculate MD5 hash
                             md5_hash = hashlib.md5(favicon_content).hexdigest()
 
-                            # Store hashes in the results dictionary
+                            # Store the hashes in the results dictionary for the URL
                             self.results[url] = {
                                 "MMH3": mmh3_hash,
                                 "SHA-256": sha256_hash,
@@ -69,13 +78,17 @@ class FaviconAnalyzerClass:
                         else:
                             self.results[url] = "Failed to download favicon"
                     else:
-                            self.results[url] = "Failed to download favicon"
+                        self.results[url] = "Failed to find favicon link tag"
                 except Exception as e:
+                    # If there's an error processing the URL, store the error message
                     self.results[url] = f"Error processing URL: {e}"
-                    
-        if not self.results:
-            self.results[url] = "Error URL not accesisble through Tor."
+            else:
+                # If no response is received, store an error message
+                self.results[url] = "Error URL not accessible through Tor."
+
+        # Return the results dictionary containing the hashes or error messages
         return self.results
+
 
 if __name__ == "__main__":
     urls = ["http://53d5skw4ypzku4bfq2tk2mr3xh5yqrzss25sooiubmjz67lb3gdivcad.onion/","https://www.reddittorjg6rue252oqsxryoxengawnmo46qy4kyii5wtqnwfj4ooad.onion/?rdt=41078", "a"]
