@@ -94,7 +94,7 @@ def main():
     parser.add_argument("-hi", "--htmlinfo", action="store_true", help="Run HTML Info scanner")
     parser.add_argument("-me", "--mailextractor", action="store_true", help="Run Mail extractor")
     parser.add_argument("-os", "--otherservices", action="store_true", help="Run Other Services scanner")
-    parser.add_argument("-ps", "--phonescanner", action="store_true", help="Run Phone scanner")
+    parser.add_argument("-pn", "--phonenumbers", action="store_true", help="Run Phone scanner")
     parser.add_argument("-php", "--phpserver", action="store_true", help="Run PHP Server Info scanner")
     parser.add_argument("-si", "--serverinfo", action="store_true", help="Run Server Info scanner")
     parser.add_argument("-ss", "--serverstatus", action="store_true", help="Run Server Status checker")
