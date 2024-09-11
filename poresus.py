@@ -100,7 +100,7 @@ def main():
     parser.add_argument("-ss", "--serverstatus", action="store_true", help="Run Server Status checker")
     parser.add_argument("-rs", "--socialnets", action="store_true", help="Run Social Networks scanner")
     parser.add_argument("-sqli", "--sqlinjection", action="store_true", help="Run SQL Injection scanner")
-    parser.add_argument("-vi", "--InputValidator", action="store_true", help="Run Validacion Input scanner")
+    parser.add_argument("-vi", "--inputvalidator", action="store_true", help="Run Validacion Input scanner")
     parser.add_argument("-xss", "--xss", action="store_true", help="Run XSS scanner")
     parser.add_argument("-db", "--database", action="store_true", help="Run Data Base scanner")
     parser.add_argument("-all", "--all", action="store_true", help="Run all scanners")
