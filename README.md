@@ -24,35 +24,65 @@ Donde ruta_al_archivo_de_URLs es un archivo de texto que contiene una lista de U
 La herramienta admite múltiples escáneres. Puedes especificar uno o más escáneres utilizando los siguientes argumentos:
 
 -b, --bitcoin: Ejecuta el extractor de direcciones de Bitcoin.
+
 -bf, --bruteforce: Ejecuta el escáner de fuerza bruta.
+
 -e, --etag: Ejecuta el escáner de ETag.
+
 -f, --favicon: Descarga y analiza el favicon de los sitios.
+
 -fi, --fileinput: Valida las entradas de archivos.
+
 -fh, --filehashes: Escanea y verifica los hashes de archivos.
+
 -bm, --binarymetadata: Escanea metadatos de archivos binarios.
+
 -em, --excelmetadata: Escanea metadatos de archivos Excel.
+
 -gm, --gifmetadata: Escanea metadatos de archivos GIF.
+
 -pm, --pdfmetadata: Escanea metadatos de archivos PDF.
+
 -pwm, --pptmetadata: Escanea metadatos de archivos PowerPoint.
+
 -wm, --wordmetadata: Escanea metadatos de archivos Word.
+
 -mm, --mediametadata: Escanea metadatos de archivos de medios.
+
 -tm, --txtmetadata: Escanea metadatos de archivos de texto.
+
 -im, --imagemetadata: Escanea metadatos de imágenes.
+
 -gs, --googleids: Extrae identificadores de servicios de Google.
+
 -gh, --gzipheader: Escanea cabeceras Gzip.
+
 -hh, --hostname: Escanea los nombres de host.
+
 -hi, --htmlinfo: Analiza información HTML.
+
 -me, --mailextractor: Extrae direcciones de correo electrónico de HTML.
+
 -os, --otherservices: Analiza otros servicios detectados.
+
 -pn, --phonenumbers: Extrae números de teléfono.
+
 -php, --phpserver: Escanea información del servidor PHP.
+
 -si, --serverinfo: Escanea información del servidor.
+
 -ss, --serverstatus: Verifica el estado del servidor.
+
 -rs, --socialnets: Escanea redes sociales vinculadas.
+
 -sqli, --sqlinjection: Escanea vulnerabilidades de inyección SQL.
+
 -vi, --inputvalidator: Valida la entrada de usuarios.
+
 -xss, --xss: Escanea vulnerabilidades XSS.
+
 -db, --database: Escanea tipos de base de datos.
+
 -all, --all: Ejecuta todos los escáneres disponibles.
 
 #### Ejemplo de Uso
