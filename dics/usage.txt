@@ -1,0 +1,1 @@
+Almacenar en este directorio los dos archivos txt con las credenciales a usar (modificar en poresus.py según convenga)

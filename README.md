@@ -97,4 +97,5 @@ python tu_script.py --all ruta_al_archivo_de_URLs.txt
 Si ejecutas el escáner de fuerza bruta (--bruteforce), necesitarás los archivos de diccionario de nombres de usuario y contraseñas. Asegurarse de tener estos archivos en el siguiente directorio:
 
 usernames_file: ./dics/usernames.txt
+
 passwords_file: ./dics/passwords.txt
