@@ -1,10 +1,3 @@
-"""
-instalar mmh3 --> pip install mmh3
-instalar mutagen --> pip install mutagen
-instalar stem --> pip install stem
-
-"""
-
 import argparse
 import json
 from BitcoinAddressExtractorFunc.BitcoinAddressExtractor import BitcoinAddressExtractorClass
@@ -76,34 +69,34 @@ def main():
     parser.add_argument("-b", "--bitcoin", action="store_true", help="Run Bitcoin address extractor")
     parser.add_argument("-bf", "--bruteforce", action="store_true", help="Run Brute Force scanner")
     parser.add_argument("-e", "--etag", action="store_true", help="Run ETag scanner")
-    parser.add_argument("-f", "--favicon", action="store_true", help="Run Favicon downloader")
+    parser.add_argument("-f", "--favicon", action="store_true", help="Run Favicon analyzer")
     parser.add_argument("-fi", "--fileinput", action="store_true", help="Run File Input validator")
-    parser.add_argument("-fh", "--filehashes", action="store_true", help="Run File Hashes scanner")
-    parser.add_argument("-bm", "--binarymetadata", action="store_true", help="Run Binary Metadata scanner")
-    parser.add_argument("-em", "--excelmetadata", action="store_true", help="Run Excel Metadata scanner")
-    parser.add_argument("-gm", "--gifmetadata", action="store_true", help="Run GIF Metadata scanner")
-    parser.add_argument("-pm", "--pdfmetadata", action="store_true", help="Run PDF Metadata scanner")
-    parser.add_argument("-pwm", "--pptmetadata", action="store_true", help="Run PPT Metadata scanner")
-    parser.add_argument("-wm", "--wordmetadata", action="store_true", help="Run Word Metadata scanner")
-    parser.add_argument("-mm", "--mediametadata", action="store_true", help="Run Media Metadata scanner")
-    parser.add_argument("-tm", "--txtmetadata", action="store_true", help="Run Text Metadata scanner")
-    parser.add_argument("-im", "--imagemetadata", action="store_true", help="Run Image Metadata scanner")
+    parser.add_argument("-fh", "--filehashes", action="store_true", help="Run File Hashes analyzer")
+    parser.add_argument("-bm", "--binarymetadata", action="store_true", help="Run Binary Metadata extractor")
+    parser.add_argument("-em", "--excelmetadata", action="store_true", help="Run Excel Metadata extractor")
+    parser.add_argument("-gm", "--gifmetadata", action="store_true", help="Run GIF Metadata extractor")
+    parser.add_argument("-pm", "--pdfmetadata", action="store_true", help="Run PDF Metadata extractor")
+    parser.add_argument("-pwm", "--pptmetadata", action="store_true", help="Run PPT Metadata extractor")
+    parser.add_argument("-wm", "--wordmetadata", action="store_true", help="Run Word Metadata extractor")
+    parser.add_argument("-mm", "--mediametadata", action="store_true", help="Run Media Metadata extractor")
+    parser.add_argument("-tm", "--txtmetadata", action="store_true", help="Run Text Metadata extractor")
+    parser.add_argument("-im", "--imagemetadata", action="store_true", help="Run Image Metadata extractor")
     parser.add_argument("-gs", "--googleids", action="store_true", help="Run Google IDs extractor")
     parser.add_argument("-gh", "--gzipheader", action="store_true", help="Run Gzip Header scanner")
     parser.add_argument("-hh", "--hostname", action="store_true", help="Run Hostname Hacking scanner")
-    parser.add_argument("-hi", "--htmlinfo", action="store_true", help="Run HTML Info scanner")
+    parser.add_argument("-hi", "--htmlinfo", action="store_true", help="Run HTML Info extractor")
     parser.add_argument("-me", "--mailextractor", action="store_true", help="Run Mail extractor")
-    parser.add_argument("-os", "--otherservices", action="store_true", help="Run Other Services scanner")
-    parser.add_argument("-pn", "--phonenumbers", action="store_true", help="Run Phone scanner")
-    parser.add_argument("-php", "--phpserver", action="store_true", help="Run PHP Server Info scanner")
-    parser.add_argument("-si", "--serverinfo", action="store_true", help="Run Server Info scanner")
-    parser.add_argument("-ss", "--serverstatus", action="store_true", help="Run Server Status checker")
-    parser.add_argument("-rs", "--socialnets", action="store_true", help="Run Social Networks scanner")
+    parser.add_argument("-os", "--otherservices", action="store_true", help="Run Other Services analyzer")
+    parser.add_argument("-pn", "--phonenumbers", action="store_true", help="Run Phone extractor")
+    parser.add_argument("-php", "--phpserver", action="store_true", help="Run PHP Server Info analyzer")
+    parser.add_argument("-si", "--serverinfo", action="store_true", help="Run Server Info analyzer")
+    parser.add_argument("-ss", "--serverstatus", action="store_true", help="Run Server Status analyzer")
+    parser.add_argument("-rs", "--socialnets", action="store_true", help="Run Social Networks extractor")
     parser.add_argument("-sqli", "--sqlinjection", action="store_true", help="Run SQL Injection scanner")
-    parser.add_argument("-vi", "--inputvalidator", action="store_true", help="Run Validacion Input scanner")
+    parser.add_argument("-vi", "--inputvalidator", action="store_true", help="Run Input validator")
     parser.add_argument("-xss", "--xss", action="store_true", help="Run XSS scanner")
     parser.add_argument("-db", "--database", action="store_true", help="Run Data Base scanner")
-    parser.add_argument("-all", "--all", action="store_true", help="Run all scanners")
+    parser.add_argument("-all", "--all", action="store_true", help="Run all modules")
 
     
     # Add an argument for the URL file
