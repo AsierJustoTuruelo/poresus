@@ -1,4 +1,4 @@
-# Multi-Scanner Tool
+# PORESUS
 
 Esta herramienta proporciona una serie de analizadores y escáneres que pueden extraer información de URLs específicas, incluyendo metadatos de archivos, vulnerabilidades de seguridad, direcciones de Bitcoin, favicons, entre otros.
 
@@ -99,3 +99,7 @@ Si ejecutas el escáner de fuerza bruta (--bruteforce), necesitarás los archivo
 usernames_file: ./dics/usernames.txt
 
 passwords_file: ./dics/passwords.txt
+
+#### DISCLAIMER
+No me hago responsable del uso indebido de la herramienta. Todas las acciones que se realicen son bajo la responsabilidad del usuario.
+La herramienta está en desarrollo por lo que no es una versión definitiva ni refinada, aún hay mucha posibilidad de mejora y de añadir nuevas funcionalidades y casos. :)
